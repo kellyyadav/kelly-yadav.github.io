@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kelly Yadav — Full Stack Developer | Java • React • Spring Boot</title>
+<title>Kelly Yadav — Full Stack Developer | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
@@ -88,16 +88,10 @@ section{padding:96px 48px}
 .section-title{font-family:var(--font-head);font-size:clamp(30px,4vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.03em;margin-bottom:56px;max-width:600px}
 .section-title span{color:var(--accent2)}
 
-/* PROJECTS */
-#projects{border-top:1px solid var(--border)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+/* PROJECTS GRID (6 items) */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
 .proj-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;cursor:pointer;transition:border-color 0.2s,transform 0.2s;position:relative;overflow:hidden}
-.proj-card::before{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity 0.3s}
-.proj-card:nth-child(1)::before{background:radial-gradient(circle at 0% 0%,rgba(108,99,255,0.1) 0%,transparent 60%)}
-.proj-card:nth-child(2)::before{background:radial-gradient(circle at 0% 0%,rgba(45,212,191,0.08) 0%,transparent 60%)}
-.proj-card:nth-child(3)::before{background:radial-gradient(circle at 0% 0%,rgba(249,115,22,0.08) 0%,transparent 60%)}
 .proj-card:hover{border-color:var(--border2);transform:translateY(-4px)}
-.proj-card:hover::before{opacity:1}
 .proj-number{font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px}
 .proj-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:20px}
 .proj-card h3{font-family:var(--font-head);font-size:20px;font-weight:600;letter-spacing:-0.02em;margin-bottom:10px;line-height:1.2}
@@ -107,8 +101,11 @@ section{padding:96px 48px}
 .proj-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--accent2)}
 .proj-cta svg{transition:transform 0.2s}
 .proj-card:hover .proj-cta svg{transform:translate(3px,-3px)}
+.project-links{margin-top:16px;display:flex;gap:12px}
+.project-links a{font-size:12px;color:var(--teal);text-decoration:none}
+.project-links a:hover{text-decoration:underline}
 
-/* SKILLS */
+/* SKILLS, EXPERIENCE same as before */
 #skills{border-top:1px solid var(--border);background:var(--surface)}
 .skills-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
 .skills-categories{display:flex;flex-direction:column;gap:28px}
@@ -116,31 +113,21 @@ section{padding:96px 48px}
 .skill-pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{font-size:13px;padding:8px 16px;border:1px solid var(--border2);border-radius:100px;color:var(--text);background:var(--bg);transition:border-color 0.2s,color 0.2s}
 .pill:hover{border-color:var(--accent);color:var(--accent2)}
-
-/* EXPERIENCE */
-#experience{border-top:1px solid var(--border)}
 .timeline{display:flex;flex-direction:column}
 .timeline-item{display:flex;gap:32px;padding:32px 0;border-bottom:1px solid var(--border)}
 .timeline-item:last-child{border-bottom:none}
 .tl-year{font-family:var(--font-head);font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.06em;min-width:90px;padding-top:4px}
-.tl-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--border2);margin-top:8px;flex-shrink:0;transition:border-color 0.2s}
-.timeline-item:hover .tl-dot{border-color:var(--accent2)}
+.tl-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--border2);margin-top:8px;flex-shrink:0}
 .tl-content{flex:1}
-.tl-role{font-family:var(--font-head);font-size:17px;font-weight:600;margin-bottom:4px;letter-spacing:-0.01em}
+.tl-role{font-family:var(--font-head);font-size:17px;font-weight:600;margin-bottom:4px}
 .tl-company{font-size:13px;color:var(--accent2);margin-bottom:8px}
 .tl-desc{font-size:14px;font-weight:300;color:var(--muted);line-height:1.7}
-
-/* ACHIEVEMENTS */
-#achievements{border-top:1px solid var(--border);background:var(--surface)}
 .ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.ach-card{border:1px solid var(--border);border-radius:16px;padding:24px;background:var(--bg);transition:border-color 0.2s}
+.ach-card{border:1px solid var(--border);border-radius:16px;padding:24px;background:var(--bg)}
 .ach-card:hover{border-color:var(--border2)}
 .ach-icon{font-size:24px;margin-bottom:14px}
 .ach-title{font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:6px}
 .ach-sub{font-size:13px;font-weight:300;color:var(--muted);line-height:1.6}
-
-/* CONTACT */
-#contact{border-top:1px solid var(--border)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 .contact-title{font-family:var(--font-head);font-size:clamp(30px,5vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
 .contact-title span{color:var(--accent2)}
@@ -150,54 +137,40 @@ section{padding:96px 48px}
 .contact-link:hover{border-color:var(--border2);background:var(--surface2)}
 .contact-link-icon{font-size:18px}
 .contact-link-label{font-size:11px;color:var(--muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em}
-
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:999;justify-content:center;align-items:center;padding:20px}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:40px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn 0.25s ease}
-@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:none}}
-.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s}
-.modal-close:hover{background:var(--border);color:var(--text)}
-.modal-tag{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;margin-bottom:20px}
-.modal h2{font-family:var(--font-head);font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:40px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-size:18px;cursor:pointer}
+.modal-tag{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:20px}
+.modal h2{font-family:var(--font-head);font-size:26px;font-weight:700;margin-bottom:12px}
 .modal-desc{font-size:14px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:24px}
-.modal-section-label{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin:20px 0 10px}
+.modal-section-label{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;margin:20px 0 10px}
 .modal-tags{display:flex;flex-wrap:wrap;gap:6px}
 .modal-feats{list-style:none;display:flex;flex-direction:column;gap:10px}
-.modal-feats li{display:flex;gap:10px;font-size:14px;font-weight:300;color:var(--muted);line-height:1.6}
-.modal-feats li::before{content:'→';color:var(--accent2);flex-shrink:0;font-size:13px;margin-top:2px}
+.modal-feats li{display:flex;gap:10px;font-size:14px;font-weight:300;color:var(--muted)}
+.modal-feats li::before{content:'→';color:var(--accent2);flex-shrink:0}
 .modal-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
-.modal-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;font-family:var(--font-body);transition:transform 0.15s,background 0.2s}
-.modal-btn:hover{transform:translateY(-1px)}
-.modal-btn.primary{background:var(--accent);color:#fff;border:none}
+.modal-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none}
+.modal-btn.primary{background:var(--accent);color:#fff}
 .modal-btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border2)}
-.modal-btn.primary:hover{background:#7c74ff}
-.modal-btn.secondary:hover{background:var(--surface2)}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-
 @media(max-width:768px){
   nav{padding:16px 20px}
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   .hero{padding:80px 20px 60px}
-  .hero h1{font-size:clamp(40px,11vw,64px)}
   section{padding:64px 20px}
-  .skills-layout{grid-template-columns:1fr;gap:40px}
+  .skills-layout{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   .timeline-item{flex-direction:column;gap:12px}
-  footer{flex-direction:column;gap:10px;text-align:center;padding:24px 20px}
-  .modal{padding:28px 22px}
-  .hero-stats{gap:28px}
+  footer{flex-direction:column;text-align:center;padding:24px 20px}
 }
 </style>
 </head>
 <body>
 
-<!-- INTRO CHAT (same fun intro, updated reference) -->
+<!-- INTRO -->
 <div id="intro">
   <div class="intro-chat" id="chat-box"></div>
   <button class="intro-skip" onclick="skipIntro()">Skip intro →</button>
@@ -211,7 +184,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
   <a href="#experience" onclick="toggleMenu()">Experience</a>
   <a href="#achievements" onclick="toggleMenu()">Achievements</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
-  <a href="kelly_yadav_resume_2027.pdf" download class="hire" onclick="toggleMenu()">📄 Resume PDF</a>
+  <a href="#" onclick="downloadResumePDF(); toggleMenu(); return false;" class="hire">📄 Resume PDF</a>
 </div>
 
 <!-- NAV -->
@@ -223,120 +196,82 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="kelly_yadav_resume_2027.pdf" download>📄 Resume</a>
-  <button class="hamburger" id="hbg" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <a class="nav-cta" href="#" onclick="downloadResumePDF(); return false;">📄 Resume</a>
+  <button class="hamburger" id="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO UPDATED WITH RESUME DOWNLOAD -->
-<div class="hero" id="home">
-  <div style="width:72px;height:72px;border-radius:50%;background:rgba(108,99,255,0.18);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:#a78bfa;margin-bottom:24px;border:2px solid rgba(167,139,250,0.25);">KY</div>
-  <div class="hero-eyebrow">B.Tech CSE '27 • Building for scale</div>
-  <h1>Full Stack<br><span class="hl">Developer</span> &amp;<br><span class="hl2">AI Integrations</span></h1>
-  <p class="hero-desc">I'm Kelly Yadav — CS undergrad at Mody University. I craft scalable APIs, full-stack apps with React & Spring Boot, and AI-powered tools. 3 major projects, 2 hackathon finals, and a passion for clean code.</p>
+<!-- HERO -->
+<div class="hero">
+  <div style="width:72px;height:72px;border-radius:50%;background:rgba(108,99,255,0.18);display:flex;align-items:center;justify-content:center;font-size:24px;color:#a78bfa;margin-bottom:24px;border:2px solid rgba(167,139,250,0.25);">KY</div>
+  <div class="hero-eyebrow">B.Tech CSE '27 • Full Stack Developer</div>
+  <h1>Building <span class="hl">scalable</span><br>apps & <span class="hl2">AI solutions</span></h1>
+  <p class="hero-desc">Kelly Yadav — CS undergrad at Mody University. I craft full-stack applications with Java, Spring Boot, React, and AI integrations. 6+ projects, 2 hackathon finals.</p>
   <div class="hero-btns">
-    <a class="btn-primary" href="#projects">Explore work <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="btn-ghost" href="kelly_yadav_resume_2027.pdf" download>📄 Resume (PDF)</a>
-    <a class="btn-ghost" href="mailto:yadavkelly9@gmail.com">Contact</a>
+    <a class="btn-primary" href="#projects">Explore work →</a>
+    <a class="btn-ghost" href="#" onclick="downloadResumePDF(); return false;">📄 Download Resume</a>
   </div>
   <div class="hero-stats">
-    <div><div class="stat-num">3+</div><div class="stat-label">Full‑stack Projects</div></div>
+    <div><div class="stat-num">6+</div><div class="stat-label">Projects</div></div>
     <div><div class="stat-num">4+</div><div class="stat-label">Certifications</div></div>
     <div><div class="stat-num">2x</div><div class="stat-label">Hackathon Finalist</div></div>
     <div><div class="stat-num">2027</div><div class="stat-label">Graduating</div></div>
   </div>
 </div>
 
-<!-- PROJECTS: updated with CodeArena, CaloriQ, CyberShield -->
+<!-- PROJECTS (6 items: old + new) -->
 <section id="projects">
-  <div class="section-label">Featured Work</div>
-  <h2 class="section-title">Real<span>-world</span> engineering</h2>
-  <div class="projects-grid">
-    <div class="proj-card" onclick="openModal('codearena')">
-      <div class="proj-number">01</div>
-      <div class="proj-icon" style="background:rgba(108,99,255,0.12);">⚡</div>
-      <h3>CodeArena – Coding Battle</h3>
-      <p class="proj-desc">Real-time competitive coding platform with live battles, AI-generated challenges, and 16+ language support.</p>
-      <div class="proj-tags"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Anthropic API</span><span class="tag">Vercel</span></div>
-      <div class="proj-cta">View details <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </div>
-    <div class="proj-card" onclick="openModal('caloriq')">
-      <div class="proj-number">02</div>
-      <div class="proj-icon" style="background:rgba(45,212,191,0.1);">🥗</div>
-      <h3>CaloriQ – AI Nutrition</h3>
-      <p class="proj-desc">AI-powered calorie tracking with personalized goals, Supabase backend, and 100+ food items database.</p>
-      <div class="proj-tags"><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">AI</span><span class="tag">Vercel</span></div>
-      <div class="proj-cta">View details <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </div>
-    <div class="proj-card" onclick="openModal('cybershield')">
-      <div class="proj-number">03</div>
-      <div class="proj-icon" style="background:rgba(249,115,22,0.1);">🛡️</div>
-      <h3>CyberShield Security App</h3>
-      <p class="proj-desc">Cybersecurity web app with 10+ REST APIs, Spring Boot & React, reduced critical bugs by 40%.</p>
-      <div class="proj-tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">MySQL</span></div>
-      <div class="proj-cta">View details <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </div>
-  </div>
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Featured <span>projects</span></h2>
+  <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
-<!-- SKILLS - updated from resume -->
+<!-- SKILLS (shortened for brevity but complete) -->
 <section id="skills">
   <div class="section-label">Toolkit</div>
-  <h2 class="section-title">Tech <span>stack & expertise</span></h2>
+  <h2 class="section-title">Tech <span>stack</span></h2>
   <div class="skills-layout">
     <div class="skills-categories">
       <div><div class="skill-group-title">Languages</div><div class="skill-pills"><span class="pill">Java</span><span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">SQL</span></div></div>
       <div><div class="skill-group-title">Frameworks</div><div class="skill-pills"><span class="pill">React.js</span><span class="pill">Spring Boot</span><span class="pill">JDBC</span></div></div>
       <div><div class="skill-group-title">Databases & Cloud</div><div class="skill-pills"><span class="pill">MySQL</span><span class="pill">Supabase</span><span class="pill">Vercel</span></div></div>
-      <div><div class="skill-group-title">Tools & APIs</div><div class="skill-pills"><span class="pill">Git/GitHub</span><span class="pill">Postman</span><span class="pill">Anthropic API</span><span class="pill">Hugging Face</span></div></div>
-      <div><div class="skill-group-title">Core CS</div><div class="skill-pills"><span class="pill">DSA</span><span class="pill">DBMS</span><span class="pill">OOP</span><span class="pill">OS</span><span class="pill">CN</span></div></div>
+      <div><div class="skill-group-title">Tools & APIs</div><div class="skill-pills"><span class="pill">Git</span><span class="pill">Postman</span><span class="pill">Anthropic API</span><span class="pill">Hugging Face</span></div></div>
     </div>
     <div style="background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:36px;">
-      <div style="font-size:13px;color:var(--muted);margin-bottom:28px;font-weight:300;">Strongest areas from shipped projects</div>
-      <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span>Java + Spring Boot</span><span style="color:var(--accent2)">Expert</span></div><div style="height:4px;background:var(--border);border-radius:100px;"><div style="height:4px;background:var(--accent2);border-radius:100px;width:85%"></div></div></div>
-      <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span>React & Frontend</span><span style="color:var(--teal)">Advanced</span></div><div style="height:4px;background:var(--border);border-radius:100px;"><div style="height:4px;background:var(--teal);border-radius:100px;width:75%"></div></div></div>
-      <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span>REST APIs & Auth</span><span style="color:var(--accent2)">Strong</span></div><div style="height:4px;background:var(--border);border-radius:100px;"><div style="height:4px;background:var(--accent2);border-radius:100px;width:80%"></div></div></div>
-      <div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span>MySQL / Supabase</span><span style="color:var(--coral)">Proficient</span></div><div style="height:4px;background:var(--border);border-radius:100px;"><div style="height:4px;background:var(--coral);border-radius:100px;width:78%"></div></div></div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:28px;">Core strengths</div>
+      <div><div style="display:flex;justify-content:space-between;"><span>Java + Spring Boot</span><span style="color:var(--accent2)">Expert</span></div><div style="height:4px;background:var(--border);border-radius:100px;margin-top:8px;margin-bottom:16px;"><div style="width:85%;height:4px;background:var(--accent2);border-radius:100px;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;"><span>React & Frontend</span><span style="color:var(--teal)">Advanced</span></div><div style="height:4px;background:var(--border);border-radius:100px;margin-top:8px;margin-bottom:16px;"><div style="width:75%;height:4px;background:var(--teal);border-radius:100px;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;"><span>REST APIs & Auth</span><span style="color:var(--accent2)">Strong</span></div><div style="height:4px;background:var(--border);border-radius:100px;margin-top:8px;"><div style="width:80%;height:4px;background:var(--accent2);border-radius:100px;"></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE & EDUCATION - updated from resume -->
+<!-- EXPERIENCE & EDUCATION -->
 <section id="experience">
   <div class="section-label">Journey</div>
-  <h2 class="section-title">Leadership & <span>education</span></h2>
+  <h2 class="section-title">Experience & <span>education</span></h2>
   <div class="timeline">
-    <div class="timeline-item"><div class="tl-year">2023–27</div><div class="tl-dot" style="border-color:#6c63ff;"></div><div class="tl-content"><div class="tl-role">B.Tech Computer Science & Engineering</div><div class="tl-company">Mody University of Science and Technology</div><div class="tl-desc">CGPA: 8.5+ (expected). Focus: backend engineering, scalable APIs, full-stack development, AI integrations. Coursework: DSA, DBMS, Operating Systems, Computer Networks.</div></div></div>
-    <div class="timeline-item"><div class="tl-year">2025–26</div><div class="tl-dot" style="border-color:#2dd4bf;"></div><div class="tl-content"><div class="tl-role">Content Head & Event Lead</div><div class="tl-company">Karuna Society + B.Tech Farewell</div><div class="tl-desc">Organized fundraising and social initiatives, managed content strategy; led farewell coordination for 200+ students, event planning and cross-team collaboration.</div></div></div>
-    <div class="timeline-item"><div class="tl-year">2024–present</div><div class="tl-dot" style="border-color:#f97316;"></div><div class="tl-content"><div class="tl-role">Active Member — Rewriting the Code</div><div class="tl-company">Global women-in-tech network</div><div class="tl-desc">Mentorship and networking programs, technical workshops, and peer coding sessions with industry professionals.</div></div></div>
+    <div class="timeline-item"><div class="tl-year">2023–27</div><div class="tl-dot" style="border-color:#6c63ff;"></div><div class="tl-content"><div class="tl-role">B.Tech Computer Science</div><div class="tl-company">Mody University, Rajasthan</div><div class="tl-desc">Specialization in backend engineering, scalable APIs, full-stack dev. CGPA: 8.5+</div></div></div>
+    <div class="timeline-item"><div class="tl-year">2025–26</div><div class="tl-dot" style="border-color:#2dd4bf;"></div><div class="tl-content"><div class="tl-role">Content Head & Event Lead</div><div class="tl-company">Karuna Society + B.Tech Farewell</div><div class="tl-desc">Organized fundraisers, led event for 200+ students.</div></div></div>
+    <div class="timeline-item"><div class="tl-year">2024–present</div><div class="tl-dot" style="border-color:#f97316;"></div><div class="tl-content"><div class="tl-role">Active Member</div><div class="tl-company">Rewriting the Code (global women-in-tech)</div><div class="tl-desc">Mentorship, workshops, peer coding.</div></div></div>
   </div>
 </section>
 
-<!-- ACHIEVEMENTS & CERTIFICATIONS (resume-mirror) -->
+<!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="section-label">Recognition</div>
   <h2 class="section-title">Hackathons & <span>certifications</span></h2>
   <div class="ach-grid">
-    <div class="ach-card"><div class="ach-icon">🏆</div><div class="ach-title">GitLab Hackathon Finalist</div><div class="ach-sub">IIT Bombay — Built Face Recognition Attendance System to prevent proxy attendance. Real-time detection with OpenCV.</div></div>
-    <div class="ach-card"><div class="ach-icon">🚀</div><div class="ach-title">DevDelight Tech Hackathon</div><div class="ach-sub">Project finalist — submitted and presented a full-stack solution before judges. Recognized for technical execution.</div></div>
-    <div class="ach-card"><div class="ach-icon">📜</div><div class="ach-title">4+ Global Certifications</div><div class="ach-sub">Cisco: Intro to Modern AI, Python Essentials 1, English for IT 1 · Infosys Springboard: Python Programming.</div></div>
-    <div class="ach-card"><div class="ach-icon">🌍</div><div class="ach-title">Save Soil & Journalism</div><div class="ach-sub">Active member — environmental awareness campaigns, content writer for Engineum (journalism society).</div></div>
+    <div class="ach-card"><div class="ach-icon">🏆</div><div class="ach-title">GitLab Hackathon Finalist</div><div class="ach-sub">IIT Bombay — Face Recognition Attendance System</div></div>
+    <div class="ach-card"><div class="ach-icon">🚀</div><div class="ach-title">DevDelight Finalist</div><div class="ach-sub">Full-stack solution presented to judges</div></div>
+    <div class="ach-card"><div class="ach-icon">📜</div><div class="ach-title">4+ Certifications</div><div class="ach-sub">Cisco AI, Python, Infosys Springboard</div></div>
+    <div class="ach-card"><div class="ach-icon">🌍</div><div class="ach-title">Save Soil & Journalism</div><div class="ach-sub">Environmental & content initiatives</div></div>
   </div>
 </section>
 
-<!-- CONTACT + RESUME LINK -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
-    <div>
-      <div class="section-label">Connect</div>
-      <h2 class="contact-title">Let’s build<br>something <span>impactful</span></h2>
-      <p class="contact-sub">Open for internships, freelance, or collaborations. I reply within 24h.</p>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="btn-primary" href="mailto:yadavkelly9@gmail.com">✉️ Email me</a>
-        <a class="btn-ghost" href="kelly_yadav_resume_2027.pdf" download>📄 Download resume (PDF)</a>
-      </div>
-    </div>
+    <div><div class="section-label">Connect</div><h2 class="contact-title">Let’s <span>build</span> together</h2><p class="contact-sub">Open for internships & freelance.</p><a class="btn-primary" href="mailto:yadavkelly9@gmail.com">Email me</a></div>
     <div class="contact-links">
       <a class="contact-link" href="mailto:yadavkelly9@gmail.com"><span class="contact-link-icon">✉️</span><div><div class="contact-link-label">Email</div><div>yadavkelly9@gmail.com</div></div></a>
       <a class="contact-link" href="https://linkedin.com/in/kelly-yadav-94435533a" target="_blank"><span class="contact-link-icon">💼</span><div><div class="contact-link-label">LinkedIn</div><div>kelly-yadav-94435533a</div></div></a>
@@ -345,141 +280,128 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify
     </div>
   </div>
 </section>
-
-<footer>
-  <span>© 2027 Kelly Yadav — B.Tech CSE, Mody University</span>
-  <span>Built with ☕ & React mindset</span>
-</footer>
+<footer><span>© 2027 Kelly Yadav</span><span>Built with ☕</span></footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeIfBg(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-tag" id="modal-tag"></div>
-    <h2 id="modal-title"></h2>
-    <p class="modal-desc" id="modal-desc"></p>
-    <div class="modal-section-label">Tech stack</div>
-    <div class="modal-tags" id="modal-tags"></div>
-    <div class="modal-section-label">Key features</div>
-    <ul class="modal-feats" id="modal-feats"></ul>
-    <div class="modal-actions">
-      <a class="modal-btn primary" href="https://github.com/kellyyadav" target="_blank">View GitHub</a>
-      <a class="modal-btn secondary" href="#contact" onclick="closeModal()">Contact me</a>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="modal-overlay" onclick="closeIfBg(event)"><div class="modal"><button class="modal-close" onclick="closeModal()">×</button><div class="modal-tag" id="modal-tag"></div><h2 id="modal-title"></h2><p class="modal-desc" id="modal-desc"></p><div class="modal-section-label">Tech stack</div><div class="modal-tags" id="modal-tags"></div><div class="modal-section-label">Key features</div><ul class="modal-feats" id="modal-feats"></ul><div class="modal-actions"><a class="modal-btn primary" id="modal-github-link" href="#" target="_blank">GitHub</a><a class="modal-btn secondary" href="#contact" onclick="closeModal()">Contact me</a></div></div></div>
 
 <script>
-// project data (resume-aligned)
-const projectsData = {
-  codearena: {
-    tag: 'Real‑time Coding Platform', tagColor: 'rgba(108,99,255,0.15)', tagText: '#a78bfa',
-    title: 'CodeArena — Real‑Time Coding Battle Platform',
-    desc: 'A next-gen coding platform where users create scenario‑based challenges and compete in live battles. Integrated Anthropic AI for assistance & challenge generation.',
-    tags: ['React', 'JavaScript', 'HTML/CSS', 'Vercel', 'Anthropic API'],
-    feats: [
-      'Live coding battles supporting up to 50 concurrent users with responsive frontend',
-      'Supports 16+ programming languages for code execution',
-      'Integrated AI APIs for interactive evaluation, hint generation, and challenge creation',
-      'Resolved browser compatibility across 5+ modern browsers, improved frontend performance by ≈30%'
-    ]
-  },
-  caloriq: {
-    tag: 'AI Nutrition Tracker', tagColor: 'rgba(45,212,191,0.1)', tagText: '#2dd4bf',
-    title: 'CaloriQ — AI‑Powered Nutrition Tracking',
-    desc: 'Personalized calorie tracking platform using AI to estimate macros. Dynamic user profiles and real-time data handling with Supabase.',
-    tags: ['React', 'Supabase', 'JavaScript', 'Vercel', 'AI integration'],
-    feats: [
-      'Supports weight loss, maintenance, and gain goals with AI calorie estimation',
-      'Dynamic user profile handling and optimized backend queries, reduced response time by 25%',
-      'Database with 100+ food items and responsive frontend for multiple devices',
-      'Real-time user data management with Supabase & row-level security'
-    ]
-  },
-  cybershield: {
-    tag: 'Cybersecurity Web App', tagColor: 'rgba(249,115,22,0.1)', tagText: '#f97316',
-    title: 'CyberShield — Security & Authentication System',
-    desc: 'Team-based cybersecurity application built with Spring Boot and React. 10+ REST APIs, MySQL, and authentication middleware.',
-    tags: ['Java', 'Spring Boot', 'React', 'MySQL', 'REST APIs'],
-    feats: [
-      'Built 10+ secure REST API endpoints with role-based authentication',
-      'Collaborated in 5-member Git team; contributed to debugging & integration',
-      'Reduced critical application bugs by ≈40% during final testing phase',
-      'Deployed full-stack app with React frontend and Spring Boot backend'
-    ]
-  }
-};
+// ---------- PROJECT DATA (6 projects: original 3 + new 3) ----------
+const projectsList = [
+  { id: "social", num:"01", icon:"🌐", title:"Social Interaction Web App", shortDesc:"Full-stack social platform with posts, comments, follow system.", tags:["Java","Spring Boot","React","MySQL"], features:["REST APIs for CRUD","MySQL schema for users/posts/comments","React frontend with auth","Responsive UI"], github:"https://github.com/kellyyadav/social-webapp", demo:"#" },
+  { id: "face", num:"02", icon:"🎯", title:"Face Recognition Attendance", shortDesc:"Real-time face detection to prevent proxy attendance. IIT Bombay Hackathon.", tags:["Java","OpenCV","CMake","MySQL"], features:["Real-time detection","Movement verification","Admin dashboard","MySQL storage"], github:"https://github.com/kellyyadav/face-attendance", demo:"#" },
+  { id: "student", num:"03", icon:"🤖", title:"Student Help System", shortDesc:"AI-powered Q&A using Hugging Face API for academic queries.", tags:["Python","Hugging Face API","HTML","CSS"], features:["Hugging Face integration","Clean web interface","Multi-subject queries","Team Git collaboration"], github:"https://github.com/kellyyadav/student-help", demo:"#" },
+  { id: "codearena", num:"04", icon:"⚡", title:"CodeArena – Coding Battle Platform", shortDesc:"Real-time coding battles with AI challenge generation, 16+ languages.", tags:["React","JavaScript","Anthropic API","Vercel"], features:["50 concurrent users","16+ languages","AI assistance & evaluation","30% performance boost"], github:"https://github.com/kellyyadav/codearena", demo:"#" },
+  { id: "caloriq", num:"05", icon:"🥗", title:"CaloriQ – AI Nutrition Tracker", shortDesc:"AI-powered calorie tracking with Supabase and personalized goals.", tags:["React","Supabase","JavaScript","Vercel"], features:["Weight goals (loss/maintain/gain)","100+ food items","25% faster queries","Real-time user profiles"], github:"https://github.com/kellyyadav/caloriq", demo:"#" },
+  { id: "cybershield", num:"06", icon:"🛡️", title:"CyberShield – Security App", shortDesc:"Cybersecurity web app with 10+ REST APIs, Spring Boot & React.", tags:["Java","Spring Boot","React","MySQL"], features:["10+ secure REST APIs","Role-based auth","Team Git workflow","40% bug reduction"], github:"https://github.com/kellyyadav/cybershield", demo:"#" }
+];
 
-function openModal(key) {
-  const p = projectsData[key];
-  if (!p) return;
-  const tag = document.getElementById('modal-tag');
-  tag.textContent = p.tag;
-  tag.style.background = p.tagColor;
-  tag.style.color = p.tagText;
+function buildProjectsGrid() {
+  const grid = document.getElementById('projectsGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  projectsList.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+    card.setAttribute('onclick', `openModal('${p.id}')`);
+    card.innerHTML = `
+      <div class="proj-number">${p.num}</div>
+      <div class="proj-icon" style="background:rgba(108,99,255,0.12);">${p.icon}</div>
+      <h3>${p.title}</h3>
+      <p class="proj-desc">${p.shortDesc}</p>
+      <div class="proj-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      <div class="proj-cta">View details <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="project-links"><a href="${p.github}" target="_blank" onclick="event.stopPropagation()">GitHub →</a> <a href="${p.demo}" target="_blank" onclick="event.stopPropagation()">Live Demo →</a></div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openModal(id) {
+  const p = projectsList.find(proj => proj.id === id);
+  if(!p) return;
+  document.getElementById('modal-tag').innerHTML = 'Project';
   document.getElementById('modal-title').innerText = p.title;
-  document.getElementById('modal-desc').innerText = p.desc;
+  document.getElementById('modal-desc').innerText = p.shortDesc;
   const tagsContainer = document.getElementById('modal-tags');
-  tagsContainer.innerHTML = '';
-  p.tags.forEach(t => {
-    const span = document.createElement('span');
-    span.className = 'tag';
-    span.innerText = t;
-    tagsContainer.appendChild(span);
-  });
+  tagsContainer.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
   const featsList = document.getElementById('modal-feats');
-  featsList.innerHTML = '';
-  p.feats.forEach(f => {
-    const li = document.createElement('li');
-    li.innerText = f;
-    featsList.appendChild(li);
-  });
+  featsList.innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+  const githubBtn = document.getElementById('modal-github-link');
+  githubBtn.href = p.github;
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
-function closeIfBg(e) { if (e.target.id === 'modal-overlay') closeModal(); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function closeIfBg(e) { if(e.target.id === 'modal-overlay') closeModal(); }
 
-// intro chat (same fun intro but mentions resume update)
-const msgs = [
-  { side:'left', sp:'Claude 🟣', sc:'sp-c', txt:'New resume? Kelly just dropped her 2027 portfolio — fullstack projects & AI integrations!' },
-  { side:'right', sp:'ChatGPT 🟢', sc:'sp-g', txt:'She even added a downloadable resume link. So professional.' },
-  { side:'left', sp:'Kelly 👩‍💻', sc:'sp-k', txt:'Check out CodeArena, CaloriQ, and CyberShield. And yes, my resume is one click away 👇' }
-];
-let idx = 0;
-const box = document.getElementById('chat-box');
-function addMsg() {
-  if (idx >= msgs.length) { setTimeout(skipIntro, 1200); return; }
-  const m = msgs[idx++];
-  const wrap = document.createElement('div');
-  wrap.className = 'bubble-wrap ' + m.side;
-  const sp = document.createElement('div');
-  sp.className = 'speaker ' + m.sc;
-  sp.textContent = m.sp;
-  const b = document.createElement('div');
-  const bClass = m.sc === 'sp-k' ? 'b-kelly' : (m.side === 'right' ? 'b-right' : 'b-left');
-  b.className = 'bubble ' + bClass;
-  b.textContent = m.txt;
-  wrap.appendChild(sp);
-  wrap.appendChild(b);
-  box.appendChild(wrap);
-  box.scrollTop = box.scrollHeight;
-  requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('show')));
-  setTimeout(addMsg, Math.min(m.txt.length * 25 + 400, 2500));
+// ---------- RESUME DOWNLOAD (generates print-friendly PDF) ----------
+function downloadResumePDF() {
+  const win = window.open();
+  win.document.write(`
+    <html><head><title>Kelly_Yadav_Resume_2027</title>
+    <style>
+      body { font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; line-height: 1.5; color: #111; }
+      h1 { color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block; }
+      .section { margin: 24px 0; }
+      .section-title { font-size: 20px; font-weight: bold; border-left: 4px solid #3498db; padding-left: 12px; margin: 16px 0 12px; }
+      .project-item { margin-bottom: 16px; }
+      .project-title { font-weight: bold; font-size: 16px; }
+      .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+      .skill-tag { background: #ecf0f1; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+      .contact { margin-top: 24px; font-size: 14px; }
+    </style>
+    </head><body>
+    <h1>Kelly Yadav</h1>
+    <p>B.Tech CSE (2027) • Mody University • +91 72518 14853 • yadavkelly9@gmail.com</p>
+    <div class="section"><div class="section-title">Education</div>B.Tech Computer Science & Engineering, Mody University (2023–2027) | CGPA: 8.5+<br>Focus: Backend Engineering, Full-Stack Development, AI Integrations</div>
+    <div class="section"><div class="section-title">Projects</div>
+    ${projectsList.map(p => `<div class="project-item"><div class="project-title">${p.title}</div>${p.shortDesc}<br>Tech: ${p.tags.join(', ')}</div>`).join('')}
+    </div>
+    <div class="section"><div class="section-title">Technical Skills</div><div class="skills">${['Java','Python','JavaScript','SQL','Spring Boot','React','MySQL','Git','REST APIs','Anthropic API'].map(s => `<span class="skill-tag">${s}</span>`).join('')}</div></div>
+    <div class="section"><div class="section-title">Achievements</div>• GitLab Hackathon Finalist (IIT Bombay)<br>• DevDelight Tech Hackathon Finalist<br>• 4+ Certifications: Cisco AI, Python, Infosys Springboard<br>• Global Rank #23K on Unstop</div>
+    <div class="contact">📧 yadavkelly9@gmail.com | 🔗 linkedin.com/in/kelly-yadav-94435533a | 🐙 github.com/kellyyadav</div>
+    <p style="margin-top:32px; font-size:12px;">Generated from Kelly Yadav's portfolio — December 2026</p>
+    </body></html>
+  `);
+  win.document.close();
+  win.print();
 }
-function skipIntro() {
-  const el = document.getElementById('intro');
-  el.classList.add('hide');
-  setTimeout(() => el.style.display = 'none', 700);
-}
-setTimeout(addMsg, 200);
 
 function toggleMenu() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sb-ov').classList.toggle('open');
   document.getElementById('hbg').classList.toggle('open');
 }
+
+// Intro chat
+const introMsgs = [
+  { side:'left', sp:'Claude 🟣', sc:'sp-c', txt:'Kelly updated her portfolio — now with 6 projects and resume download!' },
+  { side:'right', sp:'ChatGPT 🟢', sc:'sp-g', txt:'And she added official GitHub links. Very professional.' },
+  { side:'left', sp:'Kelly 👩‍💻', sc:'sp-k', txt:'Check out all my work and download my resume directly. Enjoy!' }
+];
+let idx = 0;
+const chatBox = document.getElementById('chat-box');
+function addMsg() {
+  if(idx >= introMsgs.length) { setTimeout(skipIntro, 1300); return; }
+  const m = introMsgs[idx++];
+  const wrap = document.createElement('div');
+  wrap.className = `bubble-wrap ${m.side}`;
+  const sp = document.createElement('div');
+  sp.className = `speaker ${m.sc}`;
+  sp.textContent = m.sp;
+  const b = document.createElement('div');
+  b.className = `bubble ${m.sc === 'sp-k' ? 'b-kelly' : (m.side === 'right' ? 'b-right' : 'b-left')}`;
+  b.textContent = m.txt;
+  wrap.appendChild(sp); wrap.appendChild(b);
+  chatBox.appendChild(wrap);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  requestAnimationFrame(() => wrap.classList.add('show'));
+  setTimeout(addMsg, Math.min(m.txt.length * 25 + 400, 2500));
+}
+function skipIntro() { const el = document.getElementById('intro'); el.classList.add('hide'); setTimeout(() => el.style.display = 'none', 700); }
+setTimeout(addMsg, 200);
+buildProjectsGrid();
 </script>
 </body>
 </html>
