@@ -8,30 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
-
-/* ═══════════════════════════════════
-   TIME-OF-DAY CSS VARIABLES
-═══════════════════════════════════ */
 :root{
-  /* dawn 5-7 */
-  --sky-dawn-t:#1a0a2e;
-  --sky-dawn-b:#ff6b6b;
-  /* morning 7-11 */
-  --sky-morning-t:#87ceeb;
-  --sky-morning-b:#ffd89b;
-  /* noon 11-15 */
-  --sky-noon-t:#1e90ff;
-  --sky-noon-b:#87ceeb;
-  /* evening 15-19 */
-  --sky-eve-t:#2d1b69;
-  --sky-eve-b:#ff8c42;
-  /* dusk 19-21 */
-  --sky-dusk-t:#0d0221;
-  --sky-dusk-b:#c94b4b;
-  /* night 21-5 */
-  --sky-night-t:#020209;
-  --sky-night-b:#0d0d2b;
-
   --sky-top:#87ceeb;
   --sky-bot:#ffd89b;
   --text-main:#2d1810;
@@ -47,28 +24,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
   --green-bright:#6ab04c;
   --transition-speed:3s;
 }
-
 body{transition:color var(--transition-speed)}
-
-/* ═══════════════════════════════════
-   SKY CANVAS
-═══════════════════════════════════ */
 #sky-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* ═══════════════════════════════════
-   RAIN CANVAS
-═══════════════════════════════════ */
 #rain-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 2s}
 #rain-canvas.raining{opacity:1}
-
-/* ═══════════════════════════════════
-   MOUNTAIN LAYERS (parallax)
-═══════════════════════════════════ */
+#lightning-canvas{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0}
 .mountains{position:fixed;bottom:0;left:0;width:100%;z-index:2;pointer-events:none}
-
-/* ═══════════════════════════════════
-   TOP UI
-═══════════════════════════════════ */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 52px;background:rgba(0,0,0,0.08);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.1);transition:background 2s}
 .logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;letter-spacing:-0.02em}
 .logo span{opacity:0.7}
@@ -76,22 +37,16 @@ body{transition:color var(--transition-speed)}
 .tnav{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border-radius:100px;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.1);cursor:pointer;transition:all 0.25s;font-family:'Inter',sans-serif;backdrop-filter:blur(8px)}
 .tnav:hover,.tnav.active{background:rgba(255,255,255,0.25);color:white;border-color:rgba(255,255,255,0.5)}
 .topright{display:flex;gap:10px;align-items:center}
-
-/* TIME TOGGLE BUTTON */
 .time-btn{display:flex;align-items:center;gap:6px;font-size:11px;padding:7px 16px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);color:white;background:rgba(0,0,0,0.15);cursor:pointer;backdrop-filter:blur(8px);transition:all 0.25s;font-family:'Inter',sans-serif}
 .time-btn:hover{background:rgba(0,0,0,0.3)}
 .time-icon{font-size:16px;transition:transform 0.5s}
-
 .hire-btn{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;background:rgba(255,255,255,0.9);color:#2d1810;border:none;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all 0.25s;text-decoration:none}
 .hire-btn:hover{background:white;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
-
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,0.8);border-radius:2px;transition:all 0.3s}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
-
-/* SIDEBAR */
 .sb-ov{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:none;backdrop-filter:blur(4px)}
 .sb-ov.open{display:block}
 .sidebar{position:fixed;top:0;right:-280px;width:260px;height:100vh;background:rgba(20,12,5,0.95);border-left:1px solid rgba(255,255,255,0.1);z-index:400;padding:72px 30px 40px;display:flex;flex-direction:column;gap:18px;transition:right 0.35s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(20px)}
@@ -99,38 +54,20 @@ body{transition:color var(--transition-speed)}
 .sidebar a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;cursor:pointer}
 .sidebar a:hover{color:white}
 .sb-div{height:1px;background:rgba(255,255,255,0.1)}
-
-/* ═══════════════════════════════════
-   HORIZONTAL SLIDES
-═══════════════════════════════════ */
 .h-track{position:fixed;top:0;left:0;height:100vh;display:flex;transition:transform 0.8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
 .hslide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;position:relative}
-
-/* DOT NAV (bottom center) */
 .dot-nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:300;display:flex;gap:10px;align-items:center}
 .nav-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;transition:all 0.3s}
 .nav-dot.active{background:white;border-color:white;box-shadow:0 0 10px rgba(255,255,255,0.5)}
 .nav-dot:hover{border-color:white;transform:scale(1.3)}
-
-/* PREV/NEXT ARROWS */
 .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:300;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s;backdrop-filter:blur(8px)}
 .arrow:hover{background:rgba(255,255,255,0.3);transform:translateY(-50%) scale(1.1)}
 .arrow-l{left:20px}
 .arrow-r{right:40px}
-
-/* SLIDE COUNTER */
 .slide-counter{position:fixed;right:52px;bottom:28px;z-index:300;font-family:'Syne',sans-serif;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.12em}
-
-/* ═══════════════════════════════════
-   GLASS CARD BASE
-═══════════════════════════════════ */
 .glass{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(16px);border-radius:20px;transition:all 0.3s}
 .glass:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
 .glass-dark{background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(16px);border-radius:20px}
-
-/* ═══════════════════════════════════
-   SLIDE 1 — HERO
-═══════════════════════════════════ */
 .hero-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:48px;width:100%;max-width:1200px;padding:0 64px;margin-top:20px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.15);padding:7px 18px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);margin-bottom:20px;width:fit-content;backdrop-filter:blur(8px)}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#6ab04c;animation:bdot 2s infinite}
@@ -150,8 +87,6 @@ body{transition:color var(--transition-speed)}
 .hs:last-child{border-right:none}
 .hs-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .hs-l{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px}
-
-/* PHOTO */
 .photo-wrap{position:relative;width:100%;max-width:270px;margin:0 auto}
 .photo-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);animation:haloSpin 12s linear infinite}
 .photo-halo2{position:absolute;inset:-36px;border-radius:50%;border:1px dashed rgba(255,255,255,0.08);animation:haloSpin 18s linear infinite reverse}
@@ -166,10 +101,6 @@ body{transition:color var(--transition-speed)}
 .nch-a{top:-14px;right:-16px;animation:chipf 5s ease-in-out infinite}
 .nch-b{bottom:26px;left:-22px;animation:chipf 5s ease-in-out infinite;animation-delay:-2.5s}
 @keyframes chipf{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-
-/* ═══════════════════════════════════
-   SLIDE 2 — PROJECTS
-═══════════════════════════════════ */
 .slide-inner{width:100%;max-width:1200px;padding:90px 64px 70px;overflow-y:auto;max-height:100vh}
 .slide-inner::-webkit-scrollbar{width:3px}
 .slide-inner::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:10px}
@@ -192,10 +123,6 @@ body{transition:color var(--transition-speed)}
 .plink{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:600;cursor:pointer;transition:color 0.2s}
 .plink-live{color:#a3e635;text-decoration:none}
 .plink-live:hover{color:#d9f99d}
-
-/* ═══════════════════════════════════
-   SLIDE 3 — SKILLS
-═══════════════════════════════════ */
 .skills-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .sg{margin-bottom:20px}
 .sg-head{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;display:flex;align-items:center;gap:6px}
@@ -213,10 +140,6 @@ body{transition:color var(--transition-speed)}
 .can-also{padding:20px;margin-top:0}
 .ca-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:white;margin-bottom:12px}
 .ca-pills{display:flex;flex-wrap:wrap;gap:6px}
-
-/* ═══════════════════════════════════
-   SLIDE 4 — EXPERIENCE
-═══════════════════════════════════ */
 .exp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .exp-card{padding:26px;transition:all 0.3s}
 .exp-card:hover{transform:translateY(-4px)}
@@ -231,10 +154,6 @@ body{transition:color var(--transition-speed)}
 .edu-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.1);padding:5px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.2);margin-bottom:14px}
 .edu-univ{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:white;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .edu-deg{font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:12px;font-style:italic}
-
-/* ═══════════════════════════════════
-   SLIDE 5 — ACHIEVEMENTS
-═══════════════════════════════════ */
 .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:1200px;padding:90px 64px 70px}
 .acard{padding:20px;transition:all 0.3s;cursor:default}
 .acard:hover{transform:translateY(-5px)}
@@ -242,10 +161,6 @@ body{transition:color var(--transition-speed)}
 .a-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;margin-bottom:6px;line-height:1.3}
 .a-sub{font-size:11px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.5}
 .acard.feat{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
-
-/* ═══════════════════════════════════
-   SLIDE 6 — RESUME
-═══════════════════════════════════ */
 .res-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
 .res-img-wrap{border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.2);position:relative}
 .res-img-wrap img{width:100%;display:block}
@@ -261,10 +176,6 @@ body{transition:color var(--transition-speed)}
 .cert-count-big{padding:18px;display:flex;align-items:center;gap:14px}
 .ccn{font-family:'Syne',sans-serif;font-size:50px;font-weight:800;color:white;line-height:1}
 .cct{font-size:13px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.5}
-
-/* ═══════════════════════════════════
-   SLIDE 7 — PERSONAL
-═══════════════════════════════════ */
 .pers-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .hob-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .hob{padding:18px;text-align:center;transition:all 0.25s}
@@ -280,10 +191,6 @@ body{transition:color var(--transition-speed)}
 .fact:last-child{border-bottom:none}
 .fact-e{font-size:16px;flex-shrink:0}
 .fact-t{font-size:12px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.6}
-
-/* ═══════════════════════════════════
-   SLIDE 8 — CONTACT
-═══════════════════════════════════ */
 .ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
 .ct-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,54px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;text-shadow:0 4px 16px rgba(0,0,0,0.3)}
 .ct-title em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400}
@@ -300,8 +207,6 @@ body{transition:color var(--transition-speed)}
 .cl-icon{font-size:15px}
 .cl-label{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1px}
 .cl-val{font-size:12px;color:rgba(255,255,255,0.85)}
-
-/* MODAL */
 .m-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(16px);z-index:999;justify-content:center;align-items:center;padding:20px}
 .m-ov.open{display:flex}
 .modal{background:rgba(20,12,5,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:22px;padding:38px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:mIn 0.3s cubic-bezier(.4,0,.2,1);box-shadow:0 40px 100px rgba(0,0,0,0.6)}
@@ -323,7 +228,9 @@ body{transition:color var(--transition-speed)}
 .mb-w:hover{box-shadow:0 8px 24px rgba(0,0,0,0.3)}
 .mb-g{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2)}
 .mb-g:hover{background:rgba(255,255,255,0.2)}
-
+/* THUNDER FLASH OVERLAY */
+#thunder-flash{position:fixed;inset:0;z-index:3;pointer-events:none;background:rgba(200,220,255,0);transition:background 0.05s}
+#thunder-flash.flash{background:rgba(200,220,255,0.45)}
 @media(max-width:900px){
   .hero-wrap{grid-template-columns:1fr;padding:0 28px}
   .photo-wrap{display:none}
@@ -342,37 +249,28 @@ body{transition:color var(--transition-speed)}
 </style>
 </head>
 <body>
-
-<!-- SKY CANVAS -->
 <canvas id="sky-canvas"></canvas>
-<!-- RAIN CANVAS -->
-<canvas id="rain-canvas" id="rain-canvas"></canvas>
+<canvas id="rain-canvas"></canvas>
+<canvas id="lightning-canvas"></canvas>
+<div id="thunder-flash"></div>
 
-<!-- MOUNTAINS SVG -->
 <div class="mountains">
 <svg id="mountain-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:280px;display:block">
-  <!-- Far mountains -->
   <polygon id="mfar" points="0,320 0,200 120,120 240,160 380,80 500,140 640,60 760,130 900,90 1020,150 1160,70 1280,140 1440,100 1440,320" fill="#1a3a1a" opacity="0.7"/>
-  <!-- Mid mountains -->
   <polygon id="mmid" points="0,320 0,240 100,170 200,210 320,140 440,190 560,120 680,180 800,150 920,200 1040,130 1160,190 1300,160 1440,200 1440,320" fill="#2d5a27" opacity="0.85"/>
-  <!-- Near mountains -->
   <polygon id="mnear" points="0,320 0,270 80,230 180,260 280,210 380,250 480,220 580,255 680,225 780,260 880,230 980,265 1080,240 1180,268 1280,245 1380,265 1440,255 1440,320" fill="#3d7a32"/>
-  <!-- Ground -->
   <rect id="mground" x="0" y="295" width="1440" height="25" fill="#2d5a27"/>
-  <!-- Trees left -->
   <g id="trees-l" fill="#1a3a1a">
     <polygon points="30,295 50,240 70,295"/><rect x="47" y="280" width="6" height="15" fill="#3d2010"/>
     <polygon points="80,295 95,255 110,295"/><rect x="92" y="282" width="6" height="13" fill="#3d2010"/>
     <polygon points="140,295 162,235 184,295"/><rect x="158" y="278" width="8" height="17" fill="#3d2010"/>
     <polygon points="200,295 215,260 230,295"/><rect x="212" y="283" width="6" height="12" fill="#3d2010"/>
   </g>
-  <!-- Trees right -->
   <g id="trees-r" fill="#1a3a1a">
     <polygon points="1260,295 1278,242 1296,295"/><rect x="1275" y="280" width="6" height="15" fill="#3d2010"/>
     <polygon points="1310,295 1325,258 1340,295"/><rect x="1322" y="283" width="6" height="12" fill="#3d2010"/>
     <polygon points="1360,295 1382,236 1404,295"/><rect x="1378" y="278" width="8" height="17" fill="#3d2010"/>
   </g>
-  <!-- Flowers in foreground -->
   <g id="flowers" opacity="0.9">
     <circle cx="55" cy="294" r="4" fill="#ff9a9e"/><circle cx="55" cy="289" r="2" fill="#ffd89b"/>
     <circle cx="120" cy="294" r="3" fill="#ffd89b"/><circle cx="120" cy="290" r="1.5" fill="#fff"/>
@@ -388,7 +286,6 @@ body{transition:color var(--transition-speed)}
 </svg>
 </div>
 
-<!-- TOPBAR -->
 <nav class="topbar">
   <div class="logo" onclick="gTo(0)">Kelly<span>.</span></div>
   <div class="topnav">
@@ -411,7 +308,6 @@ body{transition:color var(--transition-speed)}
   </div>
 </nav>
 
-<!-- SIDEBAR -->
 <div class="sb-ov" id="sb-ov" onclick="toggleSb()"></div>
 <div class="sidebar" id="sidebar">
   <a onclick="gTo(0);toggleSb()">Home</a>
@@ -426,15 +322,11 @@ body{transition:color var(--transition-speed)}
   <a href="mailto:yadavkelly9@gmail.com" style="color:rgba(255,200,100,0.9);margin-top:4px">Hire me 💜</a>
 </div>
 
-<!-- ARROWS -->
 <button class="arrow arrow-l" onclick="gTo(cur-1)">‹</button>
 <button class="arrow arrow-r" onclick="gTo(cur+1)">›</button>
-
-<!-- DOT NAV -->
 <div class="dot-nav" id="dot-nav"></div>
 <div class="slide-counter" id="slide-ctr">01 / 08</div>
 
-<!-- HORIZONTAL TRACK -->
 <div class="h-track" id="h-track">
 
   <!-- S1: HERO -->
@@ -460,7 +352,7 @@ body{transition:color var(--transition-speed)}
         <div class="photo-wrap">
           <div class="photo-halo"></div><div class="photo-halo2"></div>
           <div class="photo-glow"></div>
-          <div class="photo-box"><img src="PHOTO_SRC" alt="Kelly Yadav"/></div>
+          <div class="photo-box"><img src="PHOTO_PLACEHOLDER" alt="Kelly Yadav"/></div>
           <div class="photo-nametag"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;animation:bdot 2s infinite;display:inline-block"></span>Kelly Yadav 💜</div>
           <div class="nchip nch-a">⚡ Anthropic API</div>
           <div class="nchip nch-b">🌱 Open to roles</div>
@@ -511,9 +403,7 @@ body{transition:color var(--transition-speed)}
         </div>
         <div class="can-also glass-dark">
           <div class="ca-title">💡 I can also</div>
-          <div class="ca-pills">
-            <span class="sk">📹 Vibe Coding</span><span class="sk">🎨 UI/UX Design</span><span class="sk">📝 Tech Writing</span><span class="sk">🤝 Team Lead</span><span class="sk">🎤 Presentations</span><span class="sk">📊 Content Strategy</span>
-          </div>
+          <div class="ca-pills"><span class="sk">📹 Vibe Coding</span><span class="sk">🎨 UI/UX Design</span><span class="sk">📝 Tech Writing</span><span class="sk">🤝 Team Lead</span><span class="sk">🎤 Presentations</span><span class="sk">📊 Content Strategy</span></div>
         </div>
       </div>
     </div>
@@ -553,7 +443,7 @@ body{transition:color var(--transition-speed)}
       <div>
         <div class="s-eyebrow" style="margin-bottom:16px">Resume</div>
         <div class="res-img-wrap">
-          <img src="RESUME_SRC" alt="Kelly Yadav Resume"/>
+          <img src="RESUME_PLACEHOLDER" alt="Kelly Yadav Resume"/>
           <div class="res-overlay"><a class="res-dl" href="mailto:yadavkelly9@gmail.com?subject=Resume Request — Kelly Yadav">📄 Request Full Resume</a></div>
         </div>
       </div>
@@ -622,7 +512,7 @@ body{transition:color var(--transition-speed)}
     </div>
   </div>
 
-</div><!-- /h-track -->
+</div>
 
 <!-- MODAL -->
 <div class="m-ov" id="m-ov" onclick="closeMBg(event)">
@@ -640,83 +530,200 @@ body{transition:color var(--transition-speed)}
 </div>
 
 <script>
-// ═══════════════════════════════════
-// SKY / TIME OF DAY SYSTEM
-// ═══════════════════════════════════
+// ═══════════ EMBED IMAGES ═══════════
+document.querySelector('.photo-box img').src = 'PHOTO_DATA_URI';
+document.querySelector('.res-img-wrap img').src = 'RESUME_DATA_URI';
+
+// ═══════════ SKY SYSTEM ═══════════
 const skyCanvas = document.getElementById('sky-canvas');
 const skyCtx = skyCanvas.getContext('2d');
 function resizeSky(){ skyCanvas.width=innerWidth; skyCanvas.height=innerHeight; }
 resizeSky(); addEventListener('resize', resizeSky);
 
-// Time periods: [hour_start, hour_end, top_color, bottom_color, sun_color, ambient_light, is_night]
+// periods: now includes Thunderstorm
 const periods = [
-  { name:'Night',    h1:0,  h2:5,  top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false },
-  { name:'Dawn',     h1:5,  h2:7,  top:'#1a0a2e', bot:'#ff7b54', sun:'#ffcc70', moon:false, rain:false },
-  { name:'Morning',  h1:7,  h2:11, top:'#5ba3d9', bot:'#ffd89b', sun:'#ffe066', moon:false, rain:false },
-  { name:'Noon',     h1:11, h2:15, top:'#1a78c2', bot:'#87ceeb', sun:'#fff5a0', moon:false, rain:false },
-  { name:'Evening',  h1:15, h2:18, top:'#2d1b69', bot:'#f9a03f', sun:'#ffb347', moon:false, rain:false },
-  { name:'Dusk',     h1:18, h2:20, top:'#0d0221', bot:'#d4425a', sun:'#ff8c69', moon:true,  rain:false },
-  { name:'Monsoon',  h1:20, h2:21, top:'#0a0a14', bot:'#1a1a2e', sun:'#c8d0ff', moon:true,  rain:true  },
-  { name:'Night',    h1:21, h2:24, top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false },
+  { name:'Night',       h1:0,  h2:5,  top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
+  { name:'Dawn',        h1:5,  h2:7,  top:'#1a0a2e', bot:'#ff7b54', sun:'#ffcc70', moon:false, rain:false, thunder:false },
+  { name:'Morning',     h1:7,  h2:11, top:'#5ba3d9', bot:'#ffd89b', sun:'#ffe066', moon:false, rain:false, thunder:false },
+  { name:'Noon',        h1:11, h2:15, top:'#1a78c2', bot:'#87ceeb', sun:'#fff5a0', moon:false, rain:false, thunder:false },
+  { name:'Evening',     h1:15, h2:18, top:'#2d1b69', bot:'#f9a03f', sun:'#ffb347', moon:false, rain:false, thunder:false },
+  { name:'Dusk',        h1:18, h2:20, top:'#0d0221', bot:'#d4425a', sun:'#ff8c69', moon:true,  rain:false, thunder:false },
+  { name:'Thunderstorm',h1:20, h2:21, top:'#07080f', bot:'#12151f', sun:'#c8d0ff', moon:false, rain:true,  thunder:true  },
+  { name:'Night',       h1:21, h2:24, top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
 ];
 
-let manualPeriodIdx = -1; // -1 = auto
-let currentPeriodIdx = 0;
-let transitionT = 0; // 0-1
+let manualPeriodIdx = -1;
+let skyAnimT = 0;
+let rainActive = false;
+let thunderActive = false;
 
 function getPeriodForHour(h) {
-  for(let i=0; i<periods.length; i++) {
-    if(h >= periods[i].h1 && h < periods[i].h2) return i;
-  }
+  for(let i=0;i<periods.length;i++) if(h>=periods[i].h1&&h<periods[i].h2) return i;
   return 7;
 }
-
-function lerpColor(c1, c2, t) {
-  const r1=parseInt(c1.slice(1,3),16), g1=parseInt(c1.slice(3,5),16), b1=parseInt(c1.slice(5,7),16);
-  const r2=parseInt(c2.slice(1,3),16), g2=parseInt(c2.slice(3,5),16), b2=parseInt(c2.slice(5,7),16);
-  const r=Math.round(r1+(r2-r1)*t), g=Math.round(g1+(g2-g1)*t), b=Math.round(b1+(b2-b1)*t);
-  return `rgb(${r},${g},${b})`;
+function lerpColor(c1,c2,t){
+  const r1=parseInt(c1.slice(1,3),16),g1=parseInt(c1.slice(3,5),16),b1=parseInt(c1.slice(5,7),16);
+  const r2=parseInt(c2.slice(1,3),16),g2=parseInt(c2.slice(3,5),16),b2=parseInt(c2.slice(5,7),16);
+  return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
 }
-
-// Stars
-const stars = Array.from({length:200}, ()=>({ x:Math.random(), y:Math.random()*0.75, r:Math.random()*1.4+0.3, o:Math.random()*0.6+0.2, phase:Math.random()*Math.PI*2 }));
-// Sun/Moon
-let celestialAngle = 0;
+const stars = Array.from({length:200},()=>({x:Math.random(),y:Math.random()*0.75,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,phase:Math.random()*Math.PI*2}));
 
 // Rain
 const rainCanvas = document.getElementById('rain-canvas');
 const rainCtx = rainCanvas.getContext('2d');
 function resizeRain(){ rainCanvas.width=innerWidth; rainCanvas.height=innerHeight; }
 resizeRain(); addEventListener('resize', resizeRain);
-const rainDrops = Array.from({length:300}, ()=>({ x:Math.random(), y:Math.random(), speed:0.006+Math.random()*0.008, len:0.03+Math.random()*0.04 }));
-let rainActive = false;
-let skyAnimT = 0;
+const rainDrops = Array.from({length:400},()=>({
+  x:Math.random(), y:Math.random(),
+  speed:0.008+Math.random()*0.012,
+  len:0.04+Math.random()*0.05,
+  wind:0.002+Math.random()*0.002
+}));
+
+// Lightning canvas
+const ltgCanvas = document.getElementById('lightning-canvas');
+const ltgCtx = ltgCanvas.getContext('2d');
+function resizeLtg(){ ltgCanvas.width=innerWidth; ltgCanvas.height=innerHeight; }
+resizeLtg(); addEventListener('resize', resizeLtg);
+
+// Thunder state
+let lightningActive = false;
+let nextLightningIn = 3000;
+let lastLightningTime = Date.now() + 4000;
+let flashEl = document.getElementById('thunder-flash');
+let thunderAudioCtx = null;
+
+function getAudioCtx() {
+  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return thunderAudioCtx;
+}
+
+function playThunder(delay) {
+  setTimeout(()=>{
+    try {
+      const ctx = getAudioCtx();
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      // Generate thunder rumble: burst of noise with decay
+      for(let i=0;i<data.length;i++){
+        const env = i < ctx.sampleRate*0.1 ? i/(ctx.sampleRate*0.1) : Math.exp(-(i-ctx.sampleRate*0.1)/(ctx.sampleRate*0.8));
+        data[i] = (Math.random()*2-1) * env * (0.4 + 0.6*Math.exp(-i/(ctx.sampleRate*0.05)));
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const gain = ctx.createGain(); gain.gain.value = 0.6;
+      // Low pass to make it rumbly
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.frequency.value = 200;
+      src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+      src.start();
+    } catch(e){}
+  }, delay);
+}
+
+function drawLightning(x1, y1, x2, y2, width, branchProb) {
+  ltgCtx.beginPath();
+  ltgCtx.moveTo(x1, y1);
+  const dx = x2-x1, dy = y2-y1;
+  const segments = 12;
+  let cx=x1, cy=y1;
+  for(let i=1;i<=segments;i++){
+    const t=i/segments;
+    const nx = x1+dx*t + (Math.random()-0.5)*80;
+    const ny = y1+dy*t + (Math.random()-0.5)*20;
+    ltgCtx.lineTo(nx, ny);
+    // Branch
+    if(Math.random()<branchProb && i>3 && i<segments-2) {
+      const bx = nx+(Math.random()-0.5)*120;
+      const by = ny+Math.random()*80;
+      ltgCtx.moveTo(nx,ny);
+      ltgCtx.lineTo(bx,by);
+      ltgCtx.moveTo(nx,ny);
+    }
+    cx=nx; cy=ny;
+  }
+  ltgCtx.strokeStyle=`rgba(200,220,255,${0.7+Math.random()*0.3})`;
+  ltgCtx.lineWidth=width;
+  ltgCtx.shadowColor='#a0c8ff';
+  ltgCtx.shadowBlur=20;
+  ltgCtx.stroke();
+  ltgCtx.shadowBlur=0;
+  // Glow pass
+  ltgCtx.strokeStyle=`rgba(180,200,255,0.15)`;
+  ltgCtx.lineWidth=width*6;
+  ltgCtx.stroke();
+}
+
+function triggerLightning() {
+  const W=ltgCanvas.width, H=ltgCanvas.height;
+  ltgCtx.clearRect(0,0,W,H);
+  const startX = W*0.2 + Math.random()*W*0.6;
+  drawLightning(startX, 0, startX+(Math.random()-0.5)*100, H*0.7, 2+Math.random()*2, 0.4);
+  // Flash effect
+  flashEl.classList.add('flash');
+  setTimeout(()=>flashEl.classList.remove('flash'), 80);
+  // Secondary flash
+  setTimeout(()=>{
+    if(Math.random()>0.5){
+      flashEl.classList.add('flash');
+      setTimeout(()=>flashEl.classList.remove('flash'), 60);
+    }
+  }, 120);
+  // Fade out lightning bolt
+  let alpha = 1;
+  const fadeOut = setInterval(()=>{
+    alpha -= 0.12;
+    ltgCanvas.style.opacity = Math.max(0,alpha);
+    if(alpha<=0){ clearInterval(fadeOut); ltgCtx.clearRect(0,0,W,H); ltgCanvas.style.opacity=1; }
+  }, 40);
+  // Thunder sound (delayed — sound travels slower than light)
+  playThunder(400 + Math.random()*1200);
+  // Schedule next
+  nextLightningIn = 2500 + Math.random()*5000;
+  lastLightningTime = Date.now();
+}
+
+function updateThunder(p) {
+  if(p.thunder) {
+    if(!thunderActive) { thunderActive=true; nextLightningIn=2000; lastLightningTime=Date.now(); }
+    if(Date.now()-lastLightningTime > nextLightningIn) triggerLightning();
+  } else {
+    if(thunderActive) { thunderActive=false; ltgCtx.clearRect(0,0,ltgCanvas.width,ltgCanvas.height); }
+  }
+}
+
+function drawCloud(ctx,x,y,scale,alpha,dark){
+  ctx.save(); ctx.globalAlpha=alpha*(dark?0.85:0.6);
+  ctx.fillStyle=dark?'#2a2a3a':'white';
+  ctx.beginPath(); ctx.arc(x,y,30*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x+22*scale,y+5*scale,22*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x-18*scale,y+8*scale,18*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x+40*scale,y+10*scale,16*scale,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
 
 function drawSky() {
   const W=skyCanvas.width, H=skyCanvas.height;
-  const now = new Date();
-  const hour = now.getHours() + now.getMinutes()/60;
-  const pidx = manualPeriodIdx >= 0 ? manualPeriodIdx : getPeriodForHour(hour);
-  const p = periods[pidx];
+  const now=new Date();
+  const hour=now.getHours()+now.getMinutes()/60;
+  const pidx=manualPeriodIdx>=0?manualPeriodIdx:getPeriodForHour(hour);
+  const p=periods[pidx];
 
-  // Sky gradient
-  const grad = skyCtx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0, p.top);
-  grad.addColorStop(1, p.bot);
-  skyCtx.fillStyle = grad;
-  skyCtx.fillRect(0,0,W,H);
+  const grad=skyCtx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,p.top); grad.addColorStop(1,p.bot);
+  skyCtx.fillStyle=grad; skyCtx.fillRect(0,0,W,H);
 
-  // Mountain colors based on time
-  const mFar = document.getElementById('mfar');
-  const mMid = document.getElementById('mmid');
-  const mNear = document.getElementById('mnear');
-  const mGround = document.getElementById('mground');
-  const flowers = document.getElementById('flowers');
-  const treesL = document.getElementById('trees-l');
-  const treesR = document.getElementById('trees-r');
-
-  if(p.moon) {
-    // Night/dusk colors — dark mountains
+  // Mountain colors
+  const mFar=document.getElementById('mfar'),mMid=document.getElementById('mmid'),mNear=document.getElementById('mnear'),mGround=document.getElementById('mground'),flowers=document.getElementById('flowers'),treesL=document.getElementById('trees-l'),treesR=document.getElementById('trees-r');
+  if(p.thunder){
+    if(mFar) mFar.setAttribute('fill','#080c08');
+    if(mMid) mMid.setAttribute('fill','#0e160c');
+    if(mNear) mNear.setAttribute('fill','#141e10');
+    if(mGround) mGround.setAttribute('fill','#0e160c');
+    if(flowers) flowers.setAttribute('opacity','0.2');
+    if(treesL) treesL.setAttribute('fill','#060906');
+    if(treesR) treesR.setAttribute('fill','#06090600');
+  } else if(p.moon){
     if(mFar) mFar.setAttribute('fill','#0d1a0d');
     if(mMid) mMid.setAttribute('fill','#162214');
     if(mNear) mNear.setAttribute('fill','#1c2e18');
@@ -724,7 +731,7 @@ function drawSky() {
     if(flowers) flowers.setAttribute('opacity','0.4');
     if(treesL) treesL.setAttribute('fill','#0a140a');
     if(treesR) treesR.setAttribute('fill','#0a140a');
-  } else if(p.name === 'Morning' || p.name === 'Noon') {
+  } else if(p.name==='Morning'||p.name==='Noon'){
     if(mFar) mFar.setAttribute('fill','#2d5a27');
     if(mMid) mMid.setAttribute('fill','#3d7a32');
     if(mNear) mNear.setAttribute('fill','#4a9a3f');
@@ -742,164 +749,140 @@ function drawSky() {
     if(treesR) treesR.setAttribute('fill','#1a3a1a');
   }
 
-  // Celestial body (sun or moon)
-  const cx = W * 0.72;
-  const cy = H * (p.moon ? 0.12 : 0.14) + Math.sin(skyAnimT * 0.002) * 8;
-
-  if(p.moon) {
-    // Moon
-    const moonGlow = skyCtx.createRadialGradient(cx,cy,0,cx,cy,80);
-    moonGlow.addColorStop(0,'rgba(220,220,255,0.15)');
-    moonGlow.addColorStop(1,'transparent');
-    skyCtx.fillStyle = moonGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,80,0,Math.PI*2); skyCtx.fill();
+  const cx=W*0.72, cy=H*(p.moon?0.12:0.14)+Math.sin(skyAnimT*0.002)*8;
+  if(p.thunder){
+    // Storm clouds — heavy, dark, dramatic
+    drawCloud(skyCtx,W*0.05,H*0.08,2.2,0.9,true);
+    drawCloud(skyCtx,W*0.3,H*0.05,2.8,0.95,true);
+    drawCloud(skyCtx,W*0.55,H*0.1,2.0,0.88,true);
+    drawCloud(skyCtx,W*0.75,H*0.06,2.5,0.92,true);
+    drawCloud(skyCtx,W*0.15,H*0.18,1.8,0.8,true);
+    drawCloud(skyCtx,W*0.45,H*0.15,2.2,0.85,true);
+    // Eerie green/cyan tint at horizon
+    const horizGlow=skyCtx.createLinearGradient(0,H*0.5,0,H*0.85);
+    horizGlow.addColorStop(0,'transparent'); horizGlow.addColorStop(1,'rgba(30,50,30,0.3)');
+    skyCtx.fillStyle=horizGlow; skyCtx.fillRect(0,0,W,H);
+  } else if(p.moon){
+    const moonGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,80);
+    moonGlow.addColorStop(0,'rgba(220,220,255,0.15)'); moonGlow.addColorStop(1,'transparent');
+    skyCtx.fillStyle=moonGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,80,0,Math.PI*2); skyCtx.fill();
     skyCtx.beginPath(); skyCtx.arc(cx,cy,22,0,Math.PI*2);
     skyCtx.fillStyle='#e8e8f0'; skyCtx.shadowColor='#c8d0ff'; skyCtx.shadowBlur=20; skyCtx.fill();
     skyCtx.beginPath(); skyCtx.arc(cx+7,cy-4,17,0,Math.PI*2);
     skyCtx.fillStyle=p.top; skyCtx.shadowBlur=0; skyCtx.fill();
-    // Stars
     stars.forEach(s=>{
-      const alpha = s.o*(0.4+0.6*(0.5+0.5*Math.sin(skyAnimT*0.015+s.phase)));
-      skyCtx.beginPath(); skyCtx.arc(s.x*W, s.y*H*0.7, s.r,0,Math.PI*2);
+      const alpha=s.o*(0.4+0.6*(0.5+0.5*Math.sin(skyAnimT*0.015+s.phase)));
+      skyCtx.beginPath(); skyCtx.arc(s.x*W,s.y*H*0.7,s.r,0,Math.PI*2);
       skyCtx.fillStyle=`rgba(220,215,255,${alpha})`; skyCtx.shadowBlur=0; skyCtx.fill();
     });
   } else {
-    // Sun glow
-    const sunGlow = skyCtx.createRadialGradient(cx,cy,0,cx,cy,100);
-    sunGlow.addColorStop(0,'rgba(255,240,150,0.4)');
-    sunGlow.addColorStop(0.5,'rgba(255,200,80,0.2)');
-    sunGlow.addColorStop(1,'transparent');
+    const sunGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,100);
+    sunGlow.addColorStop(0,'rgba(255,240,150,0.4)'); sunGlow.addColorStop(0.5,'rgba(255,200,80,0.2)'); sunGlow.addColorStop(1,'transparent');
     skyCtx.fillStyle=sunGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,100,0,Math.PI*2); skyCtx.fill();
-    // Sun rays
     for(let i=0;i<12;i++){
       const a=i*(Math.PI/6)+skyAnimT*0.003;
-      const x1=cx+Math.cos(a)*28, y1=cy+Math.sin(a)*28;
-      const x2=cx+Math.cos(a)*(38+Math.sin(skyAnimT*0.05+i)*5), y2=cy+Math.sin(a)*(38+Math.sin(skyAnimT*0.05+i)*5);
+      const x1=cx+Math.cos(a)*28,y1=cy+Math.sin(a)*28;
+      const x2=cx+Math.cos(a)*(38+Math.sin(skyAnimT*0.05+i)*5),y2=cy+Math.sin(a)*(38+Math.sin(skyAnimT*0.05+i)*5);
       skyCtx.beginPath(); skyCtx.moveTo(x1,y1); skyCtx.lineTo(x2,y2);
       skyCtx.strokeStyle=`rgba(255,230,100,${0.3+0.2*Math.sin(skyAnimT*0.03+i)})`; skyCtx.lineWidth=2; skyCtx.stroke();
     }
     skyCtx.beginPath(); skyCtx.arc(cx,cy,24,0,Math.PI*2);
     skyCtx.fillStyle=p.sun; skyCtx.shadowColor=p.sun; skyCtx.shadowBlur=30; skyCtx.fill(); skyCtx.shadowBlur=0;
-    // Clouds (morning/noon)
-    if(p.name==='Morning'||p.name==='Noon') {
-      drawCloud(skyCtx, W*0.15, H*0.2, 1.0, 0.7);
-      drawCloud(skyCtx, W*0.45, H*0.15, 0.8, 0.6);
-      drawCloud(skyCtx, W*0.6, H*0.25, 1.2, 0.65);
+    if(p.name==='Morning'||p.name==='Noon'){
+      drawCloud(skyCtx,W*0.15,H*0.2,1.0,0.7,false);
+      drawCloud(skyCtx,W*0.45,H*0.15,0.8,0.6,false);
+      drawCloud(skyCtx,W*0.6,H*0.25,1.2,0.65,false);
     }
   }
 
   // Rain
-  if(p.rain !== rainActive) {
-    rainActive = p.rain;
-    rainCanvas.className = rainActive ? 'raining' : '';
+  if(p.rain!==rainActive){
+    rainActive=p.rain;
+    rainCanvas.className=rainActive?'raining':'';
   }
-  if(rainActive) {
+  if(rainActive){
     rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-    rainCtx.strokeStyle='rgba(180,200,255,0.35)'; rainCtx.lineWidth=1;
+    // Heavy rain with wind
+    rainCtx.strokeStyle='rgba(160,185,220,0.4)'; rainCtx.lineWidth=1.2;
     rainDrops.forEach(d=>{
-      d.y += d.speed;
-      if(d.y > 1) { d.y=0; d.x=Math.random(); }
+      d.y+=d.speed; d.x+=d.wind;
+      if(d.y>1){d.y=-0.05; d.x=Math.random();}
+      if(d.x>1) d.x=0;
       const rx=d.x*rainCanvas.width, ry=d.y*rainCanvas.height;
-      rainCtx.beginPath(); rainCtx.moveTo(rx,ry); rainCtx.lineTo(rx+2,ry+d.len*rainCanvas.height); rainCtx.stroke();
+      rainCtx.beginPath(); rainCtx.moveTo(rx,ry); rainCtx.lineTo(rx+d.wind*rainCanvas.width*8, ry+d.len*rainCanvas.height); rainCtx.stroke();
     });
+    // Puddle splashes at bottom (random)
+    if(Math.random()<0.3){
+      const sx=Math.random()*rainCanvas.width, sy=rainCanvas.height-10;
+      rainCtx.beginPath(); rainCtx.arc(sx,sy,2+Math.random()*3,0,Math.PI*2);
+      rainCtx.strokeStyle='rgba(160,185,220,0.25)'; rainCtx.lineWidth=1; rainCtx.stroke();
+    }
   }
 
-  // Update time label
-  document.getElementById('time-label').textContent = p.name;
-  document.getElementById('time-icon').textContent = p.moon ? '🌙' : p.name==='Dawn'||p.name==='Dusk' ? '🌅' : '☀️';
+  // Thunder/lightning update
+  updateThunder(p);
+
+  // UI label
+  document.getElementById('time-label').textContent=p.name;
+  document.getElementById('time-icon').textContent=p.thunder?'⛈️':p.moon?'🌙':p.name==='Dawn'||p.name==='Dusk'?'🌅':'☀️';
 
   skyAnimT++;
   requestAnimationFrame(drawSky);
 }
-
-function drawCloud(ctx, x, y, scale, alpha) {
-  ctx.save(); ctx.globalAlpha=alpha*0.6;
-  ctx.fillStyle='white';
-  ctx.beginPath(); ctx.arc(x,y,30*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x+22*scale,y+5*scale,22*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x-18*scale,y+8*scale,18*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x+40*scale,y+10*scale,16*scale,0,Math.PI*2); ctx.fill();
-  ctx.restore();
-}
-
 drawSky();
 
-// Manual time toggle
-const timeOrder = [0,1,2,3,4,5,7]; // indices into periods
-let manualIdx = 0;
+// Manual toggle — now includes Thunderstorm
+const timeOrder=[0,1,2,3,4,5,6,7];
+let manualIdx=0;
 function toggleTimeManual(){
-  manualIdx = (manualIdx+1) % timeOrder.length;
-  if(manualIdx === 0) { manualPeriodIdx = -1; } // back to auto
-  else { manualPeriodIdx = timeOrder[manualIdx]; }
+  manualIdx=(manualIdx+1)%timeOrder.length;
+  manualPeriodIdx=manualIdx===0?-1:timeOrder[manualIdx];
+  // Resume AudioContext on user gesture
+  if(thunderAudioCtx && thunderAudioCtx.state==='suspended') thunderAudioCtx.resume();
+  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
 }
 
-// ═══════════════════════════════════
-// HORIZONTAL SLIDES
-// ═══════════════════════════════════
-const track = document.getElementById('h-track');
-const hslides = document.querySelectorAll('.hslide');
-const total = hslides.length;
-var cur = 0;
-let sliding = false;
-let lastWheel = 0;
-
-// Build dots
-const dotNav = document.getElementById('dot-nav');
+// ═══════════ SLIDES ═══════════
+const track=document.getElementById('h-track');
+const hslides=document.querySelectorAll('.hslide');
+const total=hslides.length;
+var cur=0; let sliding=false; let lastWheel=0;
+const dotNav=document.getElementById('dot-nav');
 hslides.forEach((_,i)=>{
   const d=document.createElement('div'); d.className='nav-dot'+(i===0?' active':''); d.onclick=()=>gTo(i);
   dotNav.appendChild(d);
 });
-
 function gTo(idx){
-  if(sliding||idx===cur||idx<0||idx>=total) return;
+  if(sliding||idx===cur||idx<0||idx>=total)return;
   sliding=true; cur=idx;
   track.style.transform=`translateX(-${cur*100}vw)`;
   document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
   document.querySelectorAll('.tnav').forEach((t,i)=>t.classList.toggle('active',i===cur));
   document.getElementById('slide-ctr').textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
-  setTimeout(()=>{
-    sliding=false;
-    if(cur===2) animateBars();
-  },850);
+  setTimeout(()=>{ sliding=false; if(cur===2)animateBars(); },850);
 }
-
-// Scroll
 addEventListener('wheel',e=>{
-  const now=Date.now(); if(now-lastWheel<900) return; lastWheel=now;
-  if(e.deltaY>30||e.deltaX>30) gTo(cur+1);
-  else if(e.deltaY<-30||e.deltaX<-30) gTo(cur-1);
+  const now=Date.now(); if(now-lastWheel<900)return; lastWheel=now;
+  if(e.deltaY>30||e.deltaX>30)gTo(cur+1); else if(e.deltaY<-30||e.deltaX<-30)gTo(cur-1);
 },{passive:true});
-
-// Keys
 addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') gTo(cur+1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') gTo(cur-1);
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')gTo(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')gTo(cur-1);
 });
-
-// Touch
 let tx=0;
 addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-addEventListener('touchend',e=>{
-  const d=tx-e.changedTouches[0].clientX;
-  if(Math.abs(d)>60) gTo(cur+(d>0?1:-1));
-},{passive:true});
+addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>60)gTo(cur+(d>0?1:-1));},{passive:true});
 
-// Skill bars
 let barsD=false;
-function animateBars(){
-  if(barsD)return; barsD=true;
-  document.querySelectorAll('.sb-fill').forEach(b=>b.style.width=b.dataset.w+'%');
-}
+function animateBars(){ if(barsD)return; barsD=true; document.querySelectorAll('.sb-fill').forEach(b=>b.style.width=b.dataset.w+'%'); }
 
-// Sidebar
 function toggleSb(){
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sb-ov').classList.toggle('open');
   document.getElementById('hbg').classList.toggle('open');
 }
 
-// ═══════════════════════════════════
-// MODAL
-// ═══════════════════════════════════
+// ═══════════ MODAL ═══════════
 const projs={
   codearena:{tag:'🔥 Featured · Live',title:'CodeArena — Real-Time Coding Battle',desc:'Real-time coding battle platform with 16+ programming languages for up to 50 concurrent users. Anthropic AI for dynamic challenge generation and automated evaluation.',tags:['React','JavaScript','Anthropic API','Vercel'],feats:['16+ programming languages supported','50 concurrent users','Anthropic AI challenge generation & evaluation','Frontend performance optimised ~30%','Cross-browser compatibility across 5+ browsers'],live:'https://codearena-peach.vercel.app/',gh:'https://github.com/kellyyadav'},
   caloriq:{tag:'Live · AI ✨',title:'CaloriQ — AI Nutrition Tracker',desc:'Full-stack AI nutrition tracker with personalised health goals and real-time Supabase sync. AI calorie estimation across 100+ food items.',tags:['React','JavaScript','Supabase','Vercel'],feats:['AI calorie estimation 100+ foods','Personalised health goals','Real-time Supabase sync','Query response time reduced ~25%','Responsive multi-device UI'],live:'https://caloriq-one.vercel.app/',gh:'https://github.com/kellyyadav'},
