@@ -9,28 +9,19 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
 :root{
-  --sky-top:#87ceeb;
-  --sky-bot:#ffd89b;
-  --text-main:#2d1810;
-  --text-muted:#6b4c3b;
-  --card-bg:rgba(255,255,255,0.18);
-  --card-border:rgba(255,255,255,0.35);
-  --pill-bg:rgba(255,255,255,0.22);
-  --accent:#e8653a;
-  --accent2:#f0a500;
-  --green-dark:#1a3a1a;
-  --green-mid:#2d5a27;
-  --green-light:#4a8c3f;
-  --green-bright:#6ab04c;
-  --transition-speed:3s;
+  --sky-top:#87ceeb;--sky-bot:#ffd89b;
+  --green-dark:#1a3a1a;--green-mid:#2d5a27;--green-light:#4a8c3f;
 }
-body{transition:color var(--transition-speed)}
 #sky-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-#rain-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 2s}
+#rain-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 2.5s}
 #rain-canvas.raining{opacity:1}
-#lightning-canvas{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0}
+#lightning-canvas{position:fixed;inset:0;z-index:4;pointer-events:none}
+#thunder-flash{position:fixed;inset:0;z-index:5;pointer-events:none;background:rgba(200,220,255,0);transition:background 0.04s}
+#thunder-flash.flash{background:rgba(200,220,255,0.55)}
+#thunder-flash.flash2{background:rgba(200,220,255,0.3)}
 .mountains{position:fixed;bottom:0;left:0;width:100%;z-index:2;pointer-events:none}
-.topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 52px;background:rgba(0,0,0,0.08);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.1);transition:background 2s}
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 52px;background:rgba(0,0,0,0.08);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.1)}
 .logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;letter-spacing:-0.02em}
 .logo span{opacity:0.7}
 .topnav{display:flex;gap:6px}
@@ -39,7 +30,7 @@ body{transition:color var(--transition-speed)}
 .topright{display:flex;gap:10px;align-items:center}
 .time-btn{display:flex;align-items:center;gap:6px;font-size:11px;padding:7px 16px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);color:white;background:rgba(0,0,0,0.15);cursor:pointer;backdrop-filter:blur(8px);transition:all 0.25s;font-family:'Inter',sans-serif}
 .time-btn:hover{background:rgba(0,0,0,0.3)}
-.time-icon{font-size:16px;transition:transform 0.5s}
+.time-icon{font-size:16px}
 .hire-btn{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;background:rgba(255,255,255,0.9);color:#2d1810;border:none;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all 0.25s;text-decoration:none}
 .hire-btn:hover{background:white;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -54,20 +45,22 @@ body{transition:color var(--transition-speed)}
 .sidebar a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;cursor:pointer}
 .sidebar a:hover{color:white}
 .sb-div{height:1px;background:rgba(255,255,255,0.1)}
+/* SLIDES */
 .h-track{position:fixed;top:0;left:0;height:100vh;display:flex;transition:transform 0.8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
-.hslide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;position:relative}
+.hslide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
 .dot-nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:300;display:flex;gap:10px;align-items:center}
 .nav-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;transition:all 0.3s}
 .nav-dot.active{background:white;border-color:white;box-shadow:0 0 10px rgba(255,255,255,0.5)}
 .nav-dot:hover{border-color:white;transform:scale(1.3)}
 .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:300;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s;backdrop-filter:blur(8px)}
 .arrow:hover{background:rgba(255,255,255,0.3);transform:translateY(-50%) scale(1.1)}
-.arrow-l{left:20px}
-.arrow-r{right:40px}
+.arrow-l{left:20px}.arrow-r{right:40px}
 .slide-counter{position:fixed;right:52px;bottom:28px;z-index:300;font-family:'Syne',sans-serif;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.12em}
+/* GLASS */
 .glass{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(16px);border-radius:20px;transition:all 0.3s}
 .glass:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
 .glass-dark{background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(16px);border-radius:20px}
+/* HERO */
 .hero-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:48px;width:100%;max-width:1200px;padding:0 64px;margin-top:20px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.15);padding:7px 18px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);margin-bottom:20px;width:fit-content;backdrop-filter:blur(8px)}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#6ab04c;animation:bdot 2s infinite}
@@ -83,10 +76,10 @@ body{transition:color var(--transition-speed)}
 .btn-gl:hover{background:rgba(255,255,255,0.25);transform:translateY(-3px)}
 .hero-stats{display:flex;gap:0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.2)}
 .hs{flex:1;padding:0 18px;border-right:1px solid rgba(255,255,255,0.15)}
-.hs:first-child{padding-left:0}
-.hs:last-child{border-right:none}
+.hs:first-child{padding-left:0}.hs:last-child{border-right:none}
 .hs-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .hs-l{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px}
+/* PHOTO */
 .photo-wrap{position:relative;width:100%;max-width:270px;margin:0 auto}
 .photo-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);animation:haloSpin 12s linear infinite}
 .photo-halo2{position:absolute;inset:-36px;border-radius:50%;border:1px dashed rgba(255,255,255,0.08);animation:haloSpin 18s linear infinite reverse}
@@ -101,6 +94,7 @@ body{transition:color var(--transition-speed)}
 .nch-a{top:-14px;right:-16px;animation:chipf 5s ease-in-out infinite}
 .nch-b{bottom:26px;left:-22px;animation:chipf 5s ease-in-out infinite;animation-delay:-2.5s}
 @keyframes chipf{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+/* SLIDES INNER */
 .slide-inner{width:100%;max-width:1200px;padding:90px 64px 70px;overflow-y:auto;max-height:100vh}
 .slide-inner::-webkit-scrollbar{width:3px}
 .slide-inner::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:10px}
@@ -108,6 +102,7 @@ body{transition:color var(--transition-speed)}
 .s-eyebrow::before{content:'';width:18px;height:1px;background:rgba(255,255,255,0.5)}
 .s-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4.5vw,58px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:38px;text-shadow:0 4px 16px rgba(0,0,0,0.3)}
 .s-title em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:0.95em}
+/* PROJECTS */
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .pcard{padding:24px;cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s}
 .pcard:hover{transform:translateY(-7px)}
@@ -123,6 +118,7 @@ body{transition:color var(--transition-speed)}
 .plink{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:600;cursor:pointer;transition:color 0.2s}
 .plink-live{color:#a3e635;text-decoration:none}
 .plink-live:hover{color:#d9f99d}
+/* SKILLS */
 .skills-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .sg{margin-bottom:20px}
 .sg-head{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;display:flex;align-items:center;gap:6px}
@@ -140,11 +136,12 @@ body{transition:color var(--transition-speed)}
 .can-also{padding:20px;margin-top:0}
 .ca-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:white;margin-bottom:12px}
 .ca-pills{display:flex;flex-wrap:wrap;gap:6px}
+/* EXPERIENCE */
 .exp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .exp-card{padding:26px;transition:all 0.3s}
 .exp-card:hover{transform:translateY(-4px)}
 .exp-period{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px}
-.exp-role{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.exp-role{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:4px}
 .exp-co{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:14px;display:flex;align-items:center;gap:6px}
 .exp-co span{background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:100px;border:1px solid rgba(255,255,255,0.15)}
 .exp-li{list-style:none}
@@ -152,8 +149,9 @@ body{transition:color var(--transition-speed)}
 .exp-li li::before{content:"▸";color:rgba(255,255,255,0.5);flex-shrink:0;font-size:10px;margin-top:2px}
 .edu-card-big{padding:26px;grid-column:1/-1}
 .edu-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.1);padding:5px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.2);margin-bottom:14px}
-.edu-univ{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:white;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.edu-univ{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:white;margin-bottom:4px}
 .edu-deg{font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:12px;font-style:italic}
+/* ACHIEVEMENTS */
 .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:1200px;padding:90px 64px 70px}
 .acard{padding:20px;transition:all 0.3s;cursor:default}
 .acard:hover{transform:translateY(-5px)}
@@ -161,6 +159,7 @@ body{transition:color var(--transition-speed)}
 .a-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;margin-bottom:6px;line-height:1.3}
 .a-sub{font-size:11px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.5}
 .acard.feat{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
+/* RESUME */
 .res-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
 .res-img-wrap{border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.2);position:relative}
 .res-img-wrap img{width:100%;display:block}
@@ -176,6 +175,7 @@ body{transition:color var(--transition-speed)}
 .cert-count-big{padding:18px;display:flex;align-items:center;gap:14px}
 .ccn{font-family:'Syne',sans-serif;font-size:50px;font-weight:800;color:white;line-height:1}
 .cct{font-size:13px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.5}
+/* PERSONAL */
 .pers-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
 .hob-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .hob{padding:18px;text-align:center;transition:all 0.25s}
@@ -191,11 +191,12 @@ body{transition:color var(--transition-speed)}
 .fact:last-child{border-bottom:none}
 .fact-e{font-size:16px;flex-shrink:0}
 .fact-t{font-size:12px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.6}
+/* CONTACT */
 .ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
-.ct-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,54px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;text-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.ct-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,54px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px}
 .ct-title em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400}
 .ct-desc{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:28px;font-weight:300}
-.ct-email{font-family:'Syne',sans-serif;font-size:clamp(13px,1.8vw,18px);font-weight:700;color:white;margin-bottom:22px;display:block;text-decoration:none;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.ct-email{font-family:'Syne',sans-serif;font-size:clamp(13px,1.8vw,18px);font-weight:700;color:white;margin-bottom:22px;display:block;text-decoration:none}
 .avail-box{background:rgba(106,176,76,0.15);border:1px solid rgba(106,176,76,0.3);border-radius:16px;padding:22px;margin-bottom:20px;backdrop-filter:blur(8px)}
 .avail-status{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#a3e635;margin-bottom:10px}
 .avail-status::before{content:'';width:7px;height:7px;border-radius:50%;background:#4ade80;animation:bdot 2s infinite;flex-shrink:0}
@@ -207,6 +208,7 @@ body{transition:color var(--transition-speed)}
 .cl-icon{font-size:15px}
 .cl-label{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1px}
 .cl-val{font-size:12px;color:rgba(255,255,255,0.85)}
+/* MODAL */
 .m-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(16px);z-index:999;justify-content:center;align-items:center;padding:20px}
 .m-ov.open{display:flex}
 .modal{background:rgba(20,12,5,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:22px;padding:38px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:mIn 0.3s cubic-bezier(.4,0,.2,1);box-shadow:0 40px 100px rgba(0,0,0,0.6)}
@@ -224,25 +226,15 @@ body{transition:color var(--transition-speed)}
 .m-actions{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
 .mb{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:100px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;transition:all 0.25s;border:none}
 .mb:hover{transform:translateY(-2px)}
-.mb-w{background:white;color:#2d1810}
-.mb-w:hover{box-shadow:0 8px 24px rgba(0,0,0,0.3)}
-.mb-g{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2)}
-.mb-g:hover{background:rgba(255,255,255,0.2)}
-/* THUNDER FLASH OVERLAY */
-#thunder-flash{position:fixed;inset:0;z-index:3;pointer-events:none;background:rgba(200,220,255,0);transition:background 0.05s}
-#thunder-flash.flash{background:rgba(200,220,255,0.45)}
+.mb-w{background:white;color:#2d1810}.mb-w:hover{box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.mb-g{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2)}.mb-g:hover{background:rgba(255,255,255,0.2)}
 @media(max-width:900px){
-  .hero-wrap{grid-template-columns:1fr;padding:0 28px}
-  .photo-wrap{display:none}
+  .hero-wrap{grid-template-columns:1fr;padding:0 28px}.photo-wrap{display:none}
   .pgrid,.skills-wrap,.exp-wrap,.ach-grid,.res-wrap,.pers-wrap,.ct-wrap{grid-template-columns:1fr;padding:90px 28px 70px}
-  .pgrid{grid-template-columns:1fr 1fr}
-  .cert-row2,.hob-grid{grid-template-columns:1fr 1fr}
+  .pgrid{grid-template-columns:1fr 1fr}.cert-row2,.hob-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-  .topbar{padding:14px 18px}
-  .topnav{display:none}
-  .hamburger{display:flex}
-  .arrow{display:none}
+  .topbar{padding:14px 18px}.topnav{display:none}.hamburger{display:flex}.arrow{display:none}
   .hero-stats{flex-wrap:wrap}.hs{border-right:none;padding:0;min-width:40%}
   .pgrid{grid-template-columns:1fr}
 }
@@ -310,12 +302,9 @@ body{transition:color var(--transition-speed)}
 
 <div class="sb-ov" id="sb-ov" onclick="toggleSb()"></div>
 <div class="sidebar" id="sidebar">
-  <a onclick="gTo(0);toggleSb()">Home</a>
-  <a onclick="gTo(1);toggleSb()">Projects</a>
-  <a onclick="gTo(2);toggleSb()">Skills</a>
-  <a onclick="gTo(3);toggleSb()">Experience</a>
-  <a onclick="gTo(4);toggleSb()">Achievements</a>
-  <a onclick="gTo(5);toggleSb()">Resume</a>
+  <a onclick="gTo(0);toggleSb()">Home</a><a onclick="gTo(1);toggleSb()">Projects</a>
+  <a onclick="gTo(2);toggleSb()">Skills</a><a onclick="gTo(3);toggleSb()">Experience</a>
+  <a onclick="gTo(4);toggleSb()">Achievements</a><a onclick="gTo(5);toggleSb()">Resume</a>
   <div class="sb-div"></div>
   <a onclick="gTo(6);toggleSb()" style="color:rgba(255,255,255,0.9)">Personal ✨</a>
   <a onclick="gTo(7);toggleSb()">Contact</a>
@@ -352,7 +341,7 @@ body{transition:color var(--transition-speed)}
         <div class="photo-wrap">
           <div class="photo-halo"></div><div class="photo-halo2"></div>
           <div class="photo-glow"></div>
-          <div class="photo-box"><img src="./passport_photo.jpg" alt="Kelly Yadav"/></div>
+          <div class="photo-box"><img src="PHOTO_SRC" alt="Kelly Yadav"/></div>
           <div class="photo-nametag"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;animation:bdot 2s infinite;display:inline-block"></span>Kelly Yadav 💜</div>
           <div class="nchip nch-a">⚡ Anthropic API</div>
           <div class="nchip nch-b">🌱 Open to roles</div>
@@ -385,19 +374,19 @@ body{transition:color var(--transition-speed)}
         <h2 class="s-title" style="margin-bottom:24px">What I <em>work with</em></h2>
         <div class="sg"><div class="sg-head">Languages</div><div class="sp"><span class="sk h">Java</span><span class="sk h">JavaScript</span><span class="sk h">Python</span><span class="sk">SQL</span><span class="sk">TypeScript</span></div></div>
         <div class="sg"><div class="sg-head">Frontend</div><div class="sp"><span class="sk h">React.js</span><span class="sk h">HTML5</span><span class="sk h">CSS3</span><span class="sk">Tailwind CSS</span><span class="sk">Canvas API</span><span class="sk">Responsive Design</span><span class="sk">Figma</span></div></div>
-        <div class="sg"><div class="sg-head">Backend & Full Stack</div><div class="sp"><span class="sk h">Spring Boot</span><span class="sk h">REST APIs</span><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">JDBC</span><span class="sk">JWT Auth</span><span class="sk">MVC</span></div></div>
+        <div class="sg"><div class="sg-head">Backend &amp; Full Stack</div><div class="sp"><span class="sk h">Spring Boot</span><span class="sk h">REST APIs</span><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">JDBC</span><span class="sk">JWT Auth</span><span class="sk">MVC</span></div></div>
         <div class="sg"><div class="sg-head">Databases</div><div class="sp"><span class="sk h">MySQL</span><span class="sk h">Supabase</span><span class="sk">PostgreSQL</span><span class="sk">MongoDB basics</span></div></div>
-        <div class="sg"><div class="sg-head">AI & APIs</div><div class="sp"><span class="sk h">Anthropic API</span><span class="sk">Hugging Face</span><span class="sk">OpenAI basics</span><span class="sk">API Design</span></div></div>
-        <div class="sg"><div class="sg-head">DevOps & Tools</div><div class="sp"><span class="sk h">Git</span><span class="sk h">GitHub</span><span class="sk h">Vercel</span><span class="sk">Postman</span><span class="sk">VS Code</span><span class="sk">Linux basics</span><span class="sk">CI/CD basics</span></div></div>
+        <div class="sg"><div class="sg-head">AI &amp; APIs</div><div class="sp"><span class="sk h">Anthropic API</span><span class="sk">Hugging Face</span><span class="sk">OpenAI basics</span><span class="sk">API Design</span></div></div>
+        <div class="sg"><div class="sg-head">DevOps &amp; Tools</div><div class="sp"><span class="sk h">Git</span><span class="sk h">GitHub</span><span class="sk h">Vercel</span><span class="sk">Postman</span><span class="sk">VS Code</span><span class="sk">Linux basics</span><span class="sk">CI/CD basics</span></div></div>
       </div>
       <div>
         <div class="skill-bars-card glass-dark" id="skill-bars">
           <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px;font-family:'Syne',sans-serif;font-weight:600">Proficiency</div>
-          <div class="sbr"><div class="sbt"><span>Java & Spring Boot</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>React & Frontend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>MySQL & Supabase</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>REST APIs & Backend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="74"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>AI & API Integration</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>Java &amp; Spring Boot</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>React &amp; Frontend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>MySQL &amp; Supabase</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>REST APIs &amp; Backend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="74"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>AI &amp; API Integration</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
           <div class="sbr"><div class="sbt"><span>Python</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="65"></div></div></div>
           <div class="sbr"><div class="sbt"><span>DSA</span><span>Growing</span></div><div class="sb-track"><div class="sb-fill" data-w="52"></div></div></div>
         </div>
@@ -443,7 +432,7 @@ body{transition:color var(--transition-speed)}
       <div>
         <div class="s-eyebrow" style="margin-bottom:16px">Resume</div>
         <div class="res-img-wrap">
-          <img src="./Screenshot_2026-05-25_135213.png"alt="Kelly Yadav Resume"/>
+          <img src="RESUME_SRC" alt="Kelly Yadav Resume"/>
           <div class="res-overlay"><a class="res-dl" href="mailto:yadavkelly9@gmail.com?subject=Resume Request — Kelly Yadav">📄 Request Full Resume</a></div>
         </div>
       </div>
@@ -477,7 +466,7 @@ body{transition:color var(--transition-speed)}
       </div>
       <div class="facts-card glass-dark">
         <div class="facts-t">✨ Fun Facts</div>
-        <div class="fact"><div class="fact-e">🤖</div><div class="fact-t">Built CodeArena with live Anthropic API integration — real AI in a real product!</div></div>
+        <div class="fact"><div class="fact-e">🤖</div><div class="fact-t">Built CodeArena with live Anthropic API — real AI in a real product!</div></div>
         <div class="fact"><div class="fact-e">🏆</div><div class="fact-t">Ranked #158 among women globally on Unstop</div></div>
         <div class="fact"><div class="fact-e">🧶</div><div class="fact-t">I crochet cute things — patience in craft = patience in debugging!</div></div>
         <div class="fact"><div class="fact-e">🌏</div><div class="fact-t">Member of Rewriting the Code — global women in tech</div></div>
@@ -530,262 +519,337 @@ body{transition:color var(--transition-speed)}
 </div>
 
 <script>
-// ═══════════ EMBED IMAGES ═══════════
+// ════════════════════════════════════════
+// SKY + WEATHER SYSTEM
+// ════════════════════════════════════════
+const skyCanvas=document.getElementById('sky-canvas');
+const skyCtx=skyCanvas.getContext('2d');
+function resizeSky(){skyCanvas.width=innerWidth;skyCanvas.height=innerHeight;}
+resizeSky();addEventListener('resize',resizeSky);
 
-// ═══════════ SKY SYSTEM ═══════════
-const skyCanvas = document.getElementById('sky-canvas');
-const skyCtx = skyCanvas.getContext('2d');
-function resizeSky(){ skyCanvas.width=innerWidth; skyCanvas.height=innerHeight; }
-resizeSky(); addEventListener('resize', resizeSky);
-
-// periods: now includes Thunderstorm
-const periods = [
-  { name:'Night',       h1:0,  h2:5,  top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
-  { name:'Dawn',        h1:5,  h2:7,  top:'#1a0a2e', bot:'#ff7b54', sun:'#ffcc70', moon:false, rain:false, thunder:false },
-  { name:'Morning',     h1:7,  h2:11, top:'#5ba3d9', bot:'#ffd89b', sun:'#ffe066', moon:false, rain:false, thunder:false },
-  { name:'Noon',        h1:11, h2:15, top:'#1a78c2', bot:'#87ceeb', sun:'#fff5a0', moon:false, rain:false, thunder:false },
-  { name:'Evening',     h1:15, h2:18, top:'#2d1b69', bot:'#f9a03f', sun:'#ffb347', moon:false, rain:false, thunder:false },
-  { name:'Dusk',        h1:18, h2:20, top:'#0d0221', bot:'#d4425a', sun:'#ff8c69', moon:true,  rain:false, thunder:false },
-  { name:'Thunderstorm',h1:20, h2:21, top:'#07080f', bot:'#12151f', sun:'#c8d0ff', moon:false, rain:true,  thunder:true  },
-  { name:'Night',       h1:21, h2:24, top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
+const periods=[
+  {name:'Night',       h1:0,  h2:5,  top:'#010108',bot:'#05051a',sun:'#c8d0ff',moon:true, rain:false,thunder:false},
+  {name:'Dawn',        h1:5,  h2:7,  top:'#1a0a2e',bot:'#ff7b54',sun:'#ffcc70',moon:false,rain:false,thunder:false},
+  {name:'Morning',     h1:7,  h2:11, top:'#5ba3d9',bot:'#ffd89b',sun:'#ffe066',moon:false,rain:false,thunder:false},
+  {name:'Noon',        h1:11, h2:15, top:'#1a78c2',bot:'#87ceeb',sun:'#fff5a0',moon:false,rain:false,thunder:false},
+  {name:'Evening',     h1:15, h2:18, top:'#2d1b69',bot:'#f9a03f',sun:'#ffb347',moon:false,rain:false,thunder:false},
+  {name:'Dusk',        h1:18, h2:20, top:'#0d0221',bot:'#d4425a',sun:'#ff8c69',moon:true, rain:false,thunder:false},
+  {name:'Thunderstorm',h1:20, h2:21, top:'#07080f',bot:'#12151f',sun:'#c8d0ff',moon:false,rain:true, thunder:true},
+  {name:'Night',       h1:21, h2:24, top:'#010108',bot:'#05051a',sun:'#c8d0ff',moon:true, rain:false,thunder:false},
 ];
 
-let manualPeriodIdx = -1;
-let skyAnimT = 0;
-let rainActive = false;
-let thunderActive = false;
+let manualPeriodIdx=-1,skyAnimT=0,rainActive=false,thunderActive=false;
 
-function getPeriodForHour(h) {
-  for(let i=0;i<periods.length;i++) if(h>=periods[i].h1&&h<periods[i].h2) return i;
-  return 7;
-}
-function lerpColor(c1,c2,t){
-  const r1=parseInt(c1.slice(1,3),16),g1=parseInt(c1.slice(3,5),16),b1=parseInt(c1.slice(5,7),16);
-  const r2=parseInt(c2.slice(1,3),16),g2=parseInt(c2.slice(3,5),16),b2=parseInt(c2.slice(5,7),16);
-  return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
-}
-const stars = Array.from({length:200},()=>({x:Math.random(),y:Math.random()*0.75,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,phase:Math.random()*Math.PI*2}));
+function getPeriodForHour(h){for(let i=0;i<periods.length;i++)if(h>=periods[i].h1&&h<periods[i].h2)return i;return 7;}
 
-// Rain
-const rainCanvas = document.getElementById('rain-canvas');
-const rainCtx = rainCanvas.getContext('2d');
-function resizeRain(){ rainCanvas.width=innerWidth; rainCanvas.height=innerHeight; }
-resizeRain(); addEventListener('resize', resizeRain);
-const rainDrops = Array.from({length:400},()=>({
-  x:Math.random(), y:Math.random(),
-  speed:0.008+Math.random()*0.012,
-  len:0.04+Math.random()*0.05,
-  wind:0.002+Math.random()*0.002
+const stars=Array.from({length:200},()=>({x:Math.random(),y:Math.random()*0.75,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,phase:Math.random()*Math.PI*2}));
+
+// ── RAIN ──
+const rainCanvas=document.getElementById('rain-canvas');
+const rainCtx=rainCanvas.getContext('2d');
+function resizeRain(){rainCanvas.width=innerWidth;rainCanvas.height=innerHeight;}
+resizeRain();addEventListener('resize',resizeRain);
+const rainDrops=Array.from({length:500},()=>({
+  x:Math.random(),y:Math.random()-0.2,
+  speed:0.009+Math.random()*0.013,
+  len:0.045+Math.random()*0.055,
+  wind:0.0018+Math.random()*0.0022,
+  thickness:0.4+Math.random()*0.8,
+  alpha:0.25+Math.random()*0.35
 }));
 
-// Lightning canvas
-const ltgCanvas = document.getElementById('lightning-canvas');
-const ltgCtx = ltgCanvas.getContext('2d');
-function resizeLtg(){ ltgCanvas.width=innerWidth; ltgCanvas.height=innerHeight; }
-resizeLtg(); addEventListener('resize', resizeLtg);
+// ── LIGHTNING CANVAS ──
+const ltgCanvas=document.getElementById('lightning-canvas');
+const ltgCtx=ltgCanvas.getContext('2d');
+function resizeLtg(){ltgCanvas.width=innerWidth;ltgCanvas.height=innerHeight;}
+resizeLtg();addEventListener('resize',resizeLtg);
 
-// Thunder state
-let lightningActive = false;
-let nextLightningIn = 3000;
-let lastLightningTime = Date.now() + 4000;
-let flashEl = document.getElementById('thunder-flash');
-let thunderAudioCtx = null;
+const flashEl=document.getElementById('thunder-flash');
+let thunderAudioCtx=null;
+let nextLightningIn=3000,lastLightningTime=Date.now()+4000;
+let activeBolts=[];  // multiple simultaneous bolts
+let boltFadeTimers=[];
 
-function getAudioCtx() {
-  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+// ── AUDIO ──
+function getAudioCtx(){
+  if(!thunderAudioCtx) thunderAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
   return thunderAudioCtx;
 }
 
-function playThunder(delay) {
+function playThunder(delay,intensity){
   setTimeout(()=>{
-    try {
-      const ctx = getAudioCtx();
-      const buf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      // Generate thunder rumble: burst of noise with decay
-      for(let i=0;i<data.length;i++){
-        const env = i < ctx.sampleRate*0.1 ? i/(ctx.sampleRate*0.1) : Math.exp(-(i-ctx.sampleRate*0.1)/(ctx.sampleRate*0.8));
-        data[i] = (Math.random()*2-1) * env * (0.4 + 0.6*Math.exp(-i/(ctx.sampleRate*0.05)));
+    try{
+      const ctx=getAudioCtx();
+      const dur=2.5+Math.random()*2;
+      const buf=ctx.createBuffer(2,ctx.sampleRate*dur,ctx.sampleRate); // STEREO
+      for(let ch=0;ch<2;ch++){
+        const data=buf.getChannelData(ch);
+        for(let i=0;i<data.length;i++){
+          // Initial crack + deep rumble
+          const crack=i<ctx.sampleRate*0.08?Math.exp(-i/(ctx.sampleRate*0.02))*(Math.random()*2-1)*2:0;
+          const rumble=Math.exp(-i/(ctx.sampleRate*(0.6+Math.random()*0.8)))*(Math.random()*2-1);
+          // Low-freq oscillation for realism
+          const osc=Math.sin(i/(ctx.sampleRate)*20*Math.PI)*(Math.exp(-i/(ctx.sampleRate*1.2))*0.3);
+          data[i]=(crack+rumble*0.8+osc)*intensity;
+        }
       }
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      const gain = ctx.createGain(); gain.gain.value = 0.6;
-      // Low pass to make it rumbly
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 200;
-      src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+      const src=ctx.createBufferSource();src.buffer=buf;
+      const gain=ctx.createGain();gain.gain.value=0.55+Math.random()*0.25;
+      const lpf=ctx.createBiquadFilter();lpf.type='lowpass';lpf.frequency.value=180+Math.random()*60;
+      const hpf=ctx.createBiquadFilter();hpf.type='highpass';hpf.frequency.value=18;
+      // Reverb simulation using convolver
+      const conv=ctx.createConvolver();
+      const rvBuf=ctx.createBuffer(2,ctx.sampleRate*3,ctx.sampleRate);
+      for(let ch=0;ch<2;ch++){
+        const rvd=rvBuf.getChannelData(ch);
+        for(let i=0;i<rvd.length;i++) rvd[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*0.8));
+      }
+      conv.buffer=rvBuf;
+      const rvGain=ctx.createGain();rvGain.gain.value=0.25;
+      src.connect(hpf);hpf.connect(lpf);lpf.connect(gain);
+      gain.connect(ctx.destination);
+      lpf.connect(conv);conv.connect(rvGain);rvGain.connect(ctx.destination);
       src.start();
-    } catch(e){}
-  }, delay);
+    }catch(e){}
+  },delay);
 }
 
-function drawLightning(x1, y1, x2, y2, width, branchProb) {
-  ltgCtx.beginPath();
-  ltgCtx.moveTo(x1, y1);
-  const dx = x2-x1, dy = y2-y1;
-  const segments = 12;
-  let cx=x1, cy=y1;
-  for(let i=1;i<=segments;i++){
-    const t=i/segments;
-    const nx = x1+dx*t + (Math.random()-0.5)*80;
-    const ny = y1+dy*t + (Math.random()-0.5)*20;
-    ltgCtx.lineTo(nx, ny);
-    // Branch
-    if(Math.random()<branchProb && i>3 && i<segments-2) {
-      const bx = nx+(Math.random()-0.5)*120;
-      const by = ny+Math.random()*80;
-      ltgCtx.moveTo(nx,ny);
-      ltgCtx.lineTo(bx,by);
-      ltgCtx.moveTo(nx,ny);
-    }
-    cx=nx; cy=ny;
+// ── LIGHTNING BOLT RENDERER ──
+function drawBoltSegment(ctx,x1,y1,x2,y2,width,alpha,depth){
+  if(depth<=0||Math.abs(y2-y1)<2) return;
+  const dx=x2-x1,dy=y2-y1;
+  const segs=Math.max(8,Math.floor(Math.sqrt(dx*dx+dy*dy)/18));
+  const pts=[[x1,y1]];
+  for(let i=1;i<segs;i++){
+    const t=i/segs;
+    const spread=(1-t)*60+20;
+    pts.push([x1+dx*t+(Math.random()-0.5)*spread, y1+dy*t+(Math.random()-0.5)*spread*0.3]);
   }
-  ltgCtx.strokeStyle=`rgba(200,220,255,${0.7+Math.random()*0.3})`;
-  ltgCtx.lineWidth=width;
-  ltgCtx.shadowColor='#a0c8ff';
-  ltgCtx.shadowBlur=20;
-  ltgCtx.stroke();
-  ltgCtx.shadowBlur=0;
-  // Glow pass
-  ltgCtx.strokeStyle=`rgba(180,200,255,0.15)`;
-  ltgCtx.lineWidth=width*6;
-  ltgCtx.stroke();
+  pts.push([x2,y2]);
+
+  // Outer fat glow
+  ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]);
+  ctx.strokeStyle=`rgba(180,210,255,${alpha*0.08})`;
+  ctx.lineWidth=width*14;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.shadowBlur=0;ctx.stroke();
+
+  // Mid glow
+  ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]);
+  ctx.strokeStyle=`rgba(200,225,255,${alpha*0.18})`;
+  ctx.lineWidth=width*7;ctx.stroke();
+
+  // Inner bright core
+  ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]);
+  ctx.strokeStyle=`rgba(230,240,255,${alpha*0.7})`;
+  ctx.lineWidth=width*2;ctx.stroke();
+
+  // White hot core
+  ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]);
+  ctx.strokeStyle=`rgba(255,255,255,${alpha*0.9})`;
+  ctx.lineWidth=Math.max(0.5,width*0.7);ctx.stroke();
+
+  // Branches
+  if(depth>0){
+    for(let i=2;i<pts.length-2;i++){
+      if(Math.random()<(depth>1?0.5:0.3)){
+        const bLen=0.3+Math.random()*0.5;
+        const angle=(Math.random()-0.5)*1.2+Math.atan2(dy,dx);
+        const bx=pts[i][0]+Math.cos(angle)*Math.abs(dy)*bLen*0.6;
+        const by=pts[i][1]+Math.sin(angle)*Math.abs(dy)*bLen*0.6;
+        drawBoltSegment(ctx,pts[i][0],pts[i][1],bx,by,width*0.55,alpha*0.6,depth-1);
+      }
+    }
+  }
 }
 
-function triggerLightning() {
-  const W=ltgCanvas.width, H=ltgCanvas.height;
+function createBolt(){
+  const W=ltgCanvas.width,H=ltgCanvas.height;
+  const startX=W*0.1+Math.random()*W*0.8;
+  const endX=startX+(Math.random()-0.5)*W*0.3;
+  const endY=H*(0.55+Math.random()*0.35);
+  return {startX,startY:0,endX,endY,alpha:1,born:Date.now(),life:120+Math.random()*180};
+}
+
+function triggerLightning(){
+  const W=ltgCanvas.width,H=ltgCanvas.height;
+  // Number of bolts: 1-3
+  const numBolts=Math.random()<0.3?Math.floor(Math.random()*2)+2:1;
+
+  for(let b=0;b<numBolts;b++){
+    setTimeout(()=>{
+      activeBolts.push(createBolt());
+    },b*80);
+  }
+
+  // Flash sequence — realistic multi-pulse
+  const flashSequence=[
+    {delay:0,   dur:40,  alpha:0.6},
+    {delay:45,  dur:25,  alpha:0.35},
+    {delay:80,  dur:60,  alpha:0.2},
+    {delay:150, dur:20,  alpha:0.5},  // secondary strike
+    {delay:175, dur:40,  alpha:0.15},
+  ];
+  flashSequence.forEach(f=>{
+    if(Math.random()<0.7){
+      setTimeout(()=>{
+        flashEl.style.background=`rgba(200,220,255,${f.alpha})`;
+        setTimeout(()=>{flashEl.style.background='rgba(200,220,255,0)';},f.dur);
+      },f.delay);
+    }
+  });
+
+  // Thunder sound — delayed from flash realistically
+  const dist=0.5+Math.random()*2; // km
+  playThunder(dist*333+200, 0.6+Math.random()*0.4);
+  // Possible echo
+  if(Math.random()<0.6) playThunder(dist*333+1200+Math.random()*800, 0.2+Math.random()*0.2);
+
+  nextLightningIn=1800+Math.random()*5500;
+  lastLightningTime=Date.now();
+}
+
+function renderLightning(){
+  const W=ltgCanvas.width,H=ltgCanvas.height;
   ltgCtx.clearRect(0,0,W,H);
-  const startX = W*0.2 + Math.random()*W*0.6;
-  drawLightning(startX, 0, startX+(Math.random()-0.5)*100, H*0.7, 2+Math.random()*2, 0.4);
-  // Flash effect
-  flashEl.classList.add('flash');
-  setTimeout(()=>flashEl.classList.remove('flash'), 80);
-  // Secondary flash
-  setTimeout(()=>{
-    if(Math.random()>0.5){
-      flashEl.classList.add('flash');
-      setTimeout(()=>flashEl.classList.remove('flash'), 60);
+  const now=Date.now();
+  activeBolts=activeBolts.filter(bolt=>{
+    const age=now-bolt.born;
+    if(age>bolt.life) return false;
+    bolt.alpha=Math.max(0,1-(age/bolt.life));
+    // Re-draw with jitter each frame for flicker effect
+    ltgCtx.save();
+    drawBoltSegment(ltgCtx,bolt.startX,bolt.startY,bolt.endX,bolt.endY,1.8+Math.random()*0.8,bolt.alpha,3);
+    // Ground flash at strike point
+    if(bolt.alpha>0.3){
+      const grd=ltgCtx.createRadialGradient(bolt.endX,bolt.endY,0,bolt.endX,bolt.endY,60+Math.random()*40);
+      grd.addColorStop(0,`rgba(200,230,255,${bolt.alpha*0.4})`);
+      grd.addColorStop(1,'transparent');
+      ltgCtx.fillStyle=grd;ltgCtx.beginPath();ltgCtx.arc(bolt.endX,bolt.endY,80,0,Math.PI*2);ltgCtx.fill();
     }
-  }, 120);
-  // Fade out lightning bolt
-  let alpha = 1;
-  const fadeOut = setInterval(()=>{
-    alpha -= 0.12;
-    ltgCanvas.style.opacity = Math.max(0,alpha);
-    if(alpha<=0){ clearInterval(fadeOut); ltgCtx.clearRect(0,0,W,H); ltgCanvas.style.opacity=1; }
-  }, 40);
-  // Thunder sound (delayed — sound travels slower than light)
-  playThunder(400 + Math.random()*1200);
-  // Schedule next
-  nextLightningIn = 2500 + Math.random()*5000;
-  lastLightningTime = Date.now();
+    ltgCtx.restore();
+    return true;
+  });
 }
 
-function updateThunder(p) {
-  if(p.thunder) {
-    if(!thunderActive) { thunderActive=true; nextLightningIn=2000; lastLightningTime=Date.now(); }
-    if(Date.now()-lastLightningTime > nextLightningIn) triggerLightning();
+function updateThunder(p){
+  if(p.thunder){
+    if(!thunderActive){thunderActive=true;nextLightningIn=1500;lastLightningTime=Date.now();}
+    if(Date.now()-lastLightningTime>nextLightningIn) triggerLightning();
   } else {
-    if(thunderActive) { thunderActive=false; ltgCtx.clearRect(0,0,ltgCanvas.width,ltgCanvas.height); }
+    if(thunderActive){thunderActive=false;activeBolts=[];ltgCtx.clearRect(0,0,ltgCanvas.width,ltgCanvas.height);}
   }
 }
 
+// ── CLOUD HELPER ──
 function drawCloud(ctx,x,y,scale,alpha,dark){
-  ctx.save(); ctx.globalAlpha=alpha*(dark?0.85:0.6);
-  ctx.fillStyle=dark?'#2a2a3a':'white';
-  ctx.beginPath(); ctx.arc(x,y,30*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x+22*scale,y+5*scale,22*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x-18*scale,y+8*scale,18*scale,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(x+40*scale,y+10*scale,16*scale,0,Math.PI*2); ctx.fill();
+  ctx.save();ctx.globalAlpha=alpha*(dark?0.88:0.62);
+  ctx.fillStyle=dark?'#1e2030':'white';
+  ctx.beginPath();ctx.arc(x,y,30*scale,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(x+22*scale,y+5*scale,22*scale,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(x-18*scale,y+8*scale,18*scale,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(x+40*scale,y+10*scale,16*scale,0,Math.PI*2);ctx.fill();
+  // Darker underbelly for storm clouds
+  if(dark){
+    ctx.fillStyle='rgba(10,12,20,0.35)';
+    ctx.beginPath();ctx.ellipse(x+5*scale,y+12*scale,38*scale,10*scale,0,0,Math.PI*2);ctx.fill();
+  }
   ctx.restore();
 }
 
-function drawSky() {
-  const W=skyCanvas.width, H=skyCanvas.height;
+// ── MAIN SKY DRAW LOOP ──
+function drawSky(){
+  const W=skyCanvas.width,H=skyCanvas.height;
   const now=new Date();
   const hour=now.getHours()+now.getMinutes()/60;
   const pidx=manualPeriodIdx>=0?manualPeriodIdx:getPeriodForHour(hour);
   const p=periods[pidx];
 
   const grad=skyCtx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,p.top); grad.addColorStop(1,p.bot);
-  skyCtx.fillStyle=grad; skyCtx.fillRect(0,0,W,H);
+  grad.addColorStop(0,p.top);grad.addColorStop(1,p.bot);
+  skyCtx.fillStyle=grad;skyCtx.fillRect(0,0,W,H);
 
   // Mountain colors
-  const mFar=document.getElementById('mfar'),mMid=document.getElementById('mmid'),mNear=document.getElementById('mnear'),mGround=document.getElementById('mground'),flowers=document.getElementById('flowers'),treesL=document.getElementById('trees-l'),treesR=document.getElementById('trees-r');
+  const mFar=document.getElementById('mfar'),mMid=document.getElementById('mmid'),
+        mNear=document.getElementById('mnear'),mGround=document.getElementById('mground'),
+        flowers=document.getElementById('flowers'),treesL=document.getElementById('trees-l'),treesR=document.getElementById('trees-r');
   if(p.thunder){
-    if(mFar) mFar.setAttribute('fill','#080c08');
-    if(mMid) mMid.setAttribute('fill','#0e160c');
-    if(mNear) mNear.setAttribute('fill','#141e10');
-    if(mGround) mGround.setAttribute('fill','#0e160c');
-    if(flowers) flowers.setAttribute('opacity','0.2');
-    if(treesL) treesL.setAttribute('fill','#060906');
-    if(treesR) treesR.setAttribute('fill','#06090600');
+    if(mFar)mFar.setAttribute('fill','#07090700');if(mMid)mMid.setAttribute('fill','#0c120a');
+    if(mNear)mNear.setAttribute('fill','#111a0e');if(mGround)mGround.setAttribute('fill','#0c120a');
+    if(flowers)flowers.setAttribute('opacity','0.15');
+    if(treesL)treesL.setAttribute('fill','#050705');if(treesR)treesR.setAttribute('fill','#050705');
   } else if(p.moon){
-    if(mFar) mFar.setAttribute('fill','#0d1a0d');
-    if(mMid) mMid.setAttribute('fill','#162214');
-    if(mNear) mNear.setAttribute('fill','#1c2e18');
-    if(mGround) mGround.setAttribute('fill','#162214');
-    if(flowers) flowers.setAttribute('opacity','0.4');
-    if(treesL) treesL.setAttribute('fill','#0a140a');
-    if(treesR) treesR.setAttribute('fill','#0a140a');
+    if(mFar)mFar.setAttribute('fill','#0d1a0d');if(mMid)mMid.setAttribute('fill','#162214');
+    if(mNear)mNear.setAttribute('fill','#1c2e18');if(mGround)mGround.setAttribute('fill','#162214');
+    if(flowers)flowers.setAttribute('opacity','0.4');
+    if(treesL)treesL.setAttribute('fill','#0a140a');if(treesR)treesR.setAttribute('fill','#0a140a');
   } else if(p.name==='Morning'||p.name==='Noon'){
-    if(mFar) mFar.setAttribute('fill','#2d5a27');
-    if(mMid) mMid.setAttribute('fill','#3d7a32');
-    if(mNear) mNear.setAttribute('fill','#4a9a3f');
-    if(mGround) mGround.setAttribute('fill','#3a6e30');
-    if(flowers) flowers.setAttribute('opacity','1');
-    if(treesL) treesL.setAttribute('fill','#2d5a27');
-    if(treesR) treesR.setAttribute('fill','#2d5a27');
+    if(mFar)mFar.setAttribute('fill','#2d5a27');if(mMid)mMid.setAttribute('fill','#3d7a32');
+    if(mNear)mNear.setAttribute('fill','#4a9a3f');if(mGround)mGround.setAttribute('fill','#3a6e30');
+    if(flowers)flowers.setAttribute('opacity','1');
+    if(treesL)treesL.setAttribute('fill','#2d5a27');if(treesR)treesR.setAttribute('fill','#2d5a27');
   } else {
-    if(mFar) mFar.setAttribute('fill','#1a3a1a');
-    if(mMid) mMid.setAttribute('fill','#2d5a27');
-    if(mNear) mNear.setAttribute('fill','#3d7a32');
-    if(mGround) mGround.setAttribute('fill','#2d5a27');
-    if(flowers) flowers.setAttribute('opacity','0.7');
-    if(treesL) treesL.setAttribute('fill','#1a3a1a');
-    if(treesR) treesR.setAttribute('fill','#1a3a1a');
+    if(mFar)mFar.setAttribute('fill','#1a3a1a');if(mMid)mMid.setAttribute('fill','#2d5a27');
+    if(mNear)mNear.setAttribute('fill','#3d7a32');if(mGround)mGround.setAttribute('fill','#2d5a27');
+    if(flowers)flowers.setAttribute('opacity','0.7');
+    if(treesL)treesL.setAttribute('fill','#1a3a1a');if(treesR)treesR.setAttribute('fill','#1a3a1a');
   }
 
-  const cx=W*0.72, cy=H*(p.moon?0.12:0.14)+Math.sin(skyAnimT*0.002)*8;
+  const cx=W*0.72,cy=H*(p.moon?0.12:0.14)+Math.sin(skyAnimT*0.002)*8;
+
   if(p.thunder){
-    // Storm clouds — heavy, dark, dramatic
-    drawCloud(skyCtx,W*0.05,H*0.08,2.2,0.9,true);
-    drawCloud(skyCtx,W*0.3,H*0.05,2.8,0.95,true);
-    drawCloud(skyCtx,W*0.55,H*0.1,2.0,0.88,true);
-    drawCloud(skyCtx,W*0.75,H*0.06,2.5,0.92,true);
-    drawCloud(skyCtx,W*0.15,H*0.18,1.8,0.8,true);
-    drawCloud(skyCtx,W*0.45,H*0.15,2.2,0.85,true);
-    // Eerie green/cyan tint at horizon
-    const horizGlow=skyCtx.createLinearGradient(0,H*0.5,0,H*0.85);
-    horizGlow.addColorStop(0,'transparent'); horizGlow.addColorStop(1,'rgba(30,50,30,0.3)');
-    skyCtx.fillStyle=horizGlow; skyCtx.fillRect(0,0,W,H);
+    // Animated storm clouds — slowly drifting
+    const drift=Math.sin(skyAnimT*0.004)*0.04;
+    drawCloud(skyCtx,W*(0.05+drift),H*0.07,2.5,0.95,true);
+    drawCloud(skyCtx,W*(0.28+drift*0.7),H*0.04,3.0,1.0,true);
+    drawCloud(skyCtx,W*(0.5+drift*0.5),H*0.09,2.2,0.9,true);
+    drawCloud(skyCtx,W*(0.72+drift*0.3),H*0.05,2.8,0.95,true);
+    drawCloud(skyCtx,W*(0.12+drift*0.8),H*0.17,2.0,0.85,true);
+    drawCloud(skyCtx,W*(0.42+drift*0.6),H*0.14,2.4,0.88,true);
+    drawCloud(skyCtx,W*(0.62+drift*0.4),H*0.19,1.8,0.8,true);
+    drawCloud(skyCtx,W*(0.88+drift*0.2),H*0.12,2.2,0.88,true);
+    // Eerie horizon glow
+    const hg=skyCtx.createLinearGradient(0,H*0.55,0,H);
+    hg.addColorStop(0,'transparent');hg.addColorStop(1,'rgba(15,25,15,0.5)');
+    skyCtx.fillStyle=hg;skyCtx.fillRect(0,0,W,H);
+    // Occasional far lightning silhouette glow
+    if(Math.random()<0.004){
+      const fx=Math.random()*W;
+      const fg=skyCtx.createRadialGradient(fx,H*0.1,0,fx,H*0.1,W*0.15);
+      fg.addColorStop(0,'rgba(180,200,255,0.12)');fg.addColorStop(1,'transparent');
+      skyCtx.fillStyle=fg;skyCtx.fillRect(0,0,W,H);
+    }
+    // Render active bolts
+    renderLightning();
   } else if(p.moon){
     const moonGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,80);
-    moonGlow.addColorStop(0,'rgba(220,220,255,0.15)'); moonGlow.addColorStop(1,'transparent');
-    skyCtx.fillStyle=moonGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,80,0,Math.PI*2); skyCtx.fill();
-    skyCtx.beginPath(); skyCtx.arc(cx,cy,22,0,Math.PI*2);
-    skyCtx.fillStyle='#e8e8f0'; skyCtx.shadowColor='#c8d0ff'; skyCtx.shadowBlur=20; skyCtx.fill();
-    skyCtx.beginPath(); skyCtx.arc(cx+7,cy-4,17,0,Math.PI*2);
-    skyCtx.fillStyle=p.top; skyCtx.shadowBlur=0; skyCtx.fill();
+    moonGlow.addColorStop(0,'rgba(220,220,255,0.15)');moonGlow.addColorStop(1,'transparent');
+    skyCtx.fillStyle=moonGlow;skyCtx.beginPath();skyCtx.arc(cx,cy,80,0,Math.PI*2);skyCtx.fill();
+    skyCtx.beginPath();skyCtx.arc(cx,cy,22,0,Math.PI*2);
+    skyCtx.fillStyle='#e8e8f0';skyCtx.shadowColor='#c8d0ff';skyCtx.shadowBlur=20;skyCtx.fill();
+    skyCtx.beginPath();skyCtx.arc(cx+7,cy-4,17,0,Math.PI*2);
+    skyCtx.fillStyle=p.top;skyCtx.shadowBlur=0;skyCtx.fill();
     stars.forEach(s=>{
-      const alpha=s.o*(0.4+0.6*(0.5+0.5*Math.sin(skyAnimT*0.015+s.phase)));
-      skyCtx.beginPath(); skyCtx.arc(s.x*W,s.y*H*0.7,s.r,0,Math.PI*2);
-      skyCtx.fillStyle=`rgba(220,215,255,${alpha})`; skyCtx.shadowBlur=0; skyCtx.fill();
+      const a=s.o*(0.4+0.6*(0.5+0.5*Math.sin(skyAnimT*0.015+s.phase)));
+      skyCtx.beginPath();skyCtx.arc(s.x*W,s.y*H*0.7,s.r,0,Math.PI*2);
+      skyCtx.fillStyle=`rgba(220,215,255,${a})`;skyCtx.fill();
     });
   } else {
     const sunGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,100);
-    sunGlow.addColorStop(0,'rgba(255,240,150,0.4)'); sunGlow.addColorStop(0.5,'rgba(255,200,80,0.2)'); sunGlow.addColorStop(1,'transparent');
-    skyCtx.fillStyle=sunGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,100,0,Math.PI*2); skyCtx.fill();
+    sunGlow.addColorStop(0,'rgba(255,240,150,0.4)');sunGlow.addColorStop(0.5,'rgba(255,200,80,0.2)');sunGlow.addColorStop(1,'transparent');
+    skyCtx.fillStyle=sunGlow;skyCtx.beginPath();skyCtx.arc(cx,cy,100,0,Math.PI*2);skyCtx.fill();
     for(let i=0;i<12;i++){
       const a=i*(Math.PI/6)+skyAnimT*0.003;
       const x1=cx+Math.cos(a)*28,y1=cy+Math.sin(a)*28;
       const x2=cx+Math.cos(a)*(38+Math.sin(skyAnimT*0.05+i)*5),y2=cy+Math.sin(a)*(38+Math.sin(skyAnimT*0.05+i)*5);
-      skyCtx.beginPath(); skyCtx.moveTo(x1,y1); skyCtx.lineTo(x2,y2);
-      skyCtx.strokeStyle=`rgba(255,230,100,${0.3+0.2*Math.sin(skyAnimT*0.03+i)})`; skyCtx.lineWidth=2; skyCtx.stroke();
+      skyCtx.beginPath();skyCtx.moveTo(x1,y1);skyCtx.lineTo(x2,y2);
+      skyCtx.strokeStyle=`rgba(255,230,100,${0.3+0.2*Math.sin(skyAnimT*0.03+i)})`;skyCtx.lineWidth=2;skyCtx.stroke();
     }
-    skyCtx.beginPath(); skyCtx.arc(cx,cy,24,0,Math.PI*2);
-    skyCtx.fillStyle=p.sun; skyCtx.shadowColor=p.sun; skyCtx.shadowBlur=30; skyCtx.fill(); skyCtx.shadowBlur=0;
+    skyCtx.beginPath();skyCtx.arc(cx,cy,24,0,Math.PI*2);
+    skyCtx.fillStyle=p.sun;skyCtx.shadowColor=p.sun;skyCtx.shadowBlur=30;skyCtx.fill();skyCtx.shadowBlur=0;
     if(p.name==='Morning'||p.name==='Noon'){
       drawCloud(skyCtx,W*0.15,H*0.2,1.0,0.7,false);
       drawCloud(skyCtx,W*0.45,H*0.15,0.8,0.6,false);
@@ -793,75 +857,86 @@ function drawSky() {
     }
   }
 
-  // Rain
+  // Rain rendering
   if(p.rain!==rainActive){
     rainActive=p.rain;
     rainCanvas.className=rainActive?'raining':'';
   }
   if(rainActive){
     rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-    // Heavy rain with wind
-    rainCtx.strokeStyle='rgba(160,185,220,0.4)'; rainCtx.lineWidth=1.2;
     rainDrops.forEach(d=>{
-      d.y+=d.speed; d.x+=d.wind;
-      if(d.y>1){d.y=-0.05; d.x=Math.random();}
-      if(d.x>1) d.x=0;
-      const rx=d.x*rainCanvas.width, ry=d.y*rainCanvas.height;
-      rainCtx.beginPath(); rainCtx.moveTo(rx,ry); rainCtx.lineTo(rx+d.wind*rainCanvas.width*8, ry+d.len*rainCanvas.height); rainCtx.stroke();
+      d.y+=d.speed;d.x+=d.wind;
+      if(d.y>1.05){d.y=-0.05+Math.random()*-0.1;d.x=Math.random();}
+      if(d.x>1.05) d.x=0;
+      const rx=d.x*rainCanvas.width,ry=d.y*rainCanvas.height;
+      const endX=rx+d.wind*rainCanvas.width*10;
+      const endY=ry+d.len*rainCanvas.height;
+      // Rain streak gradient for depth
+      const rg=rainCtx.createLinearGradient(rx,ry,endX,endY);
+      rg.addColorStop(0,`rgba(180,200,230,0)`);
+      rg.addColorStop(0.3,`rgba(180,200,230,${d.alpha})`);
+      rg.addColorStop(1,`rgba(180,200,230,0)`);
+      rainCtx.strokeStyle=rg;
+      rainCtx.lineWidth=d.thickness;
+      rainCtx.beginPath();rainCtx.moveTo(rx,ry);rainCtx.lineTo(endX,endY);rainCtx.stroke();
     });
-    // Puddle splashes at bottom (random)
-    if(Math.random()<0.3){
-      const sx=Math.random()*rainCanvas.width, sy=rainCanvas.height-10;
-      rainCtx.beginPath(); rainCtx.arc(sx,sy,2+Math.random()*3,0,Math.PI*2);
-      rainCtx.strokeStyle='rgba(160,185,220,0.25)'; rainCtx.lineWidth=1; rainCtx.stroke();
+    // Puddle ripples at very bottom
+    if(Math.random()<0.25){
+      const sx=Math.random()*rainCanvas.width;
+      const sy=rainCanvas.height*(0.97+Math.random()*0.03);
+      const rip=rainCtx.createRadialGradient(sx,sy,0,sx,sy,3+Math.random()*5);
+      rip.addColorStop(0,'rgba(160,185,220,0)');
+      rip.addColorStop(0.5,`rgba(160,185,220,0.2)`);
+      rip.addColorStop(1,'rgba(160,185,220,0)');
+      rainCtx.fillStyle=rip;rainCtx.beginPath();rainCtx.ellipse(sx,sy,6+Math.random()*6,2,0,0,Math.PI*2);rainCtx.fill();
     }
   }
 
-  // Thunder/lightning update
   updateThunder(p);
 
-  // UI label
+  // UI update
   document.getElementById('time-label').textContent=p.name;
-  document.getElementById('time-icon').textContent=p.thunder?'⛈️':p.moon?'🌙':p.name==='Dawn'||p.name==='Dusk'?'🌅':'☀️';
+  document.getElementById('time-icon').textContent=p.thunder?'⛈️':p.moon?'🌙':(p.name==='Dawn'||p.name==='Dusk')?'🌅':'☀️';
 
   skyAnimT++;
   requestAnimationFrame(drawSky);
 }
 drawSky();
 
-// Manual toggle — now includes Thunderstorm
+// Manual toggle
 const timeOrder=[0,1,2,3,4,5,6,7];
 let manualIdx=0;
 function toggleTimeManual(){
   manualIdx=(manualIdx+1)%timeOrder.length;
   manualPeriodIdx=manualIdx===0?-1:timeOrder[manualIdx];
-  // Resume AudioContext on user gesture
-  if(thunderAudioCtx && thunderAudioCtx.state==='suspended') thunderAudioCtx.resume();
-  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if(!thunderAudioCtx) thunderAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(thunderAudioCtx.state==='suspended') thunderAudioCtx.resume();
 }
 
-// ═══════════ SLIDES ═══════════
+// ════════════════════════════════════════
+// SLIDES
+// ════════════════════════════════════════
 const track=document.getElementById('h-track');
 const hslides=document.querySelectorAll('.hslide');
 const total=hslides.length;
-var cur=0; let sliding=false; let lastWheel=0;
+var cur=0;let sliding=false,lastWheel=0;
 const dotNav=document.getElementById('dot-nav');
 hslides.forEach((_,i)=>{
-  const d=document.createElement('div'); d.className='nav-dot'+(i===0?' active':''); d.onclick=()=>gTo(i);
+  const d=document.createElement('div');d.className='nav-dot'+(i===0?' active':'');d.onclick=()=>gTo(i);
   dotNav.appendChild(d);
 });
 function gTo(idx){
   if(sliding||idx===cur||idx<0||idx>=total)return;
-  sliding=true; cur=idx;
+  sliding=true;cur=idx;
   track.style.transform=`translateX(-${cur*100}vw)`;
   document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
   document.querySelectorAll('.tnav').forEach((t,i)=>t.classList.toggle('active',i===cur));
   document.getElementById('slide-ctr').textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
-  setTimeout(()=>{ sliding=false; if(cur===2)animateBars(); },850);
+  setTimeout(()=>{sliding=false;if(cur===2)animateBars();},850);
 }
 addEventListener('wheel',e=>{
-  const now=Date.now(); if(now-lastWheel<900)return; lastWheel=now;
-  if(e.deltaY>30||e.deltaX>30)gTo(cur+1); else if(e.deltaY<-30||e.deltaX<-30)gTo(cur-1);
+  const now=Date.now();if(now-lastWheel<900)return;lastWheel=now;
+  if(e.deltaY>30||e.deltaX>30)gTo(cur+1);else if(e.deltaY<-30||e.deltaX<-30)gTo(cur-1);
 },{passive:true});
 addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key==='ArrowDown')gTo(cur+1);
@@ -869,10 +944,10 @@ addEventListener('keydown',e=>{
 });
 let tx=0;
 addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>60)gTo(cur+(d>0?1:-1));},{passive:true});
+addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>60)gTo(cur+(d>0?1:-1));},{passive:true});
 
 let barsD=false;
-function animateBars(){ if(barsD)return; barsD=true; document.querySelectorAll('.sb-fill').forEach(b=>b.style.width=b.dataset.w+'%'); }
+function animateBars(){if(barsD)return;barsD=true;document.querySelectorAll('.sb-fill').forEach(b=>b.style.width=b.dataset.w+'%');}
 
 function toggleSb(){
   document.getElementById('sidebar').classList.toggle('open');
@@ -880,24 +955,26 @@ function toggleSb(){
   document.getElementById('hbg').classList.toggle('open');
 }
 
-// ═══════════ MODAL ═══════════
+// ════════════════════════════════════════
+// MODAL
+// ════════════════════════════════════════
 const projs={
-  codearena:{tag:'🔥 Featured · Live',title:'CodeArena — Real-Time Coding Battle',desc:'Real-time coding battle platform with 16+ programming languages for up to 50 concurrent users. Anthropic AI for dynamic challenge generation and automated evaluation.',tags:['React','JavaScript','Anthropic API','Vercel'],feats:['16+ programming languages supported','50 concurrent users','Anthropic AI challenge generation & evaluation','Frontend performance optimised ~30%','Cross-browser compatibility across 5+ browsers'],live:'https://codearena-peach.vercel.app/',gh:'https://github.com/kellyyadav'},
-  caloriq:{tag:'Live · AI ✨',title:'CaloriQ — AI Nutrition Tracker',desc:'Full-stack AI nutrition tracker with personalised health goals and real-time Supabase sync. AI calorie estimation across 100+ food items.',tags:['React','JavaScript','Supabase','Vercel'],feats:['AI calorie estimation 100+ foods','Personalised health goals','Real-time Supabase sync','Query response time reduced ~25%','Responsive multi-device UI'],live:'https://caloriq-one.vercel.app/',gh:'https://github.com/kellyyadav'},
-  cybershield:{tag:'Team · Live',title:'CyberShield — Ransomware Detection',desc:'Interactive cybersecurity dashboard with real-time threat detection using HTML5 Canvas and CSS3. 3-member team build.',tags:['HTML5 Canvas','CSS3','Vanilla JS','Git'],feats:['Real-time threat visualisations','CSS3 animation dashboard','Client-side auth','3-member Git workflow'],live:'https://kellyyadav.github.io/cybershield/',gh:'https://github.com/kellyyadav'},
-  social:{tag:'Personal Project',title:'Social Interaction Web App',desc:'Full-stack social platform — posts, comments, follow system. Spring Boot backend + React frontend + MySQL.',tags:['Java','Spring Boot','React','MySQL'],feats:['REST APIs with Spring Boot','MySQL schema users/posts/follows','React + Spring Boot integration','User auth & sessions','Responsive UI'],live:null,gh:'https://github.com/kellyyadav'},
-  face:{tag:'IIT Bombay Hackathon',title:'Face Recognition Attendance',desc:'Real-time face recognition system to prevent proxy attendance. Finalist at GitLab Hackathon IIT Bombay 2025.',tags:['Java','OpenCV','CMake','MySQL'],feats:['Real-time OpenCV face detection','Movement verification anti-spoof','Admin attendance dashboard','MySQL storage','IIT Bombay finalist'],live:null,gh:'https://github.com/kellyyadav'}
+  codearena:{tag:'🔥 Featured · Live',title:'CodeArena — Real-Time Coding Battle',desc:'Real-time coding battle platform with 16+ programming languages for up to 50 concurrent users. Anthropic AI for challenge generation and automated evaluation.',tags:['React','JavaScript','Anthropic API','Vercel'],feats:['16+ programming languages','50 concurrent users','Anthropic AI challenge generation & evaluation','Frontend optimised ~30%','Cross-browser compatibility 5+ browsers'],live:'https://codearena-peach.vercel.app/',gh:'https://github.com/kellyyadav'},
+  caloriq:{tag:'Live · AI ✨',title:'CaloriQ — AI Nutrition Tracker',desc:'Full-stack AI nutrition tracker with personalised health goals and real-time Supabase sync.',tags:['React','JavaScript','Supabase','Vercel'],feats:['AI calorie estimation 100+ foods','Personalised health goals','Real-time Supabase sync','Query time reduced ~25%','Responsive multi-device UI'],live:'https://caloriq-one.vercel.app/',gh:'https://github.com/kellyyadav'},
+  cybershield:{tag:'Team · Live',title:'CyberShield — Ransomware Detection',desc:'Interactive cybersecurity dashboard with real-time threat detection using HTML5 Canvas and CSS3.',tags:['HTML5 Canvas','CSS3','Vanilla JS','Git'],feats:['Real-time threat visualisations','CSS3 animation dashboard','Client-side auth','3-member Git workflow'],live:'https://kellyyadav.github.io/cybershield/',gh:'https://github.com/kellyyadav'},
+  social:{tag:'Personal Project',title:'Social Interaction Web App',desc:'Full-stack social platform — posts, comments, follow system. Spring Boot + React + MySQL.',tags:['Java','Spring Boot','React','MySQL'],feats:['REST APIs with Spring Boot','MySQL schema users/posts/follows','React + Spring Boot integration','User auth & sessions','Responsive UI'],live:null,gh:'https://github.com/kellyyadav'},
+  face:{tag:'IIT Bombay Hackathon',title:'Face Recognition Attendance',desc:'Real-time face recognition to prevent proxy attendance. Finalist at GitLab Hackathon IIT Bombay 2025.',tags:['Java','OpenCV','CMake','MySQL'],feats:['Real-time OpenCV face detection','Movement verification anti-spoof','Admin attendance dashboard','MySQL storage','IIT Bombay finalist'],live:null,gh:'https://github.com/kellyyadav'}
 };
 function openM(k){
   const p=projs[k];
   document.getElementById('m-tag').textContent=p.tag;
   document.getElementById('m-title').textContent=p.title;
   document.getElementById('m-desc').textContent=p.desc;
-  const te=document.getElementById('m-tags'); te.innerHTML='';
+  const te=document.getElementById('m-tags');te.innerHTML='';
   p.tags.forEach(t=>{const s=document.createElement('span');s.className='ptag';s.style.cssText='font-size:11px;padding:4px 10px';s.textContent=t;te.appendChild(s);});
-  const fe=document.getElementById('m-feats'); fe.innerHTML='';
+  const fe=document.getElementById('m-feats');fe.innerHTML='';
   p.feats.forEach(f=>{const li=document.createElement('li');li.textContent=f;fe.appendChild(li);});
-  const ac=document.getElementById('m-actions'); ac.innerHTML='';
+  const ac=document.getElementById('m-actions');ac.innerHTML='';
   if(p.live){const a=document.createElement('a');a.className='mb mb-w';a.href=p.live;a.target='_blank';a.textContent='View Live ↗';ac.appendChild(a);}
   const gh=document.createElement('a');gh.className='mb mb-g';gh.href=p.gh;gh.target='_blank';gh.textContent='GitHub →';ac.appendChild(gh);
   document.getElementById('m-ov').classList.add('open');
