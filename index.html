@@ -162,11 +162,6 @@ body{transition:color var(--transition-speed)}
 .a-sub{font-size:11px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.5}
 .acard.feat{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
 .res-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
-.res-img-wrap{border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.2);position:relative}
-.res-img-wrap img{width:100%;display:block}
-.res-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,0.7));display:flex;align-items:flex-end;padding:18px}
-.res-dl{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:white;color:#2d1810;border:none;border-radius:100px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;text-decoration:none;transition:all 0.25s}
-.res-dl:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
 .cert-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .cchip{padding:14px;display:flex;gap:9px;align-items:flex-start;transition:all 0.2s}
 .cchip:hover{transform:translateY(-2px)}
@@ -335,16 +330,16 @@ body{transition:color var(--transition-speed)}
         <div class="hero-badge"><div class="badge-dot"></div>Open to Internships &amp; Full-time Roles</div>
         <h1 class="hero-h1">Full Stack<span>Developer</span></h1>
         <div class="hero-sub">Software Engineer · B.Tech CSE 2027</div>
-        <p class="hero-desc">Hi, I'm Kelly Yadav — CS student at Mody University with hands-on experience in Java, React, Spring Boot &amp; AI APIs. I build real products that solve real problems.</p>
+        <p class="hero-desc">Hi, I'm Kelly Yadav — CS student at Mody University with hands-on experience in Java, Spring Boot, React, Docker &amp; AI APIs. I build real products that solve real problems, from GPS tracking to AI-powered coding battles.</p>
         <div class="hero-btns">
           <button class="btn-w" onclick="gTo(1)">View my work ↓</button>
           <a class="btn-gl" href="mailto:yadavkelly9@gmail.com">Get in touch</a>
         </div>
         <div class="hero-stats">
-          <div class="hs"><div class="hs-n">5+</div><div class="hs-l">Projects</div></div>
+          <div class="hs"><div class="hs-n">6+</div><div class="hs-l">Projects</div></div>
           <div class="hs"><div class="hs-n">#158</div><div class="hs-l">Women rank</div></div>
-          <div class="hs"><div class="hs-n">65+</div><div class="hs-l">Certifications</div></div>
-          <div class="hs"><div class="hs-n">2</div><div class="hs-l">Internships</div></div>
+          <div class="hs"><div class="hs-n">126</div><div class="hs-l">LeetCode solved</div></div>
+          <div class="hs"><div class="hs-n">4</div><div class="hs-l">Internships</div></div>
         </div>
       </div>
       <div>
@@ -367,11 +362,11 @@ body{transition:color var(--transition-speed)}
       <h2 class="s-title">Things I've <em>built</em></h2>
       <div class="pgrid">
         <div class="pcard glass" onclick="openM('codearena')"><div class="plive"></div><span class="pcard-emoji">⚔️</span><div class="ppill">🔥 Featured · Live</div><h3>CodeArena</h3><p>Real-time coding battle platform with 16+ languages, AI-powered evaluation.</p><div class="ptags"><span class="ptag">React</span><span class="ptag">Anthropic API</span><span class="ptag">Vercel</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://codearena-peach.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
+        <div class="pcard glass" onclick="openM('geotrust')"><div class="plive"></div><span class="pcard-emoji">📍</span><div class="ppill">GPS · Live</div><h3>GeoTrust Navigator</h3><p>GPS navigation dashboard with Kalman filter smoothing for accurate location tracking.</p><div class="ptags"><span class="ptag">GPS</span><span class="ptag">Kalman Filter</span><span class="ptag">Vercel</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://geotrust-dashboard.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
         <div class="pcard glass" onclick="openM('caloriq')"><div class="plive"></div><span class="pcard-emoji">🥗</span><div class="ppill">Live · AI</div><h3>CaloriQ</h3><p>AI nutrition tracker with personalised goals and real-time Supabase sync.</p><div class="ptags"><span class="ptag">React</span><span class="ptag">Supabase</span><span class="ptag">AI</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://caloriq-one.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
         <div class="pcard glass" onclick="openM('cybershield')"><div class="plive"></div><span class="pcard-emoji">🛡️</span><div class="ppill">Team · Live</div><h3>CyberShield</h3><p>Cybersecurity dashboard with real-time threat visualisations.</p><div class="ptags"><span class="ptag">Canvas</span><span class="ptag">CSS3</span><span class="ptag">JS</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://kellyyadav.github.io/cybershield/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
         <div class="pcard glass" onclick="openM('social')"><span class="pcard-emoji">🌐</span><div class="ppill">Full Stack</div><h3>Social Interaction App</h3><p>Spring Boot + React + MySQL social platform.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">React</span></div><div class="plinks"><span class="plink">Details →</span></div></div>
         <div class="pcard glass" onclick="openM('face')"><span class="pcard-emoji">🎯</span><div class="ppill">IIT Bombay</div><h3>Face Recognition Attendance</h3><p>Real-time face detection to prevent proxy attendance.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OpenCV</span><span class="ptag">MySQL</span></div><div class="plinks"><span class="plink">Details →</span></div></div>
-        <div class="pcard glass" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px"><span style="font-size:30px">🚀</span><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white">More coming soon</div><div style="font-size:11px;color:rgba(255,255,255,0.55)">Always building something new</div><a href="https://github.com/kellyyadav" target="_blank" class="btn-w" style="font-size:10px;padding:8px 16px;margin-top:4px">GitHub ↗</a></div>
       </div>
     </div>
   </div>
@@ -384,25 +379,28 @@ body{transition:color var(--transition-speed)}
         <h2 class="s-title" style="margin-bottom:24px">What I <em>work with</em></h2>
         <div class="sg"><div class="sg-head">Languages</div><div class="sp"><span class="sk h">Java</span><span class="sk h">JavaScript</span><span class="sk h">Python</span><span class="sk">SQL</span><span class="sk">TypeScript</span></div></div>
         <div class="sg"><div class="sg-head">Frontend</div><div class="sp"><span class="sk h">React.js</span><span class="sk h">HTML5</span><span class="sk h">CSS3</span><span class="sk">Tailwind CSS</span><span class="sk">Canvas API</span><span class="sk">Responsive Design</span><span class="sk">Figma</span></div></div>
-        <div class="sg"><div class="sg-head">Backend & Full Stack</div><div class="sp"><span class="sk h">Spring Boot</span><span class="sk h">REST APIs</span><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">JDBC</span><span class="sk">JWT Auth</span><span class="sk">MVC</span></div></div>
+        <div class="sg"><div class="sg-head">Backend &amp; Full Stack</div><div class="sp"><span class="sk h">Spring Boot</span><span class="sk h">REST APIs</span><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">JDBC</span><span class="sk">JWT Auth</span><span class="sk">MVC</span></div></div>
         <div class="sg"><div class="sg-head">Databases</div><div class="sp"><span class="sk h">MySQL</span><span class="sk h">Supabase</span><span class="sk">PostgreSQL</span><span class="sk">MongoDB basics</span></div></div>
-        <div class="sg"><div class="sg-head">AI & APIs</div><div class="sp"><span class="sk h">Anthropic API</span><span class="sk">Hugging Face</span><span class="sk">OpenAI basics</span><span class="sk">API Design</span></div></div>
-        <div class="sg"><div class="sg-head">DevOps & Tools</div><div class="sp"><span class="sk h">Git</span><span class="sk h">GitHub</span><span class="sk h">Vercel</span><span class="sk">Postman</span><span class="sk">VS Code</span><span class="sk">Linux basics</span><span class="sk">CI/CD basics</span></div></div>
+        <div class="sg"><div class="sg-head">AI &amp; APIs</div><div class="sp"><span class="sk h">Anthropic API</span><span class="sk">AI Integration</span><span class="sk">Hugging Face</span><span class="sk">OpenAI basics</span><span class="sk">API Design</span></div></div>
+        <div class="sg"><div class="sg-head">Algorithms, Maps &amp; Systems</div><div class="sp"><span class="sk h">DSA</span><span class="sk h">LeetCode</span><span class="sk">Kalman Filter</span><span class="sk">GPS / Geolocation</span><span class="sk">System Design (learning)</span><span class="sk">OpenCV</span></div></div>
+        <div class="sg"><div class="sg-head">DevOps &amp; Tools</div><div class="sp"><span class="sk h">Git</span><span class="sk h">GitHub</span><span class="sk h">Docker</span><span class="sk h">Linux</span><span class="sk">Vercel</span><span class="sk">Render</span><span class="sk">Postman</span><span class="sk">VS Code</span><span class="sk">CI/CD basics</span></div></div>
       </div>
       <div>
         <div class="skill-bars-card glass-dark" id="skill-bars">
           <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px;font-family:'Syne',sans-serif;font-weight:600">Proficiency</div>
-          <div class="sbr"><div class="sbt"><span>Java & Spring Boot</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>React & Frontend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>MySQL & Supabase</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>REST APIs & Backend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="74"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>AI & API Integration</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>Java &amp; Spring Boot</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>React &amp; Frontend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="78"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>MySQL &amp; Supabase</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>REST APIs &amp; Backend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="74"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>AI &amp; API Integration</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>Docker &amp; Linux</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="64"></div></div></div>
           <div class="sbr"><div class="sbt"><span>Python</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="65"></div></div></div>
-          <div class="sbr"><div class="sbt"><span>DSA</span><span>Growing</span></div><div class="sb-track"><div class="sb-fill" data-w="52"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>DSA &amp; LeetCode</span><span>Growing</span></div><div class="sb-track"><div class="sb-fill" data-w="60"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>System Design</span><span>Learning</span></div><div class="sb-track"><div class="sb-fill" data-w="40"></div></div></div>
         </div>
         <div class="can-also glass-dark">
           <div class="ca-title">💡 I can also</div>
-          <div class="ca-pills"><span class="sk">📹 Vibe Coding</span><span class="sk">🎨 UI/UX Design</span><span class="sk">📝 Tech Writing</span><span class="sk">🤝 Team Lead</span><span class="sk">🎤 Presentations</span><span class="sk">📊 Content Strategy</span></div>
+          <div class="ca-pills"><span class="sk">📹 Vibe Coding</span><span class="sk">🎨 UI/UX Design</span><span class="sk">📝 Tech Writing</span><span class="sk">🤝 Team Lead</span><span class="sk">🎤 Presentations</span><span class="sk">🐳 Teaching Docker</span><span class="sk">📊 Content Strategy</span></div>
         </div>
       </div>
     </div>
@@ -413,6 +411,8 @@ body{transition:color var(--transition-speed)}
     <div class="exp-wrap">
       <div class="s-eyebrow" style="grid-column:1/-1;margin-bottom:-10px">Journey</div>
       <h2 class="s-title" style="grid-column:1/-1;margin-bottom:24px">Experience &amp; <em>Education</em></h2>
+      <div class="exp-card glass"><div class="exp-period">July 2026</div><div class="exp-role">AI Integration Intern</div><div class="exp-co"><span>Ambiguity Lab</span></div><ul class="exp-li"><li>Tested AI tools and worked on AI integration workflows</li><li>Worked with Linux and Docker for testing and deployment environments</li><li>Taught Docker fundamentals and how to approach AI integration</li></ul></div>
+      <div class="exp-card glass"><div class="exp-period">June 2026 · 1 Month</div><div class="exp-role">Java Backend Developer Intern</div><div class="exp-co"><span>Pearlthought</span></div><ul class="exp-li"><li>Completed daily Java tasks, building small projects such as a calculator</li><li>Practised OOP, input handling and core backend logic building</li><li>Worked on structured daily deliverables with feedback</li></ul></div>
       <div class="exp-card glass"><div class="exp-period">Jan – Feb 2026</div><div class="exp-role">Operations &amp; Content Intern</div><div class="exp-co"><span>Persist Ventures</span> · Remote</div><ul class="exp-li"><li>Led a team of interns, delegating tasks and managing deliverables</li><li>Oversaw content creation pipelines and coordinated team output</li><li>Managed cross-functional communication and process documentation</li></ul></div>
       <div class="exp-card glass"><div class="exp-period">Jun – Aug 2025</div><div class="exp-role">Java Developer Intern</div><div class="exp-co"><span>Cognifyz Technologies</span> · Remote</div><ul class="exp-li"><li>Built Java projects covering OOP, data structures and file handling</li><li>Modular backend application design and iterative code reviews</li><li>Delivered in structured internship track with feedback cycles</li></ul></div>
       <div class="edu-card-big glass"><div class="edu-badge">🎓 Education</div><div class="edu-univ">Mody University of Science &amp; Technology</div><div class="edu-deg">Bachelor of Technology — Computer Science &amp; Engineering</div><div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><div style="font-size:11px;color:rgba(255,255,255,0.65)">2023 – 2027 · Rajasthan, India</div><div style="display:flex;gap:7px;flex-wrap:wrap"><span class="sk" style="font-size:10px">Full Stack</span><span class="sk" style="font-size:10px">Algorithms</span><span class="sk" style="font-size:10px">DBMS</span><span class="sk" style="font-size:10px">Hackathons</span><span class="sk" style="font-size:10px">Leadership</span></div></div></div>
@@ -425,8 +425,10 @@ body{transition:color var(--transition-speed)}
       <div class="s-eyebrow" style="grid-column:1/-1;margin-bottom:-10px">Recognition</div>
       <h2 class="s-title" style="grid-column:1/-1;margin-bottom:20px">Achievements &amp; <em>Involvement</em></h2>
       <div class="acard glass feat"><span class="a-icon">🏆</span><div class="a-title">Unstop Engineering #372 · Women #158</div><div class="a-sub">Top-ranked nationally; 65+ certs on platform</div></div>
+      <div class="acard glass feat"><span class="a-icon">🧠</span><div class="a-title">LeetCode — 126 Problems Solved</div><div class="a-sub">47 Easy · 58 Medium · 21 Hard · Contest rating 1,460 · 50 Days Badge 2026</div></div>
       <div class="acard glass"><span class="a-icon">🎯</span><div class="a-title">Finalist — GitLab Hackathon, IIT Bombay</div><div class="a-sub">Built Face Recognition Attendance System</div></div>
       <div class="acard glass"><span class="a-icon">🚀</span><div class="a-title">Project Finalist — DevDelight Hackathon</div><div class="a-sub">Full-stack project to industry panel</div></div>
+      <div class="acard glass"><span class="a-icon">🏗️</span><div class="a-title">Studying System Design</div><div class="a-sub">Learning scalable architecture and deployment on Render</div></div>
       <div class="acard glass"><span class="a-icon">❤️</span><div class="a-title">Content Head — Karuna Society</div><div class="a-sub">Fundraising &amp; content strategy for social causes</div></div>
       <div class="acard glass"><span class="a-icon">🎉</span><div class="a-title">Event Lead — B.Tech Farewell</div><div class="a-sub">End-to-end event planning coordination</div></div>
       <div class="acard glass"><span class="a-icon">👩‍💻</span><div class="a-title">Member — Rewriting the Code (RTC)</div><div class="a-sub">Global women-in-tech mentorship community</div></div>
@@ -444,7 +446,7 @@ body{transition:color var(--transition-speed)}
         <div style="padding:40px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:20px; backdrop-filter:blur(16px); text-align:center;">
           <div style="font-size:48px; margin-bottom:20px;">📄</div>
           <h3 style="font-family:'Syne',sans-serif; font-size:20px; color:white; margin-bottom:12px;">Full Stack Developer Resume</h3>
-          <p style="font-size:14px; color:rgba(255,255,255,0.65); margin-bottom:28px; line-height:1.6;">Full Stack Developer with 2 internships, 5+ live projects and real Anthropic API experience.<br>B.Tech CSE at Mody University (2023–2027).</p>
+          <p style="font-size:14px; color:rgba(255,255,255,0.65); margin-bottom:28px; line-height:1.6;">Full Stack Developer with 4 internships, 6+ live projects and real Anthropic API experience.<br>B.Tech CSE at Mody University (2023–2027).</p>
           <a href="https://drive.google.com/file/d/1F_gcCdNwPhclgkuviuHaMFgD7Kqbrhl2/view?usp=sharing" target="_blank" class="btn-w" style="display:inline-flex; margin-bottom:16px;">📥 View Resume on Drive</a>
           <br>
           <a href="https://drive.google.com/uc?export=download&id=1F_gcCdNwPhclgkuviuHaMFgD7Kqbrhl2" class="btn-gl" style="display:inline-flex;">⬇️ Download Resume</a>
@@ -452,7 +454,7 @@ body{transition:color var(--transition-speed)}
       </div>
       <div>
         <h2 class="s-title">My <em>Resume</em></h2>
-        <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:24px;font-weight:300">Full Stack Developer with 2 internships, 5+ live projects and real Anthropic API experience. B.Tech CSE at Mody University (2023–2027).</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:24px;font-weight:300">Full Stack Developer with 4 internships, 6+ live projects, 126 LeetCode problems solved and real Anthropic API experience. B.Tech CSE at Mody University (2023–2027).</p>
         <div class="cert-row2">
           <div class="cchip glass-dark"><div class="cchip-icon">🔵</div><div><div class="cchip-t">Intro to Modern AI</div><div class="cchip-o">Cisco Networking Academy</div></div></div>
           <div class="cchip glass-dark"><div class="cchip-icon">🐍</div><div><div class="cchip-t">Python Essentials 1</div><div class="cchip-o">Cisco Networking Academy</div></div></div>
@@ -481,7 +483,9 @@ body{transition:color var(--transition-speed)}
       <div class="facts-card glass-dark">
         <div class="facts-t">✨ Fun Facts</div>
         <div class="fact"><div class="fact-e">🤖</div><div class="fact-t">Built CodeArena with live Anthropic API integration — real AI in a real product!</div></div>
+        <div class="fact"><div class="fact-e">📍</div><div class="fact-t">Built GeoTrust Navigator — GPS tracking smoothed with a Kalman filter</div></div>
         <div class="fact"><div class="fact-e">🏆</div><div class="fact-t">Ranked #158 among women globally on Unstop</div></div>
+        <div class="fact"><div class="fact-e">🧠</div><div class="fact-t">126 LeetCode problems solved and a 50 Days Badge in 2026</div></div>
         <div class="fact"><div class="fact-e">🧶</div><div class="fact-t">I crochet cute things — patience in craft = patience in debugging!</div></div>
         <div class="fact"><div class="fact-e">🌏</div><div class="fact-t">Member of Rewriting the Code — global women in tech</div></div>
         <div class="fact"><div class="fact-e">☕</div><div class="fact-t">Chai = debugging fuel. Non-negotiable.</div></div>
@@ -503,11 +507,12 @@ body{transition:color var(--transition-speed)}
         <div class="avail-box">
           <div class="avail-status">Available now</div>
           <div class="avail-title">Seeking Internships &amp; Full-time</div>
-          <div class="avail-sub">Full Stack · Java · React · Spring Boot · AI APIs<br>B.Tech CSE 2027 · Mody University</div>
+          <div class="avail-sub">Full Stack · Java · React · Spring Boot · AI APIs · Docker<br>B.Tech CSE 2027 · Mody University</div>
         </div>
         <div class="ct-links">
           <a class="cl glass-dark" href="https://linkedin.com/in/kelly-yadav-94435533a" target="_blank"><span class="cl-icon">💼</span><div><div class="cl-label">LinkedIn</div><div class="cl-val">kelly-yadav-94435533a</div></div></a>
           <a class="cl glass-dark" href="https://github.com/kellyyadav" target="_blank"><span class="cl-icon">🐙</span><div><div class="cl-label">GitHub</div><div class="cl-val">github.com/kellyyadav</div></div></a>
+          <a class="cl glass-dark" href="https://leetcode.com/u/kellyyadav/" target="_blank"><span class="cl-icon">🧠</span><div><div class="cl-label">LeetCode</div><div class="cl-val">leetcode.com/u/kellyyadav</div></div></a>
           <a class="cl glass-dark" href="https://unstop.com/u/kellyyad99326" target="_blank"><span class="cl-icon">🏆</span><div><div class="cl-label">Unstop</div><div class="cl-val">Rank #372 · Women #158</div></div></a>
           <a class="cl glass-dark" href="tel:+917251814853"><span class="cl-icon">📞</span><div><div class="cl-label">Phone</div><div class="cl-val">+91 72518 14853</div></div></a>
         </div>
@@ -533,15 +538,12 @@ body{transition:color var(--transition-speed)}
 </div>
 
 <script>
-// ═══════════ EMBED IMAGES ═══════════
-
 // ═══════════ SKY SYSTEM ═══════════
 const skyCanvas = document.getElementById('sky-canvas');
 const skyCtx = skyCanvas.getContext('2d');
 function resizeSky(){ skyCanvas.width=innerWidth; skyCanvas.height=innerHeight; }
 resizeSky(); addEventListener('resize', resizeSky);
 
-// periods: now includes Thunderstorm
 const periods = [
   { name:'Night',       h1:0,  h2:5,  top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
   { name:'Dawn',        h1:5,  h2:7,  top:'#1a0a2e', bot:'#ff7b54', sun:'#ffcc70', moon:false, rain:false, thunder:false },
@@ -562,14 +564,8 @@ function getPeriodForHour(h) {
   for(let i=0;i<periods.length;i++) if(h>=periods[i].h1&&h<periods[i].h2) return i;
   return 7;
 }
-function lerpColor(c1,c2,t){
-  const r1=parseInt(c1.slice(1,3),16),g1=parseInt(c1.slice(3,5),16),b1=parseInt(c1.slice(5,7),16);
-  const r2=parseInt(c2.slice(1,3),16),g2=parseInt(c2.slice(3,5),16),b2=parseInt(c2.slice(5,7),16);
-  return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
-}
 const stars = Array.from({length:200},()=>({x:Math.random(),y:Math.random()*0.75,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,phase:Math.random()*Math.PI*2}));
 
-// Rain
 const rainCanvas = document.getElementById('rain-canvas');
 const rainCtx = rainCanvas.getContext('2d');
 function resizeRain(){ rainCanvas.width=innerWidth; rainCanvas.height=innerHeight; }
@@ -581,14 +577,11 @@ const rainDrops = Array.from({length:400},()=>({
   wind:0.002+Math.random()*0.002
 }));
 
-// Lightning canvas
 const ltgCanvas = document.getElementById('lightning-canvas');
 const ltgCtx = ltgCanvas.getContext('2d');
 function resizeLtg(){ ltgCanvas.width=innerWidth; ltgCanvas.height=innerHeight; }
 resizeLtg(); addEventListener('resize', resizeLtg);
 
-// Thunder state
-let lightningActive = false;
 let nextLightningIn = 3000;
 let lastLightningTime = Date.now() + 4000;
 let flashEl = document.getElementById('thunder-flash');
@@ -605,7 +598,6 @@ function playThunder(delay) {
       const ctx = getAudioCtx();
       const buf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
       const data = buf.getChannelData(0);
-      // Generate thunder rumble: burst of noise with decay
       for(let i=0;i<data.length;i++){
         const env = i < ctx.sampleRate*0.1 ? i/(ctx.sampleRate*0.1) : Math.exp(-(i-ctx.sampleRate*0.1)/(ctx.sampleRate*0.8));
         data[i] = (Math.random()*2-1) * env * (0.4 + 0.6*Math.exp(-i/(ctx.sampleRate*0.05)));
@@ -613,7 +605,6 @@ function playThunder(delay) {
       const src = ctx.createBufferSource();
       src.buffer = buf;
       const gain = ctx.createGain(); gain.gain.value = 0.6;
-      // Low pass to make it rumbly
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass'; filter.frequency.value = 200;
       src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
@@ -627,13 +618,11 @@ function drawLightning(x1, y1, x2, y2, width, branchProb) {
   ltgCtx.moveTo(x1, y1);
   const dx = x2-x1, dy = y2-y1;
   const segments = 12;
-  let cx=x1, cy=y1;
   for(let i=1;i<=segments;i++){
     const t=i/segments;
     const nx = x1+dx*t + (Math.random()-0.5)*80;
     const ny = y1+dy*t + (Math.random()-0.5)*20;
     ltgCtx.lineTo(nx, ny);
-    // Branch
     if(Math.random()<branchProb && i>3 && i<segments-2) {
       const bx = nx+(Math.random()-0.5)*120;
       const by = ny+Math.random()*80;
@@ -641,7 +630,6 @@ function drawLightning(x1, y1, x2, y2, width, branchProb) {
       ltgCtx.lineTo(bx,by);
       ltgCtx.moveTo(nx,ny);
     }
-    cx=nx; cy=ny;
   }
   ltgCtx.strokeStyle=`rgba(200,220,255,${0.7+Math.random()*0.3})`;
   ltgCtx.lineWidth=width;
@@ -649,7 +637,6 @@ function drawLightning(x1, y1, x2, y2, width, branchProb) {
   ltgCtx.shadowBlur=20;
   ltgCtx.stroke();
   ltgCtx.shadowBlur=0;
-  // Glow pass
   ltgCtx.strokeStyle=`rgba(180,200,255,0.15)`;
   ltgCtx.lineWidth=width*6;
   ltgCtx.stroke();
@@ -660,26 +647,21 @@ function triggerLightning() {
   ltgCtx.clearRect(0,0,W,H);
   const startX = W*0.2 + Math.random()*W*0.6;
   drawLightning(startX, 0, startX+(Math.random()-0.5)*100, H*0.7, 2+Math.random()*2, 0.4);
-  // Flash effect
   flashEl.classList.add('flash');
   setTimeout(()=>flashEl.classList.remove('flash'), 80);
-  // Secondary flash
   setTimeout(()=>{
     if(Math.random()>0.5){
       flashEl.classList.add('flash');
       setTimeout(()=>flashEl.classList.remove('flash'), 60);
     }
   }, 120);
-  // Fade out lightning bolt
   let alpha = 1;
   const fadeOut = setInterval(()=>{
     alpha -= 0.12;
     ltgCanvas.style.opacity = Math.max(0,alpha);
     if(alpha<=0){ clearInterval(fadeOut); ltgCtx.clearRect(0,0,W,H); ltgCanvas.style.opacity=1; }
   }, 40);
-  // Thunder sound (delayed — sound travels slower than light)
   playThunder(400 + Math.random()*1200);
-  // Schedule next
   nextLightningIn = 2500 + Math.random()*5000;
   lastLightningTime = Date.now();
 }
@@ -714,7 +696,6 @@ function drawSky() {
   grad.addColorStop(0,p.top); grad.addColorStop(1,p.bot);
   skyCtx.fillStyle=grad; skyCtx.fillRect(0,0,W,H);
 
-  // Mountain colors
   const mFar=document.getElementById('mfar'),mMid=document.getElementById('mmid'),mNear=document.getElementById('mnear'),mGround=document.getElementById('mground'),flowers=document.getElementById('flowers'),treesL=document.getElementById('trees-l'),treesR=document.getElementById('trees-r');
   if(p.thunder){
     if(mFar) mFar.setAttribute('fill','#080c08');
@@ -752,14 +733,12 @@ function drawSky() {
 
   const cx=W*0.72, cy=H*(p.moon?0.12:0.14)+Math.sin(skyAnimT*0.002)*8;
   if(p.thunder){
-    // Storm clouds — heavy, dark, dramatic
     drawCloud(skyCtx,W*0.05,H*0.08,2.2,0.9,true);
     drawCloud(skyCtx,W*0.3,H*0.05,2.8,0.95,true);
     drawCloud(skyCtx,W*0.55,H*0.1,2.0,0.88,true);
     drawCloud(skyCtx,W*0.75,H*0.06,2.5,0.92,true);
     drawCloud(skyCtx,W*0.15,H*0.18,1.8,0.8,true);
     drawCloud(skyCtx,W*0.45,H*0.15,2.2,0.85,true);
-    // Eerie green/cyan tint at horizon
     const horizGlow=skyCtx.createLinearGradient(0,H*0.5,0,H*0.85);
     horizGlow.addColorStop(0,'transparent'); horizGlow.addColorStop(1,'rgba(30,50,30,0.3)');
     skyCtx.fillStyle=horizGlow; skyCtx.fillRect(0,0,W,H);
@@ -796,14 +775,12 @@ function drawSky() {
     }
   }
 
-  // Rain
   if(p.rain!==rainActive){
     rainActive=p.rain;
     rainCanvas.className=rainActive?'raining':'';
   }
   if(rainActive){
     rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-    // Heavy rain with wind
     rainCtx.strokeStyle='rgba(160,185,220,0.4)'; rainCtx.lineWidth=1.2;
     rainDrops.forEach(d=>{
       d.y+=d.speed; d.x+=d.wind;
@@ -812,7 +789,6 @@ function drawSky() {
       const rx=d.x*rainCanvas.width, ry=d.y*rainCanvas.height;
       rainCtx.beginPath(); rainCtx.moveTo(rx,ry); rainCtx.lineTo(rx+d.wind*rainCanvas.width*8, ry+d.len*rainCanvas.height); rainCtx.stroke();
     });
-    // Puddle splashes at bottom (random)
     if(Math.random()<0.3){
       const sx=Math.random()*rainCanvas.width, sy=rainCanvas.height-10;
       rainCtx.beginPath(); rainCtx.arc(sx,sy,2+Math.random()*3,0,Math.PI*2);
@@ -820,10 +796,8 @@ function drawSky() {
     }
   }
 
-  // Thunder/lightning update
   updateThunder(p);
 
-  // UI label
   document.getElementById('time-label').textContent=p.name;
   document.getElementById('time-icon').textContent=p.thunder?'⛈️':p.moon?'🌙':p.name==='Dawn'||p.name==='Dusk'?'🌅':'☀️';
 
@@ -832,13 +806,11 @@ function drawSky() {
 }
 drawSky();
 
-// Manual toggle — now includes Thunderstorm
 const timeOrder=[0,1,2,3,4,5,6,7];
 let manualIdx=0;
 function toggleTimeManual(){
   manualIdx=(manualIdx+1)%timeOrder.length;
   manualPeriodIdx=manualIdx===0?-1:timeOrder[manualIdx];
-  // Resume AudioContext on user gesture
   if(thunderAudioCtx && thunderAudioCtx.state==='suspended') thunderAudioCtx.resume();
   if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
 }
@@ -886,6 +858,7 @@ function toggleSb(){
 // ═══════════ MODAL ═══════════
 const projs={
   codearena:{tag:'🔥 Featured · Live',title:'CodeArena — Real-Time Coding Battle',desc:'Real-time coding battle platform with 16+ programming languages for up to 50 concurrent users. Anthropic AI for dynamic challenge generation and automated evaluation.',tags:['React','JavaScript','Anthropic API','Vercel'],feats:['16+ programming languages supported','50 concurrent users','Anthropic AI challenge generation & evaluation','Frontend performance optimised ~30%','Cross-browser compatibility across 5+ browsers'],live:'https://codearena-peach.vercel.app/',gh:'https://github.com/kellyyadav'},
+  geotrust:{tag:'GPS · Live',title:'GeoTrust Navigator — GPS Tracking',desc:'GPS navigation dashboard that uses a Kalman filter to smooth noisy location readings, giving more stable and accurate position tracking.',tags:['GPS','Kalman Filter','Dashboard','Vercel'],feats:['Kalman filter for smoothing noisy GPS data','Stable real-time location tracking','Interactive navigation dashboard','Deployed live on Vercel'],live:'https://geotrust-dashboard.vercel.app/',gh:'https://github.com/kellyyadav/Geotrust'},
   caloriq:{tag:'Live · AI ✨',title:'CaloriQ — AI Nutrition Tracker',desc:'Full-stack AI nutrition tracker with personalised health goals and real-time Supabase sync. AI calorie estimation across 100+ food items.',tags:['React','JavaScript','Supabase','Vercel'],feats:['AI calorie estimation 100+ foods','Personalised health goals','Real-time Supabase sync','Query response time reduced ~25%','Responsive multi-device UI'],live:'https://caloriq-one.vercel.app/',gh:'https://github.com/kellyyadav'},
   cybershield:{tag:'Team · Live',title:'CyberShield — Ransomware Detection',desc:'Interactive cybersecurity dashboard with real-time threat detection using HTML5 Canvas and CSS3. 3-member team build.',tags:['HTML5 Canvas','CSS3','Vanilla JS','Git'],feats:['Real-time threat visualisations','CSS3 animation dashboard','Client-side auth','3-member Git workflow'],live:'https://kellyyadav.github.io/cybershield/',gh:'https://github.com/kellyyadav'},
   social:{tag:'Personal Project',title:'Social Interaction Web App',desc:'Full-stack social platform — posts, comments, follow system. Spring Boot backend + React frontend + MySQL.',tags:['Java','Spring Boot','React','MySQL'],feats:['REST APIs with Spring Boot','MySQL schema users/posts/follows','React + Spring Boot integration','User auth & sessions','Responsive UI'],live:null,gh:'https://github.com/kellyyadav'},
