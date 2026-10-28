@@ -1,691 +1,978 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kelly Yadav — Full Stack Developer</title>
-<meta name="description" content="Kelly Yadav — Java Backend & Full Stack Developer. Spring Boot, React, Supabase, Docker, and AI API integration. Projects: GeoTrust, CodeArena, CaloriQ, CyberShield." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kelly Yadav — Java Backend & Full Stack Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 <style>
-  :root{
-    --bg:#0a0e17;
-    --surface:#111827;
-    --card:#151d2e;
-    --border:#1f2a40;
-    --border2:#2c3a57;
-    --text:#e6ebf5;
-    --muted:#8b96b0;
-    --dim:#5b6785;
-    --accent:#8b8cf8;
-    --accent2:#5eead4;
-    --warn:#fbbf24;
-    --danger:#fb7185;
-    --ok:#4ade80;
-    --r:14px;
-    --mono:'JetBrains Mono',monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;scroll-padding-top:80px}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  ::selection{background:var(--accent);color:#fff}
-  ::-webkit-scrollbar{width:6px}
-  ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif}
+:root{
+  --sky-top:#87ceeb;
+  --sky-bot:#ffd89b;
+  --text-main:#2d1810;
+  --text-muted:#6b4c3b;
+  --card-bg:rgba(255,255,255,0.18);
+  --card-border:rgba(255,255,255,0.35);
+  --pill-bg:rgba(255,255,255,0.22);
+  --accent:#e8653a;
+  --accent2:#f0a500;
+  --green-dark:#1a3a1a;
+  --green-mid:#2d5a27;
+  --green-light:#4a8c3f;
+  --green-bright:#6ab04c;
+  --transition-speed:3s;
+}
+body{transition:color var(--transition-speed)}
+#sky-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+#rain-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 2s}
+#rain-canvas.raining{opacity:1}
+#lightning-canvas{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0}
+.mountains{position:fixed;bottom:0;left:0;width:100%;z-index:2;pointer-events:none}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 52px;background:rgba(0,0,0,0.08);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.1);transition:background 2s}
+.logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;letter-spacing:-0.02em}
+.logo span{opacity:0.7}
+.topnav{display:flex;gap:6px}
+.tnav{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.1);cursor:pointer;transition:all 0.25s;font-family:'Inter',sans-serif;backdrop-filter:blur(8px)}
+.tnav:hover,.tnav.active{background:rgba(255,255,255,0.25);color:white;border-color:rgba(255,255,255,0.5)}
+.topright{display:flex;gap:10px;align-items:center}
+.time-btn{display:flex;align-items:center;gap:6px;font-size:11px;padding:7px 16px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);color:white;background:rgba(0,0,0,0.15);cursor:pointer;backdrop-filter:blur(8px);transition:all 0.25s;font-family:'Inter',sans-serif}
+.time-btn:hover{background:rgba(0,0,0,0.3)}
+.time-icon{font-size:16px;transition:transform 0.5s}
+.hire-btn{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;background:rgba(255,255,255,0.9);color:#2d1810;border:none;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all 0.25s;text-decoration:none}
+.hire-btn:hover{background:white;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,0.8);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+.sb-ov{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:none;backdrop-filter:blur(4px)}
+.sb-ov.open{display:block}
+.sidebar{position:fixed;top:0;right:-280px;width:260px;height:100vh;background:rgba(20,12,5,0.95);border-left:1px solid rgba(255,255,255,0.1);z-index:400;padding:72px 30px 40px;display:flex;flex-direction:column;gap:18px;transition:right 0.35s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(20px)}
+.sidebar.open{right:0}
+.sidebar a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;cursor:pointer}
+.sidebar a:hover{color:white}
+.sb-div{height:1px;background:rgba(255,255,255,0.1)}
+.h-track{position:fixed;top:0;left:0;height:100vh;display:flex;transition:transform 0.8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+.hslide{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;position:relative}
+.dot-nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:300;display:flex;gap:10px;align-items:center}
+.nav-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);background:transparent;cursor:pointer;transition:all 0.3s}
+.nav-dot.active{background:white;border-color:white;box-shadow:0 0 10px rgba(255,255,255,0.5)}
+.nav-dot:hover{border-color:white;transform:scale(1.3)}
+.arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:300;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s;backdrop-filter:blur(8px)}
+.arrow:hover{background:rgba(255,255,255,0.3);transform:translateY(-50%) scale(1.1)}
+.arrow-l{left:20px}
+.arrow-r{right:40px}
+.slide-counter{position:fixed;right:52px;bottom:28px;z-index:300;font-family:'Syne',sans-serif;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.12em}
+.glass{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(16px);border-radius:20px;transition:all 0.3s}
+.glass:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
+.glass-dark{background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(16px);border-radius:20px}
+.hero-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:48px;width:100%;max-width:1200px;padding:0 64px;margin-top:20px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.15);padding:7px 18px;border-radius:100px;border:1px solid rgba(255,255,255,0.3);margin-bottom:20px;width:fit-content;backdrop-filter:blur(8px)}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#6ab04c;animation:bdot 2s infinite}
+@keyframes bdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(44px,5.5vw,80px);font-weight:800;line-height:0.96;letter-spacing:-0.03em;color:white;text-shadow:0 4px 20px rgba(0,0,0,0.3);margin-bottom:10px}
+.hero-h1 span{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:0.72em;color:rgba(255,255,255,0.85)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.75);margin-bottom:22px;font-weight:300;font-style:italic}
+.hero-desc{font-size:14px;color:rgba(255,255,255,0.7);max-width:440px;line-height:1.85;margin-bottom:30px;font-weight:300}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+.btn-w{display:inline-flex;align-items:center;gap:7px;padding:12px 24px;background:white;color:#2d1810;border:none;border-radius:100px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.25s}
+.btn-w:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.25)}
+.btn-gl{display:inline-flex;align-items:center;gap:7px;padding:12px 24px;background:rgba(255,255,255,0.15);color:white;border:1.5px solid rgba(255,255,255,0.35);border-radius:100px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;transition:all 0.25s;backdrop-filter:blur(8px)}
+.btn-gl:hover{background:rgba(255,255,255,0.25);transform:translateY(-3px)}
+.hero-stats{display:flex;gap:0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.2)}
+.hs{flex:1;padding:0 18px;border-right:1px solid rgba(255,255,255,0.15)}
+.hs:first-child{padding-left:0}
+.hs:last-child{border-right:none}
+.hs-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.hs-l{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px}
+.photo-wrap{position:relative;width:100%;max-width:270px;margin:0 auto}
+.photo-halo{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);animation:haloSpin 12s linear infinite}
+.photo-halo2{position:absolute;inset:-36px;border-radius:50%;border:1px dashed rgba(255,255,255,0.08);animation:haloSpin 18s linear infinite reverse}
+@keyframes haloSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.photo-glow{position:absolute;inset:-28px;border-radius:32px;background:radial-gradient(circle,rgba(255,200,100,0.2),transparent 65%);animation:hglow 4s ease-in-out infinite;z-index:0}
+@keyframes hglow{0%,100%{opacity:0.5}50%{opacity:1}}
+.photo-box{position:relative;z-index:1;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);border-radius:26px;padding:9px;box-shadow:0 32px 80px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.2);transition:transform 0.4s}
+.photo-box:hover{transform:translateY(-8px) rotate(1deg)}
+.photo-box img{width:100%;border-radius:18px;display:block;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.photo-nametag{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:8px 20px;white-space:nowrap;backdrop-filter:blur(16px);font-size:12px;color:white;display:flex;align-items:center;gap:6px;z-index:2}
+.nchip{position:absolute;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:7px 12px;font-size:10px;font-weight:500;white-space:nowrap;backdrop-filter:blur(12px);color:white;z-index:2}
+.nch-a{top:-14px;right:-16px;animation:chipf 5s ease-in-out infinite}
+.nch-b{bottom:26px;left:-22px;animation:chipf 5s ease-in-out infinite;animation-delay:-2.5s}
+@keyframes chipf{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.slide-inner{width:100%;max-width:1200px;padding:90px 64px 70px;overflow-y:auto;max-height:100vh}
+.slide-inner::-webkit-scrollbar{width:3px}
+.slide-inner::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:10px}
+.s-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.s-eyebrow::before{content:'';width:18px;height:1px;background:rgba(255,255,255,0.5)}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4.5vw,58px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:38px;text-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.s-title em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:0.95em}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{padding:24px;cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s}
+.pcard:hover{transform:translateY(-7px)}
+.plive{position:absolute;top:18px;right:18px;width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,0.7);animation:bdot 2s infinite}
+.ppill{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:14px;display:inline-block;font-weight:600;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25)}
+.pcard-emoji{font-size:30px;margin-bottom:12px;display:block;transition:transform 0.3s}
+.pcard:hover .pcard-emoji{transform:scale(1.15) rotate(5deg)}
+.pcard h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:7px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.pcard p{font-size:12px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:12px;font-weight:300}
+.ptags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.ptag{font-size:9px;padding:3px 8px;border-radius:100px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.65)}
+.plinks{display:flex;gap:10px;align-items:center}
+.plink{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:600;cursor:pointer;transition:color 0.2s}
+.plink-live{color:#a3e635;text-decoration:none}
+.plink-live:hover{color:#d9f99d}
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,14,23,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-  .logo{font-weight:800;font-size:1.1rem;letter-spacing:-.02em}
-  .logo span{color:var(--accent)}
-  .nav-links{display:flex;gap:4px}
-  .nav-links a{font-size:.82rem;color:var(--muted);padding:7px 12px;border-radius:8px;transition:.2s}
-  .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--card)}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;font-size:.88rem;font-weight:600;transition:.2s;border:1px solid transparent;cursor:pointer;font-family:inherit}
-  .btn-primary{background:var(--accent);color:#0a0e17}
-  .btn-primary:hover{background:#a5a6fa;transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--text);border-color:var(--border2)}
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-  .btn-sm{padding:8px 14px;font-size:.8rem}
+/* SYSTEM DESIGN */
+.sd-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.sd-label small{font-family:'Inter',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase}
+.sd-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:26px}
+.sd-node{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:12px;padding:10px 12px;min-width:118px;flex:1 1 118px;backdrop-filter:blur(12px);transition:all 0.25s}
+.sd-node:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.sd-node.hl{border-color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.18)}
+.sd-node b{display:block;font-size:11px;color:white;font-weight:600;margin-bottom:2px}
+.sd-node small{display:block;font-size:9px;color:rgba(255,255,255,0.55);line-height:1.4}
+.sd-arr{color:rgba(255,255,255,0.55);font-size:13px;flex:0 0 auto}
+.sd-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.sd-card{padding:20px}
+.sd-card h4{font-family:'Syne',sans-serif;font-size:13px;color:white;margin-bottom:8px;line-height:1.3}
+.sd-card p{font-size:11px;color:rgba(255,255,255,0.65);line-height:1.75;font-weight:300}
+.sd-card ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.sd-card ul li{font-size:11px;color:rgba(255,255,255,0.65);padding-left:16px;position:relative;line-height:1.6;font-weight:300}
+.sd-card ul li::before{content:"→";position:absolute;left:0;color:rgba(255,255,255,0.5)}
+.sd-note{margin-top:16px;padding:14px 18px;background:rgba(0,0,0,0.18);border:1px dashed rgba(255,255,255,0.25);border-radius:14px;font-size:11px;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300}
+.sd-note b{color:white;font-weight:600}
 
-  /* LAYOUT */
-  section{padding:110px 48px}
-  .wrap{max-width:1160px;margin:0 auto}
-  .eyebrow{font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
-  h2.title{font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:14px}
-  .lead{color:var(--muted);max-width:640px;font-size:1rem}
-  .section-head{margin-bottom:48px}
-  .alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:.25s}
-  .card:hover{border-color:var(--border2);transform:translateY(-3px)}
-  .tag{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:4px 10px;border-radius:6px;background:rgba(139,140,248,.08);color:#b9baff;border:1px solid rgba(139,140,248,.2)}
-  .tags{display:flex;flex-wrap:wrap;gap:6px}
-  .status{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:600;color:var(--ok);background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);padding:4px 10px;border-radius:100px}
-  .status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .fade{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-  .fade.in{opacity:1;transform:none}
-
-  /* HERO */
-  #home{min-height:100vh;display:flex;align-items:center;padding-top:120px}
-  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
-  .hero h1{font-size:clamp(2.6rem,5.4vw,4.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:18px 0}
-  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .role{font-family:var(--mono);color:var(--muted);font-size:.95rem;margin-bottom:22px}
-  .hero p.desc{color:var(--muted);max-width:560px;font-size:1.02rem;margin-bottom:30px}
-  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border);padding-top:26px}
-  .stat{padding-right:16px}
-  .stat b{display:block;font-size:1.7rem;font-weight:800;letter-spacing:-.02em}
-  .stat small{color:var(--dim);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
-  .photo{position:relative;max-width:360px;margin:0 auto}
-  .photo .frame{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--border2);background:var(--card);aspect-ratio:3/4}
-  .photo .frame img{width:100%;height:100%;object-fit:cover;object-position:top}
-  .photo::before{content:"";position:absolute;inset:-18px;border-radius:30px;background:radial-gradient(circle,rgba(139,140,248,.25),transparent 70%);z-index:-1}
-  .float{position:absolute;background:rgba(17,24,39,.9);border:1px solid var(--border2);border-radius:12px;padding:9px 14px;font-size:.78rem;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
-  .float.a{top:24px;left:-36px}
-  .float.b{bottom:40px;right:-30px}
-
-  /* ABOUT */
-  .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .about p{color:var(--muted);margin-bottom:16px}
-  .about p strong{color:var(--text);font-weight:600}
-  .facts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .fact{padding:20px}
-  .fact .ic{font-size:1.4rem;margin-bottom:10px}
-  .fact h4{font-size:.95rem;margin-bottom:4px}
-  .fact p{font-size:.82rem;color:var(--muted);margin:0}
-
-  /* PROJECTS */
-  .case{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:28px}
-  .case.reverse .case-info{order:2}
-  .case-tag{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-  .case h3{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
-  .case .sub{color:var(--accent2);font-size:.95rem;margin-bottom:16px;font-weight:500}
-  .case p{color:var(--muted);font-size:.93rem;margin-bottom:14px}
-  .case h5{font-family:var(--mono);font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 10px}
-  .case ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-  .case ul li{color:var(--muted);font-size:.88rem;padding-left:18px;position:relative}
-  .case ul li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:2px;background:var(--accent)}
-  .case-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-  .case-visual{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:14px;justify-content:center}
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.76rem;color:var(--muted);margin-bottom:6px}
-  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
-  .metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .metric span{font-size:.82rem;color:var(--muted)}
-  .metric b{font-family:var(--mono);font-size:.9rem;color:var(--accent2);text-align:right}
-
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .proj{display:flex;flex-direction:column;gap:12px}
-  .proj .top{display:flex;justify-content:space-between;align-items:center}
-  .proj .ico{font-size:1.7rem}
-  .proj h4{font-size:1.05rem;font-weight:700}
-  .proj p{color:var(--muted);font-size:.86rem;flex:1}
-  .proj a.link{font-size:.82rem;color:var(--accent);font-weight:600}
-  .proj a.link:hover{text-decoration:underline}
-
-  /* SYSTEM DESIGN */
-  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 28px}
-  .node{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;min-width:150px;flex:1 1 150px}
-  .node b{display:block;font-size:.88rem;margin-bottom:2px}
-  .node small{color:var(--dim);font-size:.74rem;font-family:var(--mono)}
-  .node.hl{border-color:rgba(139,140,248,.5);background:rgba(139,140,248,.08)}
-  .arr{color:var(--dim);font-size:1.1rem;flex:0 0 auto}
-  .sd-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
-  .sd-card h4{font-size:1rem;margin-bottom:8px}
-  .sd-card p{font-size:.86rem;color:var(--muted)}
-  .sd-card ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:8px}
-  .sd-card ul li{font-size:.84rem;color:var(--muted);padding-left:16px;position:relative}
-  .sd-card ul li::before{content:"→";position:absolute;left:0;color:var(--accent2)}
-  .tradeoff{background:var(--surface);border:1px dashed var(--border2);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:.84rem;color:var(--muted)}
-  .tradeoff b{color:var(--text)}
-
-  /* SKILLS */
-  .skills-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
-  .sg{margin-bottom:22px}
-  .sg h5{font-family:var(--mono);font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{font-size:.8rem;padding:6px 12px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--muted);transition:.2s}
-  .chip:hover{color:var(--text);border-color:var(--accent)}
-  .chip.core{color:var(--text);border-color:var(--border2)}
-  .bars .row{margin-bottom:18px}
-  .bars .lbl{display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:7px}
-  .bars .lbl span:last-child{color:var(--dim);font-family:var(--mono);font-size:.74rem}
-  .bar{height:6px;background:var(--border);border-radius:6px;overflow:hidden}
-  .bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
-
-  /* EXPERIENCE */
-  .timeline{position:relative;display:flex;flex-direction:column;gap:18px;padding-left:28px}
-  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--border)}
-  .tl{position:relative}
-  .tl::before{content:"";position:absolute;left:-28px;top:26px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
-  .tl-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-  .tl h4{font-size:1.05rem}
-  .tl .co{color:var(--accent2);font-size:.88rem;font-weight:500}
-  .tl .when{font-family:var(--mono);font-size:.75rem;color:var(--dim)}
-  .tl ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px}
-  .tl ul li{font-size:.86rem;color:var(--muted);padding-left:16px;position:relative}
-  .tl ul li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
-
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  .edu{padding:30px}
-  .edu h4{font-size:1.2rem;margin:10px 0 4px}
-  .edu .deg{color:var(--muted);font-size:.9rem}
-  .ach{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .ach .card{padding:18px}
-  .ach .ic{font-size:1.4rem;margin-bottom:8px}
-  .ach h5{font-size:.9rem;margin-bottom:4px}
-  .ach p{font-size:.8rem;color:var(--muted)}
-  .certs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-  .cert{padding:14px 16px;font-size:.84rem}
-  .cert b{display:block;font-weight:600}
-  .cert small{color:var(--dim);font-size:.74rem}
-
-  /* RESUME */
-  .resume{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .resume-card{padding:44px 36px;text-align:center}
-  .resume-card .big{font-size:3rem;margin-bottom:14px}
-  .resume-card h3{font-size:1.3rem;margin-bottom:10px}
-  .resume-card p{color:var(--muted);font-size:.9rem;margin-bottom:26px}
-  .resume-card .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  .resume p.txt{color:var(--muted);margin-bottom:24px}
-  .resume-list{list-style:none;display:flex;flex-direction:column;gap:12px}
-  .resume-list li{display:flex;gap:12px;color:var(--muted);font-size:.92rem}
-  .resume-list li b{color:var(--text);min-width:110px}
-
-  /* CONTACT */
-  .contact{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .contact h2{font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:18px}
-  .contact h2 em{font-style:normal;color:var(--accent)}
-  .avail{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:var(--r);padding:20px;margin-bottom:20px}
-  .avail h4{font-size:1rem;margin:8px 0 4px}
-  .avail p{font-size:.84rem;color:var(--muted)}
-  .clinks{display:flex;flex-direction:column;gap:10px}
-  .clink{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;transition:.2s}
-  .clink:hover{transform:translateX(6px);border-color:var(--accent)}
-  .clink small{display:block;color:var(--dim);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
-  .clink span{font-size:.9rem}
-  .clink .arrow{color:var(--dim)}
-
-  footer{padding:30px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--dim);font-size:.82rem}
-
-  /* RESPONSIVE */
-  @media(max-width:1000px){
-    nav{padding:0 22px}
-    .nav-links{display:none}
-    .hero,.about,.case,.skills-grid,.resume,.contact,.two,.sd-grid{grid-template-columns:1fr}
-    .case.reverse .case-info{order:0}
-    .grid3{grid-template-columns:1fr 1fr}
-    .stats{grid-template-columns:1fr 1fr;row-gap:20px}
-    .float.a{left:-10px}.float.b{right:-10px}
-  }
-  @media(max-width:640px){
-    section{padding:80px 22px}
-    #home{padding-top:110px}
-    .grid3,.facts,.ach,.certs{grid-template-columns:1fr}
-    .photo{max-width:280px}
-    .arr{display:none}
-  }
+.skills-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
+.sg{margin-bottom:20px}
+.sg-head{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.sg-head::before{content:'';width:10px;height:1px;background:rgba(255,255,255,0.4)}
+.sp{display:flex;flex-wrap:wrap;gap:6px}
+.sk{font-size:11px;padding:5px 13px;border:1px solid rgba(255,255,255,0.2);border-radius:100px;color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.08);transition:all 0.25s;cursor:default;backdrop-filter:blur(4px)}
+.sk:hover{border-color:rgba(255,255,255,0.5);color:white;background:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.sk.h{border-color:rgba(255,255,255,0.35);color:white;background:rgba(255,255,255,0.12)}
+.skill-bars-card{padding:26px;margin-bottom:14px}
+.sbr{margin-bottom:18px}.sbr:last-child{margin-bottom:0}
+.sbt{display:flex;justify-content:space-between;font-size:11px;margin-bottom:7px;color:rgba(255,255,255,0.8)}
+.sbt span:last-child{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.6);font-size:12px}
+.sb-track{height:3px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.sb-fill{height:3px;border-radius:100px;width:0;transition:width 1.6s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,rgba(255,255,255,0.4),rgba(255,255,255,0.85))}
+.can-also{padding:20px;margin-top:0}
+.ca-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:white;margin-bottom:12px}
+.ca-pills{display:flex;flex-wrap:wrap;gap:6px}
+.exp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
+.exp-card{padding:26px;transition:all 0.3s}
+.exp-card:hover{transform:translateY(-4px)}
+.exp-period{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px}
+.exp-role{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.exp-co{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.exp-co span{background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:100px;border:1px solid rgba(255,255,255,0.15)}
+.exp-li{list-style:none}
+.exp-li li{font-size:12px;color:rgba(255,255,255,0.65);padding:3px 0;display:flex;gap:8px;font-weight:300;line-height:1.6}
+.exp-li li::before{content:"▸";color:rgba(255,255,255,0.5);flex-shrink:0;font-size:10px;margin-top:2px}
+.edu-card-big{padding:26px;grid-column:1/-1}
+.edu-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.1);padding:5px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.2);margin-bottom:14px}
+.edu-univ{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:white;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.edu-deg{font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:12px;font-style:italic}
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:1200px;padding:90px 64px 70px}
+.acard{padding:20px;transition:all 0.3s;cursor:default}
+.acard:hover{transform:translateY(-5px)}
+.a-icon{font-size:26px;margin-bottom:10px;display:block}
+.a-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;margin-bottom:6px;line-height:1.3}
+.a-sub{font-size:11px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.5}
+.acard.feat{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.4)}
+.res-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
+.cert-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.cchip{padding:14px;display:flex;gap:9px;align-items:flex-start;transition:all 0.2s}
+.cchip:hover{transform:translateY(-2px)}
+.cchip-icon{font-size:17px;flex-shrink:0}
+.cchip-t{font-size:11px;font-weight:500;color:white;margin-bottom:2px;line-height:1.3}
+.cchip-o{font-size:10px;color:rgba(255,255,255,0.55)}
+.cert-count-big{padding:18px;display:flex;align-items:center;gap:14px}
+.ccn{font-family:'Syne',sans-serif;font-size:50px;font-weight:800;color:white;line-height:1}
+.cct{font-size:13px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.5}
+.pers-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;width:100%;max-width:1200px;padding:90px 64px 70px}
+.hob-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.hob{padding:18px;text-align:center;transition:all 0.25s}
+.hob:hover{transform:translateY(-4px)}
+.hob-e{font-size:28px;margin-bottom:8px;display:block;transition:transform 0.3s}
+.hob:hover .hob-e{transform:scale(1.2) rotate(5deg)}
+.hob-t{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:white;margin-bottom:3px}
+.hob-d{font-size:10px;color:rgba(255,255,255,0.55)}
+.facts-card{padding:26px}
+.facts-t{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.fact{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);transition:transform 0.2s}
+.fact:hover{transform:translateX(5px)}
+.fact:last-child{border-bottom:none}
+.fact-e{font-size:16px;flex-shrink:0}
+.fact-t{font-size:12px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.6}
+.ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;max-width:1100px;padding:90px 64px 70px}
+.ct-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,54px);font-weight:800;color:white;line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;text-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.ct-title em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400}
+.ct-desc{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:28px;font-weight:300}
+.ct-email{font-family:'Syne',sans-serif;font-size:clamp(13px,1.8vw,18px);font-weight:700;color:white;margin-bottom:22px;display:block;text-decoration:none;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.avail-box{background:rgba(106,176,76,0.15);border:1px solid rgba(106,176,76,0.3);border-radius:16px;padding:22px;margin-bottom:20px;backdrop-filter:blur(8px)}
+.avail-status{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#a3e635;margin-bottom:10px}
+.avail-status::before{content:'';width:7px;height:7px;border-radius:50%;background:#4ade80;animation:bdot 2s infinite;flex-shrink:0}
+.avail-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:white;margin-bottom:6px}
+.avail-sub{font-size:12px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.6}
+.ct-links{display:flex;flex-direction:column;gap:8px}
+.cl{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:13px;text-decoration:none;color:white;transition:all 0.25s}
+.cl:hover{transform:translateX(5px)}
+.cl-icon{font-size:15px}
+.cl-label{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1px}
+.cl-val{font-size:12px;color:rgba(255,255,255,0.85)}
+.m-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(16px);z-index:999;justify-content:center;align-items:center;padding:20px}
+.m-ov.open{display:flex}
+.modal{background:rgba(20,12,5,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:22px;padding:38px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:mIn 0.3s cubic-bezier(.4,0,.2,1);box-shadow:0 40px 100px rgba(0,0,0,0.6)}
+@keyframes mIn{from{opacity:0;transform:scale(0.96) translateY(20px)}to{opacity:1;transform:none}}
+.mx{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.mx:hover{background:rgba(255,255,255,0.15);color:white}
+.m-tag{display:inline-block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;padding:4px 12px;border-radius:100px;margin-bottom:14px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2)}
+.modal h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:white;margin-bottom:10px;line-height:1.2}
+.m-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.9;margin-bottom:18px}
+.m-sec{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.4);margin:14px 0 8px}
+.m-tags{display:flex;flex-wrap:wrap;gap:5px}
+.m-feats{list-style:none;display:flex;flex-direction:column;gap:7px}
+.m-feats li{display:flex;gap:8px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.6}
+.m-feats li::before{content:"▸";color:rgba(255,255,255,0.4);flex-shrink:0;font-size:10px;margin-top:2px}
+.m-actions{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.mb{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:100px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;transition:all 0.25s;border:none}
+.mb:hover{transform:translateY(-2px)}
+.mb-w{background:white;color:#2d1810}
+.mb-w:hover{box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.mb-g{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2)}
+.mb-g:hover{background:rgba(255,255,255,0.2)}
+#thunder-flash{position:fixed;inset:0;z-index:3;pointer-events:none;background:rgba(200,220,255,0);transition:background 0.05s}
+#thunder-flash.flash{background:rgba(200,220,255,0.45)}
+@media(max-width:900px){
+  .hero-wrap{grid-template-columns:1fr;padding:0 28px}
+  .photo-wrap{display:none}
+  .pgrid,.skills-wrap,.exp-wrap,.ach-grid,.res-wrap,.pers-wrap,.ct-wrap{grid-template-columns:1fr;padding:90px 28px 70px}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .sd-cards{grid-template-columns:1fr}
+  .cert-row2,.hob-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .topbar{padding:14px 18px}
+  .topnav{display:none}
+  .hamburger{display:flex}
+  .arrow{display:none}
+  .hero-stats{flex-wrap:wrap}.hs{border-right:none;padding:0;min-width:40%}
+  .pgrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+<canvas id="sky-canvas"></canvas>
+<canvas id="rain-canvas"></canvas>
+<canvas id="lightning-canvas"></canvas>
+<div id="thunder-flash"></div>
 
-<nav>
-  <a href="#home" class="logo">Kelly<span>.</span></a>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#system-design">System Design</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#resume">Resume</a>
-    <a href="#contact">Contact</a>
+<div class="mountains">
+<svg id="mountain-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:280px;display:block">
+  <polygon id="mfar" points="0,320 0,200 120,120 240,160 380,80 500,140 640,60 760,130 900,90 1020,150 1160,70 1280,140 1440,100 1440,320" fill="#1a3a1a" opacity="0.7"/>
+  <polygon id="mmid" points="0,320 0,240 100,170 200,210 320,140 440,190 560,120 680,180 800,150 920,200 1040,130 1160,190 1300,160 1440,200 1440,320" fill="#2d5a27" opacity="0.85"/>
+  <polygon id="mnear" points="0,320 0,270 80,230 180,260 280,210 380,250 480,220 580,255 680,225 780,260 880,230 980,265 1080,240 1180,268 1280,245 1380,265 1440,255 1440,320" fill="#3d7a32"/>
+  <rect id="mground" x="0" y="295" width="1440" height="25" fill="#2d5a27"/>
+  <g id="trees-l" fill="#1a3a1a">
+    <polygon points="30,295 50,240 70,295"/><rect x="47" y="280" width="6" height="15" fill="#3d2010"/>
+    <polygon points="80,295 95,255 110,295"/><rect x="92" y="282" width="6" height="13" fill="#3d2010"/>
+    <polygon points="140,295 162,235 184,295"/><rect x="158" y="278" width="8" height="17" fill="#3d2010"/>
+    <polygon points="200,295 215,260 230,295"/><rect x="212" y="283" width="6" height="12" fill="#3d2010"/>
+  </g>
+  <g id="trees-r" fill="#1a3a1a">
+    <polygon points="1260,295 1278,242 1296,295"/><rect x="1275" y="280" width="6" height="15" fill="#3d2010"/>
+    <polygon points="1310,295 1325,258 1340,295"/><rect x="1322" y="283" width="6" height="12" fill="#3d2010"/>
+    <polygon points="1360,295 1382,236 1404,295"/><rect x="1378" y="278" width="8" height="17" fill="#3d2010"/>
+  </g>
+  <g id="flowers" opacity="0.9">
+    <circle cx="55" cy="294" r="4" fill="#ff9a9e"/><circle cx="55" cy="289" r="2" fill="#ffd89b"/>
+    <circle cx="120" cy="294" r="3" fill="#ffd89b"/><circle cx="120" cy="290" r="1.5" fill="#fff"/>
+    <circle cx="185" cy="294" r="4" fill="#a8e6cf"/><circle cx="185" cy="289" r="2" fill="#fff"/>
+    <circle cx="240" cy="294" r="3" fill="#ff9a9e"/><circle cx="240" cy="290" r="1.5" fill="#ffd89b"/>
+    <circle cx="300" cy="294" r="4" fill="#ffd89b"/><circle cx="300" cy="289" r="2" fill="#fff"/>
+    <circle cx="1160" cy="294" r="4" fill="#ff9a9e"/><circle cx="1160" cy="289" r="2" fill="#ffd89b"/>
+    <circle cx="1220" cy="294" r="3" fill="#a8e6cf"/><circle cx="1220" cy="290" r="1.5" fill="#fff"/>
+    <circle cx="1280" cy="294" r="4" fill="#ffd89b"/><circle cx="1280" cy="289" r="2" fill="#fff"/>
+    <circle cx="1340" cy="294" r="3" fill="#ff9a9e"/><circle cx="1340" cy="290" r="1.5" fill="#ffd89b"/>
+    <circle cx="1400" cy="294" r="4" fill="#a8e6cf"/><circle cx="1400" cy="289" r="2" fill="#fff"/>
+  </g>
+</svg>
+</div>
+
+<nav class="topbar">
+  <div class="logo" onclick="gTo(0)">Kelly<span>.</span></div>
+  <div class="topnav">
+    <button class="tnav" onclick="gTo(0)">Home</button>
+    <button class="tnav" onclick="gTo(1)">Projects</button>
+    <button class="tnav" onclick="gTo(2)">System Design</button>
+    <button class="tnav" onclick="gTo(3)">Skills</button>
+    <button class="tnav" onclick="gTo(4)">Experience</button>
+    <button class="tnav" onclick="gTo(5)">Achievements</button>
+    <button class="tnav" onclick="gTo(6)">Resume</button>
+    <button class="tnav" onclick="gTo(7)">Personal</button>
+    <button class="tnav" onclick="gTo(8)">Contact</button>
   </div>
-  <a class="btn btn-primary btn-sm" href="mailto:yadavkelly9@gmail.com">Hire me</a>
+  <div class="topright">
+    <button class="time-btn" id="time-btn" onclick="toggleTimeManual()">
+      <span class="time-icon" id="time-icon">☀️</span>
+      <span id="time-label">Auto</span>
+    </button>
+    <a class="hire-btn" href="mailto:yadavkelly9@gmail.com">Hire me 💜</a>
+    <button class="hamburger" id="hbg" onclick="toggleSb()"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section id="home">
-  <div class="wrap hero">
-    <div class="fade">
-      <span class="status">Open to internships &amp; full-time roles</span>
-      <h1>Building reliable<br/>software, <em>end to end.</em></h1>
-      <div class="role">Java Backend Engineer · Full Stack · Spring Boot · React · AI APIs</div>
-      <p class="desc">
-        Hi, I'm Kelly Yadav, a Computer Science student at Mody University of Science &amp; Technology.
-        I build backend and full-stack products that handle real-time data, GPS signals, and AI integrations,
-        from a Kalman-filtered GPS trust engine to a live coding battle platform.
-      </p>
-      <div class="hero-btns">
-        <a class="btn btn-primary" href="#projects">View projects →</a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>5</b><small>Live projects</small></div>
-        <div class="stat"><b>3</b><small>Internships</small></div>
-        <div class="stat"><b>250+</b><small>Problems solved</small></div>
-        <div class="stat"><b>#158</b><small>Women rank · Unstop</small></div>
-      </div>
-    </div>
-    <div class="photo fade">
-      <div class="frame"><img src="./passport_photo.jpg" alt="Kelly Yadav" /></div>
-      <div class="float a">⚡ Anthropic API integrated</div>
-      <div class="float b">📍 Kalman-filtered GPS</div>
-    </div>
-  </div>
-</section>
+<div class="sb-ov" id="sb-ov" onclick="toggleSb()"></div>
+<div class="sidebar" id="sidebar">
+  <a onclick="gTo(0);toggleSb()">Home</a>
+  <a onclick="gTo(1);toggleSb()">Projects</a>
+  <a onclick="gTo(2);toggleSb()">System Design</a>
+  <a onclick="gTo(3);toggleSb()">Skills</a>
+  <a onclick="gTo(4);toggleSb()">Experience</a>
+  <a onclick="gTo(5);toggleSb()">Achievements</a>
+  <a onclick="gTo(6);toggleSb()">Resume</a>
+  <div class="sb-div"></div>
+  <a onclick="gTo(7);toggleSb()" style="color:rgba(255,255,255,0.9)">Personal ✨</a>
+  <a onclick="gTo(8);toggleSb()">Contact</a>
+  <a href="mailto:yadavkelly9@gmail.com" style="color:rgba(255,200,100,0.9);margin-top:4px">Hire me 💜</a>
+</div>
 
-<!-- ABOUT -->
-<section id="about" class="alt">
-  <div class="wrap about">
-    <div class="fade">
-      <div class="eyebrow">About</div>
-      <h2 class="title">I like systems that work under messy, real-world conditions.</h2>
-      <p>I'm a backend-leaning full-stack developer. My projects usually start with messy real-world input, like noisy GPS coordinates, unstructured user descriptions, or a live multiplayer session, and turn it into something measurable and reliable.</p>
-      <p>Across three internships I've worked on Java backend development, AI tool integration, and Docker-based build and test environments. I've also taught Docker fundamentals to teammates and led a team of interns in an operations role.</p>
-      <p>Outside of code I crochet, sketch, and cook. I think the patience from craft carries over well to debugging.</p>
-    </div>
-    <div class="facts fade">
-      <div class="card fact"><div class="ic">🧩</div><h4>Problem solver</h4><p>250+ problems solved across platforms, including a 50 Days Badge on LeetCode in 2026.</p></div>
-      <div class="card fact"><div class="ic">🛰️</div><h4>Signals &amp; maps</h4><p>Per-device Kalman filtering, GPS smoothing, and anomaly detection in GeoTrust.</p></div>
-      <div class="card fact"><div class="ic">🤖</div><h4>AI in products</h4><p>Claude API in CodeArena for challenge generation and hints; Hugging Face image recognition in CaloriQ.</p></div>
-      <div class="card fact"><div class="ic">🐳</div><h4>DevOps basics</h4><p>Docker, GitHub Actions, Linux, Git, and deployments on Render, Supabase, and Vercel.</p></div>
-    </div>
-  </div>
-</section>
+<button class="arrow arrow-l" onclick="gTo(cur-1)">‹</button>
+<button class="arrow arrow-r" onclick="gTo(cur+1)">›</button>
+<div class="dot-nav" id="dot-nav"></div>
+<div class="slide-counter" id="slide-ctr">01 / 09</div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head fade">
-      <div class="eyebrow">Projects</div>
-      <h2 class="title">Case studies</h2>
-      <p class="lead">Three flagship projects with architecture and engineering decisions, followed by smaller builds.</p>
-    </div>
+<div class="h-track" id="h-track">
 
-    <!-- GeoTrust -->
-    <div class="case fade">
-      <div class="case-info">
-        <div class="case-tag"><span class="status">Live</span><span class="tag">Java · Spring Boot</span><span class="tag">Kalman Filter</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
-        <h3>GeoTrust Navigator</h3>
-        <div class="sub">GPS correction and spoof detection platform with a 0–100 trust score per point</div>
-        <p>Phone GPS readings are noisy, and location can be spoofed. GeoTrust ingests raw coordinates over REST, returns a Kalman-filtered estimate for each device, flags impossible speeds and sudden jumps, and scores every point so downstream systems know how much to trust it.</p>
-        <h5>What I built</h5>
-        <ul>
-          <li>Spring Boot REST APIs that ingest GPS coordinates and return corrected location estimates</li>
-          <li>Per-device Kalman filter, with filter state kept separate for each device</li>
-          <li>Anomaly detection for impossible speeds and sudden location jumps</li>
-          <li>0–100 trust score for every point, based on filter residuals and detection flags</li>
-          <li>PostgreSQL on Supabase for storage, with the backend containerised in Docker</li>
-          <li>Unit tests run automatically through GitHub Actions on every change</li>
-          <li>Leaflet dashboard comparing raw and corrected routes, with flagged points highlighted</li>
-        </ul>
-        <div class="case-links">
-          <a class="btn btn-primary btn-sm" href="https://geotrust-dashboard.vercel.app/" target="_blank" rel="noopener">Live dashboard ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/kellyyadav/Geotrust" target="_blank" rel="noopener">Source code →</a>
+  <!-- S1: HERO -->
+  <div class="hslide">
+    <div class="hero-wrap">
+      <div>
+        <div class="hero-badge"><div class="badge-dot"></div>Open to Internships &amp; Full-time Roles</div>
+        <h1 class="hero-h1">Java Backend<span>Full Stack Engineer</span></h1>
+        <div class="hero-sub">Software Development Intern · B.Tech CSE 2027</div>
+        <p class="hero-desc">Hi, I'm Kelly Yadav, a CS student at Mody University. I build backend-first products: Spring Boot REST APIs, a Kalman-filtered GPS trust engine, and a live AI-powered coding battle platform.</p>
+        <div class="hero-btns">
+          <button class="btn-w" onclick="gTo(1)">View my work ↓</button>
+          <a class="btn-gl" href="mailto:yadavkelly9@gmail.com">Get in touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><div class="hs-n">6+</div><div class="hs-l">Projects</div></div>
+          <div class="hs"><div class="hs-n">#158</div><div class="hs-l">Women rank</div></div>
+          <div class="hs"><div class="hs-n">250+</div><div class="hs-l">Problems solved</div></div>
+          <div class="hs"><div class="hs-n">3</div><div class="hs-l">Internships</div></div>
         </div>
       </div>
-      <div class="case-visual">
-        <div class="legend">
-          <span><i style="background:#f87171"></i>Raw GPS</span>
-          <span><i style="background:#4ade80"></i>Kalman corrected</span>
-          <span><i style="background:#fb923c"></i>Flagged</span>
-        </div>
-        <div class="metric"><span>Input</span><b>Noisy GPS stream</b></div>
-        <div class="metric"><span>Smoothing</span><b>Per-device Kalman filter</b></div>
-        <div class="metric"><span>Security check</span><b>Impossible speed &amp; jump detection</b></div>
-        <div class="metric"><span>Output</span><b>Trust score 0–100 per point</b></div>
-        <div class="metric"><span>Storage</span><b>PostgreSQL on Supabase</b></div>
-        <div class="metric"><span>Delivery</span><b>Docker · GitHub Actions · Render · Vercel</b></div>
-      </div>
-    </div>
-
-    <!-- CodeArena -->
-    <div class="case reverse fade">
-      <div class="case-info">
-        <div class="case-tag"><span class="status">Live · Featured</span><span class="tag">React</span><span class="tag">WebSockets</span><span class="tag">Monaco Editor</span><span class="tag">Claude API</span></div>
-        <h3>CodeArena</h3>
-        <div class="sub">Real-time coding battle platform with AI-generated challenges</div>
-        <p>A competitive coding platform where two players are matched, receive the same problem, and race to solve it in a Monaco Editor. The Claude API generates challenges and context-aware hints, and WebSockets keep both players in sync during a battle.</p>
-        <h5>What I built</h5>
-        <ul>
-          <li>Scenario-based challenges in Java, Python, and JavaScript, plus support for 16+ languages</li>
-          <li>Claude API integration to generate challenges from real-life situations and provide context-aware hints</li>
-          <li>WebSocket-based real-time communication for live 1v1 battles and matchmaking</li>
-          <li>Monaco Editor interface for a code-editor experience in the browser</li>
-          <li>Google sign-in via Supabase Auth, player profiles, and solve history</li>
-          <li>Leaderboards and Warrior, Eagle, and Divine badges based on solved questions</li>
-          <li>Faster frontend loading through React code splitting and lazy loading</li>
-        </ul>
-        <div class="case-links">
-          <a class="btn btn-primary btn-sm" href="https://codearena-peach.vercel.app/" target="_blank" rel="noopener">Live app ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/kellyyadav" target="_blank" rel="noopener">GitHub →</a>
+      <div>
+        <div class="photo-wrap">
+          <div class="photo-halo"></div><div class="photo-halo2"></div>
+          <div class="photo-glow"></div>
+          <div class="photo-box"><img src="./passport_photo.jpg" alt="Kelly Yadav"/></div>
+          <div class="photo-nametag"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;animation:bdot 2s infinite;display:inline-block"></span>Kelly Yadav 💜</div>
+          <div class="nchip nch-a">⚡ Claude API</div>
+          <div class="nchip nch-b">🌱 Open to roles</div>
         </div>
       </div>
-      <div class="case-visual">
-        <div class="metric"><span>Mode</span><b>Live 1v1 battles</b></div>
-        <div class="metric"><span>Editor</span><b>Monaco Editor</b></div>
-        <div class="metric"><span>Languages</span><b>Java · Python · JavaScript + more</b></div>
-        <div class="metric"><span>AI</span><b>Anthropic Claude API</b></div>
-        <div class="metric"><span>Real-time</span><b>WebSockets</b></div>
-        <div class="metric"><span>Performance</span><b>Code splitting &amp; lazy loading</b></div>
+    </div>
+  </div>
+
+  <!-- S2: PROJECTS -->
+  <div class="hslide">
+    <div class="slide-inner">
+      <div class="s-eyebrow">Work</div>
+      <h2 class="s-title">Things I've <em>built</em></h2>
+      <div class="pgrid">
+        <div class="pcard glass" onclick="openM('geotrust')"><div class="plive"></div><span class="pcard-emoji">📍</span><div class="ppill">GPS · Live</div><h3>GeoTrust Navigator</h3><p>Spring Boot API that corrects noisy GPS with a per-device Kalman filter and scores every point 0–100 for trust.</p><div class="ptags"><span class="ptag">Spring Boot</span><span class="ptag">Kalman</span><span class="ptag">PostgreSQL</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://geotrust-dashboard.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
+        <div class="pcard glass" onclick="openM('codearena')"><div class="plive"></div><span class="pcard-emoji">⚔️</span><div class="ppill">🔥 Featured · Live</div><h3>CodeArena</h3><p>Real-time 1v1 coding battles in a Monaco Editor. Claude API generates challenges and hints; WebSockets keep both players in sync.</p><div class="ptags"><span class="ptag">React</span><span class="ptag">WebSockets</span><span class="ptag">Claude API</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://codearena-peach.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
+        <div class="pcard glass" onclick="openM('caloriq')"><div class="plive"></div><span class="pcard-emoji">🥗</span><div class="ppill">Live · AI</div><h3>CaloriQ</h3><p>AI-powered nutrition tracker with personalised goals, real-time Supabase sync and Hugging Face food recognition.</p><div class="ptags"><span class="ptag">React</span><span class="ptag">Supabase</span><span class="ptag">Hugging Face</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://caloriq-one.vercel.app/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
+        <div class="pcard glass" onclick="openM('cybershield')"><div class="plive"></div><span class="pcard-emoji">🛡️</span><div class="ppill">Team · Live</div><h3>CyberShield</h3><p>Threat visualisation dashboard rendering hundreds of dynamic nodes with a custom requestAnimationFrame loop.</p><div class="ptags"><span class="ptag">Canvas</span><span class="ptag">WebGL</span><span class="ptag">JS</span></div><div class="plinks"><span class="plink">Details →</span><a class="plink plink-live" href="https://kellyyadav.github.io/cybershield/" target="_blank" onclick="event.stopPropagation()">🟢 Live ↗</a></div></div>
+        <div class="pcard glass" onclick="openM('social')"><span class="pcard-emoji">🌐</span><div class="ppill">Full Stack</div><h3>Social Interaction App</h3><p>Posts, comments and a follow system with Spring Boot REST APIs, a MySQL schema and a React frontend.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">React</span></div><div class="plinks"><span class="plink">Details →</span></div></div>
+        <div class="pcard glass" onclick="openM('face')"><span class="pcard-emoji">🎯</span><div class="ppill">IIT Bombay</div><h3>Face Recognition Attendance</h3><p>Real-time OpenCV face detection with movement checks to prevent proxy attendance. Hackathon finalist.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OpenCV</span><span class="ptag">MySQL</span></div><div class="plinks"><span class="plink">Details →</span></div></div>
       </div>
     </div>
+  </div>
 
-    <!-- CaloriQ -->
-    <div class="case fade">
-      <div class="case-info">
-        <div class="case-tag"><span class="status">Live</span><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">Hugging Face</span><span class="tag">Vercel</span></div>
-        <h3>CaloriQ</h3>
-        <div class="sub">AI-powered nutrition tracker with personalised goals</div>
-        <p>A full-stack nutrition tracker with personalised health goals, calorie logging, and real-time analytics. Supabase handles authentication, data, and live sync, and Hugging Face models recognise food from images.</p>
-        <h5>What I built</h5>
-        <ul>
-          <li>Personalised calorie and nutrition goals with daily logging</li>
-          <li>Real-time analytics that update as entries change</li>
-          <li>Supabase for authentication, database operations, and real-time synchronisation</li>
-          <li>Hugging Face integration for food image recognition</li>
-          <li>Responsive interface that works on both mobile and desktop</li>
-          <li>Deployed on Vercel</li>
-        </ul>
-        <div class="case-links">
-          <a class="btn btn-primary btn-sm" href="https://caloriq-one.vercel.app/" target="_blank" rel="noopener">Live app ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/kellyyadav" target="_blank" rel="noopener">GitHub →</a>
+  <!-- S3: SYSTEM DESIGN (NEW) -->
+  <div class="hslide">
+    <div class="slide-inner">
+      <div class="s-eyebrow">Architecture</div>
+      <h2 class="s-title">How it's <em>built</em></h2>
+
+      <div class="sd-label">GeoTrust · GPS trust pipeline</div>
+      <div class="sd-flow">
+        <div class="sd-node"><b>GPS clients</b><small>raw coordinates per device</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>REST ingest API</b><small>Spring Boot · Docker</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>Per-device Kalman</b><small>separate filter state</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>Anomaly check</b><small>impossible speed &amp; jumps</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>Trust scorer</b><small>0–100 per point</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node"><b>PostgreSQL</b><small>Supabase</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node"><b>Leaflet dashboard</b><small>Vercel</small></div>
+      </div>
+
+      <div class="sd-label">CodeArena · real-time battle architecture</div>
+      <div class="sd-flow">
+        <div class="sd-node"><b>React + Monaco</b><small>2 players, one problem</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>Supabase Auth</b><small>Google sign-in</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>Matchmaking</b><small>queue + pairing</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node hl"><b>WebSocket channel</b><small>live state to both players</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node"><b>Battles + Postgres</b><small>questions · profiles · solves</small></div>
+      </div>
+      <div class="sd-flow">
+        <div class="sd-node"><b>Serverless /api/generate</b><small>keeps the API key server-side</small></div>
+        <span class="sd-arr">→</span>
+        <div class="sd-node"><b>Claude API</b><small>challenges + context-aware hints</small></div>
+      </div>
+
+      <div class="sd-cards">
+        <div class="card sd-card glass">
+          <h4>Why a Kalman filter instead of a moving average?</h4>
+          <p>GPS noise is not uniform. A Kalman filter keeps a running estimate of position and velocity and weights each reading by its uncertainty, so it damps jitter without lagging behind real turns.</p>
+          <ul>
+            <li>Predict the next state from the last one</li>
+            <li>Update the estimate with the new reading, weighted by uncertainty</li>
+            <li>Compare each reading to the prediction to flag impossible jumps</li>
+          </ul>
+        </div>
+        <div class="card sd-card glass">
+          <h4>Why WebSockets for battles?</h4>
+          <p>Both players need to see battle state change live. A persistent connection pushes updates both ways, which suits a 1v1 better than repeatedly polling the server.</p>
+          <ul>
+            <li>Matchmaking and battle status are pushed to both clients</li>
+            <li>Postgres stays the source of truth for profiles, questions and solves</li>
+            <li>Question generation runs behind a serverless route, so the key never reaches the browser</li>
+          </ul>
         </div>
       </div>
-      <div class="case-visual">
-        <div class="metric"><span>Food recognition</span><b>Hugging Face models</b></div>
-        <div class="metric"><span>Auth &amp; data</span><b>Supabase</b></div>
-        <div class="metric"><span>Sync</span><b>Supabase real-time</b></div>
-        <div class="metric"><span>Hosting</span><b>Vercel</b></div>
-      </div>
-    </div>
 
-    <!-- Smaller projects -->
-    <div class="grid3" style="margin-top:20px">
-      <div class="card proj fade">
-        <div class="top"><span class="ico">🛡️</span><span class="status">Live</span></div>
-        <h4>CyberShield</h4>
-        <p>Cybersecurity threat visualisation dashboard that renders hundreds of dynamic threat nodes with a custom requestAnimationFrame loop. Built with a three-member team using Git workflows and code reviews.</p>
-        <div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span><span class="tag">WebGL</span><span class="tag">CSS3</span></div>
-        <a class="link" href="https://kellyyadav.github.io/cybershield/" target="_blank" rel="noopener">View live ↗</a>
-      </div>
-      <div class="card proj fade">
-        <div class="top"><span class="ico">🌐</span></div>
-        <h4>Social Interaction App</h4>
-        <p>Full-stack social platform with posts, comments, and a follow system. Spring Boot REST APIs, a MySQL schema for users, posts, and follows, and a React frontend.</p>
-        <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">MySQL</span></div>
-        <a class="link" href="https://github.com/kellyyadav" target="_blank" rel="noopener">GitHub →</a>
-      </div>
-      <div class="card proj fade">
-        <div class="top"><span class="ico">🎯</span></div>
-        <h4>Face Recognition Attendance</h4>
-        <p>Real-time face detection with OpenCV to prevent proxy attendance, with movement checks against spoofing. Reached the finals of the GitLab Hackathon at IIT Bombay (2025).</p>
-        <div class="tags"><span class="tag">Java</span><span class="tag">OpenCV</span><span class="tag">MySQL</span></div>
-        <a class="link" href="https://github.com/kellyyadav" target="_blank" rel="noopener">GitHub →</a>
-      </div>
+      <div class="sd-note"><b>Trade-off I'm aware of:</b> CaloriQ's current setup calls an AI API from the frontend, which exposes the key to users. The fix is to move those calls behind a serverless function, the same pattern CodeArena uses.</div>
     </div>
   </div>
-</section>
 
-<!-- SYSTEM DESIGN -->
-<section id="system-design" class="alt">
-  <div class="wrap">
-    <div class="section-head fade">
-      <div class="eyebrow">System Design</div>
-      <h2 class="title">How the systems fit together</h2>
-      <p class="lead">Architecture behind two of my projects, including the trade-offs I made and why.</p>
-    </div>
-
-    <h4 style="font-size:1.1rem;margin-bottom:14px" class="fade">GeoTrust: GPS trust pipeline</h4>
-    <div class="flow fade">
-      <div class="node"><b>GPS clients</b><small>raw coordinates per device</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>REST ingest API</b><small>Spring Boot · Docker</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Per-device Kalman filter</b><small>smooth track, separate state</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Anomaly check</b><small>speed &amp; jump detection</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Trust scorer</b><small>0–100 per point</small></div>
-      <span class="arr">→</span>
-      <div class="node"><b>PostgreSQL</b><small>Supabase</small></div>
-      <span class="arr">→</span>
-      <div class="node"><b>Leaflet dashboard</b><small>Vercel</small></div>
-    </div>
-
-    <h4 style="font-size:1.1rem;margin-bottom:14px" class="fade">CodeArena: real-time battle architecture</h4>
-    <div class="flow fade">
-      <div class="node"><b>React clients</b><small>Monaco Editor · 2 players</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Supabase Auth</b><small>Google sign-in</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Matchmaking</b><small>queue + pairing</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>WebSocket channel</b><small>live state to both players</small></div>
-      <span class="arr">→</span>
-      <div class="node hl"><b>Battles + Postgres</b><small>questions · profiles · solves</small></div>
-    </div>
-    <div class="flow fade">
-      <div class="node"><b>Serverless /api/generate</b><small>keeps API key server-side</small></div>
-      <span class="arr">→</span>
-      <div class="node"><b>Claude API</b><small>challenges + hints</small></div>
-    </div>
-
-    <div class="sd-grid">
-      <div class="card sd-card fade">
-        <h4>Why a Kalman filter instead of a moving average?</h4>
-        <p>GPS noise is not uniform. A Kalman filter keeps a running estimate of position and velocity and weighs each new reading by its uncertainty, so it tracks real movement while damping jitter. A moving average lags on turns and blurs real motion.</p>
-        <ul>
-          <li>Predict the next state from the last one</li>
-          <li>Update the estimate with the new reading, weighted by uncertainty</li>
-          <li>Compare the reading to the prediction to detect implausible jumps</li>
-        </ul>
+  <!-- S4: SKILLS -->
+  <div class="hslide">
+    <div class="skills-wrap">
+      <div>
+        <div class="s-eyebrow" style="margin-bottom:10px">Toolkit</div>
+        <h2 class="s-title" style="margin-bottom:24px">What I <em>work with</em></h2>
+        <div class="sg"><div class="sg-head">Languages</div><div class="sp"><span class="sk h">Java</span><span class="sk h">Python</span><span class="sk h">JavaScript</span><span class="sk">SQL</span></div></div>
+        <div class="sg"><div class="sg-head">Backend</div><div class="sp"><span class="sk h">Spring Boot</span><span class="sk h">REST APIs</span><span class="sk">Object-Oriented Programming</span><span class="sk">Java Collections</span><span class="sk">Multithreading</span></div></div>
+        <div class="sg"><div class="sg-head">Frontend</div><div class="sp"><span class="sk h">React.js</span><span class="sk h">WebSockets</span><span class="sk">Monaco Editor</span><span class="sk">Canvas</span><span class="sk">WebGL</span><span class="sk">HTML5</span><span class="sk">CSS3</span><span class="sk">Leaflet</span></div></div>
+        <div class="sg"><div class="sg-head">Databases</div><div class="sp"><span class="sk h">PostgreSQL</span><span class="sk h">MySQL</span><span class="sk h">Supabase</span><span class="sk">Indexing</span></div></div>
+        <div class="sg"><div class="sg-head">AI, Signals &amp; Vision</div><div class="sp"><span class="sk h">Claude API</span><span class="sk h">Kalman Filter</span><span class="sk">Hugging Face</span><span class="sk">GPS / Geolocation</span><span class="sk">OpenCV</span></div></div>
+        <div class="sg"><div class="sg-head">Core CS</div><div class="sp"><span class="sk h">Data Structures &amp; Algorithms</span><span class="sk h">DBMS</span><span class="sk">Computer Networks</span><span class="sk">Operating Systems</span><span class="sk">System Design</span></div></div>
+        <div class="sg"><div class="sg-head">DevOps &amp; Tools</div><div class="sp"><span class="sk h">Docker</span><span class="sk h">GitHub Actions</span><span class="sk h">Git</span><span class="sk h">Linux</span><span class="sk">GitHub</span><span class="sk">Render</span><span class="sk">Vercel</span></div></div>
       </div>
-      <div class="card sd-card fade">
-        <h4>Why WebSockets for battles?</h4>
-        <p>Both players need to see the battle state change without refreshing. A persistent WebSocket connection pushes updates in both directions, which suits a live 1v1 better than repeatedly polling the server.</p>
-        <ul>
-          <li>Matchmaking and battle status are pushed to both clients</li>
-          <li>Question generation stays behind a serverless route, not in the browser</li>
-          <li>Postgres stays the single source of truth for profiles, questions, and solves</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="tradeoff fade">
-      <b>Trade-off I'm aware of:</b> CaloriQ's current setup exposes the AI key on the frontend, which is a risk for a public deployment. The fix is to move AI calls behind a serverless function, the same pattern CodeArena uses. That migration is the next thing I'm planning for CaloriQ.
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="wrap skills-grid">
-    <div class="fade">
-      <div class="section-head" style="margin-bottom:36px">
-        <div class="eyebrow">Skills</div>
-        <h2 class="title">Toolkit</h2>
-        <p class="lead">Grouped by how I use them in projects, not just by what I've listed.</p>
-      </div>
-      <div class="sg"><h5>Languages</h5><div class="chips"><span class="chip core">Java</span><span class="chip core">Python</span><span class="chip core">JavaScript</span><span class="chip">SQL</span></div></div>
-      <div class="sg"><h5>Backend</h5><div class="chips"><span class="chip core">Spring Boot</span><span class="chip core">REST APIs</span><span class="chip core">Object-Oriented Programming</span><span class="chip">Java Collections</span><span class="chip">Multithreading</span><span class="chip">Node.js</span><span class="chip">Express.js</span></div></div>
-      <div class="sg"><h5>Frontend</h5><div class="chips"><span class="chip core">React.js</span><span class="chip core">HTML5</span><span class="chip core">CSS3</span><span class="chip">WebSockets</span><span class="chip">Monaco Editor</span><span class="chip">Canvas / WebGL</span><span class="chip">Responsive Design</span></div></div>
-      <div class="sg"><h5>Databases</h5><div class="chips"><span class="chip core">PostgreSQL</span><span class="chip core">MySQL</span><span class="chip core">Supabase</span><span class="chip">Indexing</span></div></div>
-      <div class="sg"><h5>AI &amp; Signals</h5><div class="chips"><span class="chip core">Anthropic Claude API</span><span class="chip core">Kalman Filter</span><span class="chip">Hugging Face</span><span class="chip">GPS / Geolocation</span><span class="chip">OpenCV</span></div></div>
-      <div class="sg"><h5>Algorithms &amp; Core CS</h5><div class="chips"><span class="chip core">Data Structures &amp; Algorithms</span><span class="chip core">DBMS</span><span class="chip">Computer Networks</span><span class="chip">Operating Systems</span><span class="chip">System Design</span></div></div>
-      <div class="sg"><h5>DevOps &amp; Tools</h5><div class="chips"><span class="chip core">Git</span><span class="chip core">GitHub</span><span class="chip core">Docker</span><span class="chip core">GitHub Actions</span><span class="chip core">Linux</span><span class="chip">Render</span><span class="chip">Vercel</span></div></div>
-    </div>
-    <div class="card fade bars">
-      <div class="eyebrow" style="margin-bottom:22px">Proficiency</div>
-      <div class="row"><div class="lbl"><span>Java &amp; Spring Boot</span><span>Strong</span></div><div class="bar"><i data-w="82"></i></div></div>
-      <div class="row"><div class="lbl"><span>React &amp; Frontend</span><span>Strong</span></div><div class="bar"><i data-w="78"></i></div></div>
-      <div class="row"><div class="lbl"><span>PostgreSQL / MySQL / Supabase</span><span>Strong</span></div><div class="bar"><i data-w="76"></i></div></div>
-      <div class="row"><div class="lbl"><span>REST APIs &amp; Backend</span><span>Strong</span></div><div class="bar"><i data-w="74"></i></div></div>
-      <div class="row"><div class="lbl"><span>AI &amp; API Integration</span><span>Good</span></div><div class="bar"><i data-w="70"></i></div></div>
-      <div class="row"><div class="lbl"><span>Docker &amp; Linux</span><span>Good</span></div><div class="bar"><i data-w="64"></i></div></div>
-      <div class="row"><div class="lbl"><span>Python</span><span>Good</span></div><div class="bar"><i data-w="65"></i></div></div>
-      <div class="row"><div class="lbl"><span>DSA &amp; Problem Solving</span><span>Growing</span></div><div class="bar"><i data-w="60"></i></div></div>
-      <div class="row"><div class="lbl"><span>System Design</span><span>Growing</span></div><div class="bar"><i data-w="45"></i></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="alt">
-  <div class="wrap">
-    <div class="section-head fade">
-      <div class="eyebrow">Experience</div>
-      <h2 class="title">Internships &amp; leadership</h2>
-    </div>
-    <div class="timeline fade">
-      <div class="tl">
-        <div class="tl-head"><h4>AI Integration Intern</h4><span class="when">Jul 2026</span></div>
-        <div class="co">Ambiguity Lab</div>
-        <ul>
-          <li>Evaluated AI tools and integration workflows for application development pipelines</li>
-          <li>Configured and tested Linux and Docker environments for consistent build and verification</li>
-          <li>Guided teammates on Docker fundamentals and on approaches to integrating AI APIs</li>
-        </ul>
-      </div>
-      <div class="tl">
-        <div class="tl-head"><h4>Java Backend Developer Intern</h4><span class="when">Jun 2026</span></div>
-        <div class="co">Pearlthought</div>
-        <ul>
-          <li>Built backend applications in Java covering input handling, validation, and structured control flow</li>
-          <li>Learned Git-based version control and deployment workflows for shipping backend projects</li>
-          <li>Applied code review feedback to improve clarity and correctness</li>
-        </ul>
-      </div>
-      <div class="tl">
-        <div class="tl-head"><h4>Java Developer Intern</h4><span class="when">Jun – Aug 2025 · Remote</span></div>
-        <div class="co">Cognifyz Technologies</div>
-        <ul>
-          <li>Developed 5+ Java applications covering OOP, data structures, file I/O, and multithreading</li>
-          <li>Refined data structure implementations with a focus on memory efficiency</li>
-          <li>Built modular Java code and applied iterative code review feedback to improve maintainability</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION + ACHIEVEMENTS -->
-<section id="education">
-  <div class="wrap">
-    <div class="section-head fade">
-      <div class="eyebrow">Education &amp; Achievements</div>
-      <h2 class="title">Learning, competing, contributing</h2>
-    </div>
-    <div class="two">
-      <div class="card edu fade">
-        <div class="eyebrow">🎓 Education</div>
-        <h4>Mody University of Science &amp; Technology</h4>
-        <div class="deg">B.Tech, Computer Science &amp; Engineering · 2023 – 2027 · Rajasthan, India</div>
-        <div class="tags" style="margin-top:16px"><span class="tag">Data Structures &amp; Algorithms</span><span class="tag">OOP</span><span class="tag">DBMS</span><span class="tag">Computer Networks</span><span class="tag">Operating Systems</span></div>
-        <h5 style="font-family:var(--mono);font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:26px 0 4px">Certifications</h5>
-        <div class="certs">
-          <div class="card cert"><b>Intro to Modern AI</b><small>Cisco Networking Academy</small></div>
-          <div class="card cert"><b>Python Essentials 1</b><small>Cisco Networking Academy</small></div>
-          <div class="card cert"><b>Python Programming</b><small>Infosys Springboard</small></div>
-          <div class="card cert"><b>English for IT 1</b><small>Cisco Networking Academy</small></div>
+      <div>
+        <div class="skill-bars-card glass-dark" id="skill-bars">
+          <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px;font-family:'Syne',sans-serif;font-weight:600">Proficiency</div>
+          <div class="sbr"><div class="sbt"><span>Java &amp; Spring Boot</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="82"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>React &amp; Frontend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>PostgreSQL / MySQL / Supabase</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="76"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>REST APIs &amp; Backend</span><span>Strong</span></div><div class="sb-track"><div class="sb-fill" data-w="74"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>AI API Integration</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="70"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>Docker &amp; Linux</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="66"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>Python</span><span>Good</span></div><div class="sb-track"><div class="sb-fill" data-w="62"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>DSA &amp; Problem Solving</span><span>Growing</span></div><div class="sb-track"><div class="sb-fill" data-w="60"></div></div></div>
+          <div class="sbr"><div class="sbt"><span>System Design</span><span>Growing</span></div><div class="sb-track"><div class="sb-fill" data-w="45"></div></div></div>
         </div>
-        <p style="font-size:.84rem;color:var(--muted);margin-top:14px"><b style="color:var(--text)">65+</b> certifications across platforms</p>
-      </div>
-      <div class="ach fade">
-        <div class="card"><div class="ic">🏆</div><h5>Unstop: Engineering #372 · Women #158</h5><p>Top-ranked nationally on the platform</p></div>
-        <div class="card"><div class="ic">🧠</div><h5>Competitive programming</h5><p>250+ problems solved across platforms, including the LeetCode 50 Days Badge (2026)</p></div>
-        <div class="card"><div class="ic">🎯</div><h5>Finalist, GitLab Hackathon (IIT Bombay)</h5><p>Built the Face Recognition Attendance System (2025)</p></div>
-        <div class="card"><div class="ic">🚀</div><h5>Project Finalist, DevDelight Hackathon</h5><p>Full-stack project presented to an industry panel</p></div>
-        <div class="card"><div class="ic">🤖</div><h5>Claude API &amp; Hugging Face integrations</h5><p>Shipped CodeArena with Claude and CaloriQ with Hugging Face image recognition</p></div>
-        <div class="card"><div class="ic">❤️</div><h5>Content Head, Karuna Society</h5><p>Led content strategy and social media across 8+ fundraising events</p></div>
-        <div class="card"><div class="ic">👩‍💻</div><h5>Member, Rewriting the Code</h5><p>Global women-in-tech community; technical talks on system design and distributed systems</p></div>
-        <div class="card"><div class="ic">📰</div><h5>Journalist, Engineum</h5><p>Content creation and technical writing for college publications</p></div>
+        <div class="can-also glass-dark">
+          <div class="ca-title">💡 I can also</div>
+          <div class="ca-pills"><span class="sk">📝 Technical Writing</span><span class="sk">🤝 Team Leadership</span><span class="sk">🐳 Teaching Docker</span><span class="sk">📊 Content Strategy</span><span class="sk">🎤 Presentations</span><span class="sk">📹 Vibe Coding</span></div>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- RESUME -->
-<section id="resume" class="alt">
-  <div class="wrap resume">
-    <div class="fade">
-      <div class="eyebrow">Resume</div>
-      <h2 class="title">Java Backend Engineer</h2>
-      <p class="txt">Software development intern with three internships, live full-stack projects, and hands-on work with Spring Boot, React, PostgreSQL, Supabase, Docker, and AI APIs. B.Tech CSE at Mody University (2023–2027).</p>
-      <ul class="resume-list">
-        <li><b>Education</b> B.Tech CSE, Mody University (2027)</li>
-        <li><b>Core stack</b> Java, Spring Boot, React, PostgreSQL, Supabase, Docker</li>
-        <li><b>Highlights</b> GeoTrust, CodeArena, CaloriQ, GitLab Hackathon finalist</li>
-      </ul>
+  <!-- S5: EXPERIENCE -->
+  <div class="hslide">
+    <div class="exp-wrap">
+      <div class="s-eyebrow" style="grid-column:1/-1;margin-bottom:-10px">Journey</div>
+      <h2 class="s-title" style="grid-column:1/-1;margin-bottom:24px">Experience &amp; <em>Education</em></h2>
+      <div class="exp-card glass"><div class="exp-period">Jul 2026</div><div class="exp-role">AI Integration Intern</div><div class="exp-co"><span>Ambiguity Lab</span></div><ul class="exp-li"><li>Evaluated AI tools and integration workflows for application development pipelines</li><li>Configured and tested Linux and Docker environments for consistent build and verification</li><li>Guided teammates on Docker fundamentals and on integrating AI APIs into applications</li></ul></div>
+      <div class="exp-card glass"><div class="exp-period">Jun 2026</div><div class="exp-role">Java Backend Developer Intern</div><div class="exp-co"><span>Pearlthought</span></div><ul class="exp-li"><li>Built backend applications covering input handling, validation and structured control flow</li><li>Learned Git-based version control and deployment workflows for shipping backend projects</li><li>Applied code review feedback to improve clarity and correctness</li></ul></div>
+      <div class="exp-card glass"><div class="exp-period">Jun – Aug 2025 · Remote</div><div class="exp-role">Java Developer Intern</div><div class="exp-co"><span>Cognifyz Technologies</span></div><ul class="exp-li"><li>Developed 5+ Java applications covering OOP, data structures, file I/O and multithreading</li><li>Refined data structure implementations with a focus on memory efficiency</li><li>Built modular Java code and applied iterative code review feedback for maintainability</li></ul></div>
+      <div class="exp-card glass"><div class="exp-period">Leadership &amp; Community</div><div class="exp-role">Content, Talks &amp; Journalism</div><div class="exp-co"><span>Karuna Society</span><span>RTC</span><span>Engineum</span></div><ul class="exp-li"><li>Led content strategy and social media across 8+ fundraising events</li><li>Gave technical talks on system design and distributed systems at Rewriting the Code</li><li>Created content and technical writing for Engineum college publications</li></ul></div>
+      <div class="edu-card-big glass"><div class="edu-badge">🎓 Education</div><div class="edu-univ">Mody University of Science &amp; Technology</div><div class="edu-deg">B.Tech, Computer Science &amp; Engineering · 2023 – 2027 · Rajasthan, India</div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px"><span class="sk" style="font-size:10px">Data Structures &amp; Algorithms</span><span class="sk" style="font-size:10px">OOP</span><span class="sk" style="font-size:10px">DBMS</span><span class="sk" style="font-size:10px">Computer Networks</span><span class="sk" style="font-size:10px">Operating Systems</span></div></div>
     </div>
-    <div class="card resume-card fade">
-      <div class="big">📄</div>
-      <h3>Updated Resume</h3>
-      <p>Latest version with internships, projects, and achievements.</p>
-      <div class="row">
-        <a class="btn btn-primary" href="https://drive.google.com/file/d/1uzs2NsHmC97o72hxFlJgmU-H0_pJrezv/view?usp=sharing" target="_blank" rel="noopener">View resume ↗</a>
-        <a class="btn btn-ghost" href="https://drive.google.com/uc?export=download&id=1uzs2NsHmC97o72hxFlJgmU-H0_pJrezv">Download PDF</a>
+  </div>
+
+  <!-- S6: ACHIEVEMENTS -->
+  <div class="hslide">
+    <div class="ach-grid">
+      <div class="s-eyebrow" style="grid-column:1/-1;margin-bottom:-10px">Recognition</div>
+      <h2 class="s-title" style="grid-column:1/-1;margin-bottom:20px">Achievements &amp; <em>Involvement</em></h2>
+      <div class="acard glass feat"><span class="a-icon">🏆</span><div class="a-title">Unstop Engineering #372 · Women #158</div><div class="a-sub">Top-ranked nationally on the platform</div></div>
+      <div class="acard glass feat"><span class="a-icon">🧠</span><div class="a-title">250+ Problems Solved</div><div class="a-sub">Across platforms, including the LeetCode 50 Days Badge (2026)</div></div>
+      <div class="acard glass"><span class="a-icon">🎯</span><div class="a-title">Finalist — GitLab Hackathon, IIT Bombay</div><div class="a-sub">Built the Face Recognition Attendance System (2025)</div></div>
+      <div class="acard glass"><span class="a-icon">🚀</span><div class="a-title">Project Finalist — DevDelight Hackathon</div><div class="a-sub">Full-stack project presented to an industry panel</div></div>
+      <div class="acard glass feat"><span class="a-icon">🤖</span><div class="a-title">Claude API Integration</div><div class="a-sub">Shipped CodeArena with AI challenge generation and hints</div></div>
+      <div class="acard glass"><span class="a-icon">🖼️</span><div class="a-title">Hugging Face Integration</div><div class="a-sub">Food image recognition in CaloriQ</div></div>
+      <div class="acard glass"><span class="a-icon">❤️</span><div class="a-title">Content Head — Karuna Society</div><div class="a-sub">Content strategy and social media across 8+ fundraising events</div></div>
+      <div class="acard glass"><span class="a-icon">👩‍💻</span><div class="a-title">Member — Rewriting the Code (RTC)</div><div class="a-sub">Global women-in-tech community; technical talks on system design</div></div>
+      <div class="acard glass"><span class="a-icon">📰</span><div class="a-title">Journalist — Engineum</div><div class="a-sub">Content creation and technical writing for college publications</div></div>
+      <div class="acard glass"><span class="a-icon">🌱</span><div class="a-title">Winner — Sustainable Poster Competition</div><div class="a-sub">Creativity and strong presentation skills</div></div>
+      <div class="acard glass"><span class="a-icon">🎉</span><div class="a-title">Event Lead — B.Tech Farewell</div><div class="a-sub">End-to-end event planning and coordination</div></div>
+      <div class="acard glass"><span class="a-icon">📜</span><div class="a-title">65+ Certifications</div><div class="a-sub">Cisco (Intro to Modern AI, Python Essentials), Infosys Springboard (Python)</div></div>
+    </div>
+  </div>
+
+  <!-- S7: RESUME -->
+  <div class="hslide">
+    <div class="res-wrap">
+      <div>
+        <div class="s-eyebrow" style="margin-bottom:16px">Resume</div>
+        <div style="padding:40px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:20px; backdrop-filter:blur(16px); text-align:center;">
+          <div style="font-size:48px; margin-bottom:20px;">📄</div>
+          <h3 style="font-family:'Syne',sans-serif; font-size:20px; color:white; margin-bottom:12px;">Java Backend Engineer Resume</h3>
+          <p style="font-size:14px; color:rgba(255,255,255,0.65); margin-bottom:28px; line-height:1.6;">Updated resume with internships, projects and achievements.<br>B.Tech CSE at Mody University (2023–2027).</p>
+          <a href="https://drive.google.com/file/d/1uzs2NsHmC97o72hxFlJgmU-H0_pJrezv/view?usp=sharing" target="_blank" class="btn-w" style="display:inline-flex; margin-bottom:16px;">📥 View Resume on Drive</a>
+          <br>
+          <a href="https://drive.google.com/uc?export=download&id=1uzs2NsHmC97o72hxFlJgmU-H0_pJrezv" class="btn-gl" style="display:inline-flex;">⬇️ Download Resume</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="s-title">My <em>Resume</em></h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:24px;font-weight:300">Java backend and full-stack engineer with three internships, live projects using Spring Boot, React, PostgreSQL, Supabase, Docker and AI APIs. B.Tech CSE at Mody University (2023–2027).</p>
+        <div class="cert-row2">
+          <div class="cchip glass-dark"><div class="cchip-icon">🔵</div><div><div class="cchip-t">Intro to Modern AI</div><div class="cchip-o">Cisco Networking Academy</div></div></div>
+          <div class="cchip glass-dark"><div class="cchip-icon">🐍</div><div><div class="cchip-t">Python Essentials 1</div><div class="cchip-o">Cisco Networking Academy</div></div></div>
+          <div class="cchip glass-dark"><div class="cchip-icon">☕</div><div><div class="cchip-t">Python Programming</div><div class="cchip-o">Infosys Springboard</div></div></div>
+          <div class="cchip glass-dark"><div class="cchip-icon">💬</div><div><div class="cchip-t">English for IT 1</div><div class="cchip-o">Cisco Networking Academy</div></div></div>
+        </div>
+        <div class="cert-count-big glass-dark"><div class="ccn">65+</div><div class="cct">Certifications across platforms<br><span style="color:rgba(255,220,100,0.9);font-size:11px">Ranked #372 Engineering · #158 Women on Unstop</span></div></div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap contact">
-    <div class="fade">
-      <h2>Let's build<br/>something <em>useful.</em></h2>
-      <p class="lead">Open to internships, full-time roles, freelance work, and collaborations. I usually reply within a day.</p>
-      <a class="btn btn-primary" href="mailto:yadavkelly9@gmail.com" style="margin-top:26px">Send me an email →</a>
-    </div>
-    <div class="fade">
-      <div class="avail">
-        <span class="status">Available now</span>
-        <h4>Seeking internships &amp; full-time roles</h4>
-        <p>Java · Spring Boot · React · PostgreSQL · Docker · AI APIs · System Design</p>
+  <!-- S8: PERSONAL -->
+  <div class="hslide">
+    <div class="pers-wrap">
+      <div>
+        <div class="s-eyebrow" style="margin-bottom:10px">Personal</div>
+        <h2 class="s-title" style="margin-bottom:18px">The <em>person</em> behind</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.85;margin-bottom:22px">When I'm not shipping backend services or grinding DSA, you'll find me with a crochet hook, a sketchbook, or in the kitchen. I think the patience from craft carries over well to debugging 💜</p>
+        <div class="hob-grid">
+          <div class="hob glass-dark"><span class="hob-e">🧶</span><div class="hob-t">Crochet</div><div class="hob-d">Cute creatures &amp; accessories</div></div>
+          <div class="hob glass-dark"><span class="hob-e">🎨</span><div class="hob-t">Art &amp; Sketching</div><div class="hob-d">Visual storytelling</div></div>
+          <div class="hob glass-dark"><span class="hob-e">🍳</span><div class="hob-t">Cooking &amp; Baking</div><div class="hob-d">Experimenting with flavours</div></div>
+          <div class="hob glass-dark"><span class="hob-e">📚</span><div class="hob-t">Learning</div><div class="hob-d">System design, distributed systems</div></div>
+        </div>
       </div>
-      <div class="clinks">
-        <a class="card clink" href="mailto:yadavkelly9@gmail.com"><div><small>Email</small><span>yadavkelly9@gmail.com</span></div><span class="arrow">→</span></a>
-        <a class="card clink" href="tel:+917251814853"><div><small>Phone</small><span>+91 72518 14853</span></div><span class="arrow">→</span></a>
-        <a class="card clink" href="https://linkedin.com/in/kelly-yadav-94435533a" target="_blank" rel="noopener"><div><small>LinkedIn</small><span>kelly-yadav-94435533a</span></div><span class="arrow">↗</span></a>
-        <a class="card clink" href="https://github.com/kellyyadav" target="_blank" rel="noopener"><div><small>GitHub</small><span>github.com/kellyyadav</span></div><span class="arrow">↗</span></a>
-        <a class="card clink" href="https://leetcode.com/u/kellyyadav/" target="_blank" rel="noopener"><div><small>LeetCode</small><span>leetcode.com/u/kellyyadav</span></div><span class="arrow">↗</span></a>
-        <a class="card clink" href="https://unstop.com/u/kellyyad99326" target="_blank" rel="noopener"><div><small>Unstop</small><span>Rank #372 · Women #158</span></div><span class="arrow">↗</span></a>
+      <div class="facts-card glass-dark">
+        <div class="facts-t">✨ Fun Facts</div>
+        <div class="fact"><div class="fact-e">🤖</div><div class="fact-t">Built CodeArena with live Claude API integration for challenge generation and hints</div></div>
+        <div class="fact"><div class="fact-e">📍</div><div class="fact-t">Built GeoTrust, where every GPS point gets a 0–100 trust score</div></div>
+        <div class="fact"><div class="fact-e">🏆</div><div class="fact-t">Ranked #158 among women on Unstop</div></div>
+        <div class="fact"><div class="fact-e">🧠</div><div class="fact-t">250+ problems solved across platforms and a LeetCode 50 Days Badge in 2026</div></div>
+        <div class="fact"><div class="fact-e">🧶</div><div class="fact-t">I crochet cute things; patience in craft = patience in debugging!</div></div>
+        <div class="fact"><div class="fact-e">🌏</div><div class="fact-t">Member of Rewriting the Code, giving talks on system design</div></div>
+        <div class="fact"><div class="fact-e">☕</div><div class="fact-t">Chai = debugging fuel. Non-negotiable.</div></div>
+        <div class="fact"><div class="fact-e">📹</div><div class="fact-t">Into vibe coding, with lo-fi and aesthetic setups</div></div>
       </div>
     </div>
   </div>
-</section>
 
-<footer>
-  <div>© 2026 Kelly Yadav. Built with HTML, CSS, and a lot of chai.</div>
-  <div><a href="#home">Back to top ↑</a></div>
-</footer>
+  <!-- S9: CONTACT -->
+  <div class="hslide">
+    <div class="ct-wrap">
+      <div>
+        <h2 class="ct-title">Let's build<br>something <em>great</em></h2>
+        <p class="ct-desc">Open to internships, full-time roles, freelance work and collaborations. I respond fast, promise! 💜</p>
+        <a class="ct-email" href="mailto:yadavkelly9@gmail.com">yadavkelly9@gmail.com</a>
+        <a class="btn-w" href="mailto:yadavkelly9@gmail.com" style="display:inline-flex">Send me an email 💜</a>
+      </div>
+      <div>
+        <div class="avail-box">
+          <div class="avail-status">Available now</div>
+          <div class="avail-title">Seeking Internships &amp; Full-time</div>
+          <div class="avail-sub">Java · Spring Boot · React · PostgreSQL · Docker · AI APIs · System Design<br>B.Tech CSE 2027 · Mody University</div>
+        </div>
+        <div class="ct-links">
+          <a class="cl glass-dark" href="https://linkedin.com/in/kelly-yadav-94435533a" target="_blank"><span class="cl-icon">💼</span><div><div class="cl-label">LinkedIn</div><div class="cl-val">kelly-yadav-94435533a</div></div></a>
+          <a class="cl glass-dark" href="https://github.com/kellyyadav" target="_blank"><span class="cl-icon">🐙</span><div><div class="cl-label">GitHub</div><div class="cl-val">github.com/kellyyadav</div></div></a>
+          <a class="cl glass-dark" href="https://leetcode.com/u/kellyyadav/" target="_blank"><span class="cl-icon">🧠</span><div><div class="cl-label">LeetCode</div><div class="cl-val">leetcode.com/u/kellyyadav</div></div></a>
+          <a class="cl glass-dark" href="https://unstop.com/u/kellyyad99326" target="_blank"><span class="cl-icon">🏆</span><div><div class="cl-label">Unstop</div><div class="cl-val">Rank #372 · Women #158</div></div></a>
+          <a class="cl glass-dark" href="tel:+917251814853"><span class="cl-icon">📞</span><div><div class="cl-label">Phone</div><div class="cl-val">+91 72518 14853</div></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="m-ov" id="m-ov" onclick="closeMBg(event)">
+  <div class="modal">
+    <button class="mx" onclick="closeM()">✕</button>
+    <div class="m-tag" id="m-tag"></div>
+    <h2 id="m-title"></h2>
+    <p class="m-desc" id="m-desc"></p>
+    <div class="m-sec">Tech stack</div>
+    <div class="m-tags" id="m-tags"></div>
+    <div class="m-sec">What I built</div>
+    <ul class="m-feats" id="m-feats"></ul>
+    <div class="m-actions" id="m-actions"></div>
+  </div>
+</div>
 
 <script>
-  // Reveal on scroll
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        e.target.querySelectorAll('.bar i').forEach(b => b.style.width = b.dataset.w + '%');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+// ═══════════ SKY SYSTEM ═══════════
+const skyCanvas = document.getElementById('sky-canvas');
+const skyCtx = skyCanvas.getContext('2d');
+function resizeSky(){ skyCanvas.width=innerWidth; skyCanvas.height=innerHeight; }
+resizeSky(); addEventListener('resize', resizeSky);
 
-  // Active nav link on scroll
-  const links = document.querySelectorAll('.nav-links a');
-  const secIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+const periods = [
+  { name:'Night',       h1:0,  h2:5,  top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
+  { name:'Dawn',        h1:5,  h2:7,  top:'#1a0a2e', bot:'#ff7b54', sun:'#ffcc70', moon:false, rain:false, thunder:false },
+  { name:'Morning',     h1:7,  h2:11, top:'#5ba3d9', bot:'#ffd89b', sun:'#ffe066', moon:false, rain:false, thunder:false },
+  { name:'Noon',        h1:11, h2:15, top:'#1a78c2', bot:'#87ceeb', sun:'#fff5a0', moon:false, rain:false, thunder:false },
+  { name:'Evening',     h1:15, h2:18, top:'#2d1b69', bot:'#f9a03f', sun:'#ffb347', moon:false, rain:false, thunder:false },
+  { name:'Dusk',        h1:18, h2:20, top:'#0d0221', bot:'#d4425a', sun:'#ff8c69', moon:true,  rain:false, thunder:false },
+  { name:'Thunderstorm',h1:20, h2:21, top:'#07080f', bot:'#12151f', sun:'#c8d0ff', moon:false, rain:true,  thunder:true  },
+  { name:'Night',       h1:21, h2:24, top:'#010108', bot:'#05051a', sun:'#c8d0ff', moon:true,  rain:false, thunder:false },
+];
+
+let manualPeriodIdx = -1;
+let skyAnimT = 0;
+let rainActive = false;
+let thunderActive = false;
+
+function getPeriodForHour(h) {
+  for(let i=0;i<periods.length;i++) if(h>=periods[i].h1&&h<periods[i].h2) return i;
+  return 7;
+}
+const stars = Array.from({length:200},()=>({x:Math.random(),y:Math.random()*0.75,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,phase:Math.random()*Math.PI*2}));
+
+const rainCanvas = document.getElementById('rain-canvas');
+const rainCtx = rainCanvas.getContext('2d');
+function resizeRain(){ rainCanvas.width=innerWidth; rainCanvas.height=innerHeight; }
+resizeRain(); addEventListener('resize', resizeRain);
+const rainDrops = Array.from({length:400},()=>({
+  x:Math.random(), y:Math.random(),
+  speed:0.008+Math.random()*0.012,
+  len:0.04+Math.random()*0.05,
+  wind:0.002+Math.random()*0.002
+}));
+
+const ltgCanvas = document.getElementById('lightning-canvas');
+const ltgCtx = ltgCanvas.getContext('2d');
+function resizeLtg(){ ltgCanvas.width=innerWidth; ltgCanvas.height=innerHeight; }
+resizeLtg(); addEventListener('resize', resizeLtg);
+
+let nextLightningIn = 3000;
+let lastLightningTime = Date.now() + 4000;
+let flashEl = document.getElementById('thunder-flash');
+let thunderAudioCtx = null;
+
+function getAudioCtx() {
+  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return thunderAudioCtx;
+}
+
+function playThunder(delay) {
+  setTimeout(()=>{
+    try {
+      const ctx = getAudioCtx();
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for(let i=0;i<data.length;i++){
+        const env = i < ctx.sampleRate*0.1 ? i/(ctx.sampleRate*0.1) : Math.exp(-(i-ctx.sampleRate*0.1)/(ctx.sampleRate*0.8));
+        data[i] = (Math.random()*2-1) * env * (0.4 + 0.6*Math.exp(-i/(ctx.sampleRate*0.05)));
       }
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const gain = ctx.createGain(); gain.gain.value = 0.6;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.frequency.value = 200;
+      src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+      src.start();
+    } catch(e){}
+  }, delay);
+}
+
+function drawLightning(x1, y1, x2, y2, width, branchProb) {
+  ltgCtx.beginPath();
+  ltgCtx.moveTo(x1, y1);
+  const dx = x2-x1, dy = y2-y1;
+  const segments = 12;
+  for(let i=1;i<=segments;i++){
+    const t=i/segments;
+    const nx = x1+dx*t + (Math.random()-0.5)*80;
+    const ny = y1+dy*t + (Math.random()-0.5)*20;
+    ltgCtx.lineTo(nx, ny);
+    if(Math.random()<branchProb && i>3 && i<segments-2) {
+      const bx = nx+(Math.random()-0.5)*120;
+      const by = ny+Math.random()*80;
+      ltgCtx.moveTo(nx,ny);
+      ltgCtx.lineTo(bx,by);
+      ltgCtx.moveTo(nx,ny);
+    }
+  }
+  ltgCtx.strokeStyle=`rgba(200,220,255,${0.7+Math.random()*0.3})`;
+  ltgCtx.lineWidth=width;
+  ltgCtx.shadowColor='#a0c8ff';
+  ltgCtx.shadowBlur=20;
+  ltgCtx.stroke();
+  ltgCtx.shadowBlur=0;
+  ltgCtx.strokeStyle=`rgba(180,200,255,0.15)`;
+  ltgCtx.lineWidth=width*6;
+  ltgCtx.stroke();
+}
+
+function triggerLightning() {
+  const W=ltgCanvas.width, H=ltgCanvas.height;
+  ltgCtx.clearRect(0,0,W,H);
+  const startX = W*0.2 + Math.random()*W*0.6;
+  drawLightning(startX, 0, startX+(Math.random()-0.5)*100, H*0.7, 2+Math.random()*2, 0.4);
+  flashEl.classList.add('flash');
+  setTimeout(()=>flashEl.classList.remove('flash'), 80);
+  setTimeout(()=>{
+    if(Math.random()>0.5){
+      flashEl.classList.add('flash');
+      setTimeout(()=>flashEl.classList.remove('flash'), 60);
+    }
+  }, 120);
+  let alpha = 1;
+  const fadeOut = setInterval(()=>{
+    alpha -= 0.12;
+    ltgCanvas.style.opacity = Math.max(0,alpha);
+    if(alpha<=0){ clearInterval(fadeOut); ltgCtx.clearRect(0,0,W,H); ltgCanvas.style.opacity=1; }
+  }, 40);
+  playThunder(400 + Math.random()*1200);
+  nextLightningIn = 2500 + Math.random()*5000;
+  lastLightningTime = Date.now();
+}
+
+function updateThunder(p) {
+  if(p.thunder) {
+    if(!thunderActive) { thunderActive=true; nextLightningIn=2000; lastLightningTime=Date.now(); }
+    if(Date.now()-lastLightningTime > nextLightningIn) triggerLightning();
+  } else {
+    if(thunderActive) { thunderActive=false; ltgCtx.clearRect(0,0,ltgCanvas.width,ltgCanvas.height); }
+  }
+}
+
+function drawCloud(ctx,x,y,scale,alpha,dark){
+  ctx.save(); ctx.globalAlpha=alpha*(dark?0.85:0.6);
+  ctx.fillStyle=dark?'#2a2a3a':'white';
+  ctx.beginPath(); ctx.arc(x,y,30*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x+22*scale,y+5*scale,22*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x-18*scale,y+8*scale,18*scale,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x+40*scale,y+10*scale,16*scale,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawSky() {
+  const W=skyCanvas.width, H=skyCanvas.height;
+  const now=new Date();
+  const hour=now.getHours()+now.getMinutes()/60;
+  const pidx=manualPeriodIdx>=0?manualPeriodIdx:getPeriodForHour(hour);
+  const p=periods[pidx];
+
+  const grad=skyCtx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,p.top); grad.addColorStop(1,p.bot);
+  skyCtx.fillStyle=grad; skyCtx.fillRect(0,0,W,H);
+
+  const mFar=document.getElementById('mfar'),mMid=document.getElementById('mmid'),mNear=document.getElementById('mnear'),mGround=document.getElementById('mground'),flowers=document.getElementById('flowers'),treesL=document.getElementById('trees-l'),treesR=document.getElementById('trees-r');
+  if(p.thunder){
+    if(mFar) mFar.setAttribute('fill','#080c08');
+    if(mMid) mMid.setAttribute('fill','#0e160c');
+    if(mNear) mNear.setAttribute('fill','#141e10');
+    if(mGround) mGround.setAttribute('fill','#0e160c');
+    if(flowers) flowers.setAttribute('opacity','0.2');
+    if(treesL) treesL.setAttribute('fill','#060906');
+    if(treesR) treesR.setAttribute('fill','#06090600');
+  } else if(p.moon){
+    if(mFar) mFar.setAttribute('fill','#0d1a0d');
+    if(mMid) mMid.setAttribute('fill','#162214');
+    if(mNear) mNear.setAttribute('fill','#1c2e18');
+    if(mGround) mGround.setAttribute('fill','#162214');
+    if(flowers) flowers.setAttribute('opacity','0.4');
+    if(treesL) treesL.setAttribute('fill','#0a140a');
+    if(treesR) treesR.setAttribute('fill','#0a140a');
+  } else if(p.name==='Morning'||p.name==='Noon'){
+    if(mFar) mFar.setAttribute('fill','#2d5a27');
+    if(mMid) mMid.setAttribute('fill','#3d7a32');
+    if(mNear) mNear.setAttribute('fill','#4a9a3f');
+    if(mGround) mGround.setAttribute('fill','#3a6e30');
+    if(flowers) flowers.setAttribute('opacity','1');
+    if(treesL) treesL.setAttribute('fill','#2d5a27');
+    if(treesR) treesR.setAttribute('fill','#2d5a27');
+  } else {
+    if(mFar) mFar.setAttribute('fill','#1a3a1a');
+    if(mMid) mMid.setAttribute('fill','#2d5a27');
+    if(mNear) mNear.setAttribute('fill','#3d7a32');
+    if(mGround) mGround.setAttribute('fill','#2d5a27');
+    if(flowers) flowers.setAttribute('opacity','0.7');
+    if(treesL) treesL.setAttribute('fill','#1a3a1a');
+    if(treesR) treesR.setAttribute('fill','#1a3a1a');
+  }
+
+  const cx=W*0.72, cy=H*(p.moon?0.12:0.14)+Math.sin(skyAnimT*0.002)*8;
+  if(p.thunder){
+    drawCloud(skyCtx,W*0.05,H*0.08,2.2,0.9,true);
+    drawCloud(skyCtx,W*0.3,H*0.05,2.8,0.95,true);
+    drawCloud(skyCtx,W*0.55,H*0.1,2.0,0.88,true);
+    drawCloud(skyCtx,W*0.75,H*0.06,2.5,0.92,true);
+    drawCloud(skyCtx,W*0.15,H*0.18,1.8,0.8,true);
+    drawCloud(skyCtx,W*0.45,H*0.15,2.2,0.85,true);
+    const horizGlow=skyCtx.createLinearGradient(0,H*0.5,0,H*0.85);
+    horizGlow.addColorStop(0,'transparent'); horizGlow.addColorStop(1,'rgba(30,50,30,0.3)');
+    skyCtx.fillStyle=horizGlow; skyCtx.fillRect(0,0,W,H);
+  } else if(p.moon){
+    const moonGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,80);
+    moonGlow.addColorStop(0,'rgba(220,220,255,0.15)'); moonGlow.addColorStop(1,'transparent');
+    skyCtx.fillStyle=moonGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,80,0,Math.PI*2); skyCtx.fill();
+    skyCtx.beginPath(); skyCtx.arc(cx,cy,22,0,Math.PI*2);
+    skyCtx.fillStyle='#e8e8f0'; skyCtx.shadowColor='#c8d0ff'; skyCtx.shadowBlur=20; skyCtx.fill();
+    skyCtx.beginPath(); skyCtx.arc(cx+7,cy-4,17,0,Math.PI*2);
+    skyCtx.fillStyle=p.top; skyCtx.shadowBlur=0; skyCtx.fill();
+    stars.forEach(s=>{
+      const alpha=s.o*(0.4+0.6*(0.5+0.5*Math.sin(skyAnimT*0.015+s.phase)));
+      skyCtx.beginPath(); skyCtx.arc(s.x*W,s.y*H*0.7,s.r,0,Math.PI*2);
+      skyCtx.fillStyle=`rgba(220,215,255,${alpha})`; skyCtx.shadowBlur=0; skyCtx.fill();
     });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  document.querySelectorAll('section[id]').forEach(s => secIO.observe(s));
+  } else {
+    const sunGlow=skyCtx.createRadialGradient(cx,cy,0,cx,cy,100);
+    sunGlow.addColorStop(0,'rgba(255,240,150,0.4)'); sunGlow.addColorStop(0.5,'rgba(255,200,80,0.2)'); sunGlow.addColorStop(1,'transparent');
+    skyCtx.fillStyle=sunGlow; skyCtx.beginPath(); skyCtx.arc(cx,cy,100,0,Math.PI*2); skyCtx.fill();
+    for(let i=0;i<12;i++){
+      const a=i*(Math.PI/6)+skyAnimT*0.003;
+      const x1=cx+Math.cos(a)*28,y1=cy+Math.sin(a)*28;
+      const x2=cx+Math.cos(a)*(38+Math.sin(skyAnimT*0.05+i)*5),y2=cy+Math.sin(a)*(38+Math.sin(skyAnimT*0.05+i)*5);
+      skyCtx.beginPath(); skyCtx.moveTo(x1,y1); skyCtx.lineTo(x2,y2);
+      skyCtx.strokeStyle=`rgba(255,230,100,${0.3+0.2*Math.sin(skyAnimT*0.03+i)})`; skyCtx.lineWidth=2; skyCtx.stroke();
+    }
+    skyCtx.beginPath(); skyCtx.arc(cx,cy,24,0,Math.PI*2);
+    skyCtx.fillStyle=p.sun; skyCtx.shadowColor=p.sun; skyCtx.shadowBlur=30; skyCtx.fill(); skyCtx.shadowBlur=0;
+    if(p.name==='Morning'||p.name==='Noon'){
+      drawCloud(skyCtx,W*0.15,H*0.2,1.0,0.7,false);
+      drawCloud(skyCtx,W*0.45,H*0.15,0.8,0.6,false);
+      drawCloud(skyCtx,W*0.6,H*0.25,1.2,0.65,false);
+    }
+  }
+
+  if(p.rain!==rainActive){
+    rainActive=p.rain;
+    rainCanvas.className=rainActive?'raining':'';
+  }
+  if(rainActive){
+    rainCtx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
+    rainCtx.strokeStyle='rgba(160,185,220,0.4)'; rainCtx.lineWidth=1.2;
+    rainDrops.forEach(d=>{
+      d.y+=d.speed; d.x+=d.wind;
+      if(d.y>1){d.y=-0.05; d.x=Math.random();}
+      if(d.x>1) d.x=0;
+      const rx=d.x*rainCanvas.width, ry=d.y*rainCanvas.height;
+      rainCtx.beginPath(); rainCtx.moveTo(rx,ry); rainCtx.lineTo(rx+d.wind*rainCanvas.width*8, ry+d.len*rainCanvas.height); rainCtx.stroke();
+    });
+    if(Math.random()<0.3){
+      const sx=Math.random()*rainCanvas.width, sy=rainCanvas.height-10;
+      rainCtx.beginPath(); rainCtx.arc(sx,sy,2+Math.random()*3,0,Math.PI*2);
+      rainCtx.strokeStyle='rgba(160,185,220,0.25)'; rainCtx.lineWidth=1; rainCtx.stroke();
+    }
+  }
+
+  updateThunder(p);
+
+  document.getElementById('time-label').textContent=p.name;
+  document.getElementById('time-icon').textContent=p.thunder?'⛈️':p.moon?'🌙':p.name==='Dawn'||p.name==='Dusk'?'🌅':'☀️';
+
+  skyAnimT++;
+  requestAnimationFrame(drawSky);
+}
+drawSky();
+
+const timeOrder=[0,1,2,3,4,5,6,7];
+let manualIdx=0;
+function toggleTimeManual(){
+  manualIdx=(manualIdx+1)%timeOrder.length;
+  manualPeriodIdx=manualIdx===0?-1:timeOrder[manualIdx];
+  if(thunderAudioCtx && thunderAudioCtx.state==='suspended') thunderAudioCtx.resume();
+  if(!thunderAudioCtx) thunderAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+}
+
+// ═══════════ SLIDES ═══════════
+const track=document.getElementById('h-track');
+const hslides=document.querySelectorAll('.hslide');
+const total=hslides.length;
+var cur=0; let sliding=false; let lastWheel=0;
+const dotNav=document.getElementById('dot-nav');
+hslides.forEach((_,i)=>{
+  const d=document.createElement('div'); d.className='nav-dot'+(i===0?' active':''); d.onclick=()=>gTo(i);
+  dotNav.appendChild(d);
+});
+function gTo(idx){
+  if(sliding||idx===cur||idx<0||idx>=total)return;
+  sliding=true; cur=idx;
+  track.style.transform=`translateX(-${cur*100}vw)`;
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  document.querySelectorAll('.tnav').forEach((t,i)=>t.classList.toggle('active',i===cur));
+  document.getElementById('slide-ctr').textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+  setTimeout(()=>{ sliding=false; if(cur===3)animateBars(); },850);
+}
+addEventListener('wheel',e=>{
+  const now=Date.now(); if(now-lastWheel<900)return; lastWheel=now;
+  if(e.deltaY>30||e.deltaX>30)gTo(cur+1); else if(e.deltaY<-30||e.deltaX<-30)gTo(cur-1);
+},{passive:true});
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')gTo(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')gTo(cur-1);
+});
+let tx=0;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>60)gTo(cur+(d>0?1:-1));},{passive:true});
+
+let barsD=false;
+function animateBars(){ if(barsD)return; barsD=true; document.querySelectorAll('.sb-fill').forEach(b=>b.style.width=b.dataset.w+'%'); }
+
+function toggleSb(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sb-ov').classList.toggle('open');
+  document.getElementById('hbg').classList.toggle('open');
+}
+
+// ═══════════ MODAL ═══════════
+const projs={
+  geotrust:{tag:'GPS · Live',title:'GeoTrust — GPS Correction & Spoof Detection',desc:'Spring Boot REST API that ingests noisy GPS coordinates, returns a per-device Kalman-filtered location estimate, and assigns a 0–100 trust score to every point.',tags:['Java','Spring Boot','Kalman Filter','PostgreSQL','Docker','GitHub Actions'],feats:['Per-device Kalman filter with separate filter state for each device','Anomaly detection for impossible speeds and sudden location jumps','0–100 trust score for every point','PostgreSQL on Supabase, backend containerised with Docker','Unit tests automated through GitHub Actions','Backend deployed on Render, dashboard on Vercel','Leaflet dashboard comparing raw and corrected routes, with flagged points highlighted'],live:'https://geotrust-dashboard.vercel.app/',gh:'https://github.com/kellyyadav/Geotrust'},
+  codearena:{tag:'🔥 Featured · Live',title:'CodeArena — Real-Time Coding Battle Platform',desc:'Real-time 1v1 coding battles with a Monaco Editor interface. The Claude API generates scenario-based challenges and context-aware hints, and WebSockets keep both players in sync.',tags:['React','WebSockets','Monaco Editor','Claude API','Supabase','Vercel'],feats:['Scenario-based challenges in Java, Python and JavaScript','Claude API for challenge generation and context-aware hints','WebSocket-based communication for live battle interactions','Google sign-in via Supabase Auth, player profiles and solve history','Warrior, Eagle and Divine badges based on solved questions','React code splitting and lazy loading for faster frontend loading'],live:'https://codearena-peach.vercel.app/',gh:'https://github.com/kellyyadav'},
+  caloriq:{tag:'Live · AI ✨',title:'CaloriQ — AI-Powered Nutrition Tracker',desc:'Full-stack nutrition tracker with personalised health goals, daily calorie logging and real-time analytics. Hugging Face models recognise food from images.',tags:['React','Supabase','Hugging Face','CSS3','Vercel'],feats:['Personalised health goals and daily calorie logging','Real-time analytics that update as entries change','Supabase for authentication, database operations and real-time sync','Hugging Face integration for food image recognition','Responsive interface for mobile and desktop'],live:'https://caloriq-one.vercel.app/',gh:'https://github.com/kellyyadav'},
+  cybershield:{tag:'Team · Live',title:'CyberShield — Cybersecurity Threat Visualization',desc:'Threat visualisation dashboard that renders hundreds of dynamic threat nodes with a custom requestAnimationFrame loop. Built by a three-member team.',tags:['JavaScript','Canvas','WebGL','CSS3','Git'],feats:['Custom requestAnimationFrame loop for hundreds of dynamic threat nodes','Canvas and WebGL rendering','Three-member team using Git-based workflows and code reviews'],live:'https://kellyyadav.github.io/cybershield/',gh:'https://github.com/kellyyadav'},
+  social:{tag:'Personal Project',title:'Social Interaction Web App',desc:'Full-stack social platform with posts, comments and a follow system, built with Spring Boot, MySQL and React.',tags:['Java','Spring Boot','React','MySQL'],feats:['REST APIs built with Spring Boot','MySQL schema for users, posts and follows','React frontend integrated with the Spring Boot backend'],live:null,gh:'https://github.com/kellyyadav'},
+  face:{tag:'GitLab Hackathon · IIT Bombay',title:'Face Recognition Attendance System',desc:'Real-time face detection with OpenCV to prevent proxy attendance. Finalist at the GitLab Hackathon at IIT Bombay (2025).',tags:['Java','OpenCV','MySQL'],feats:['Real-time face detection with OpenCV','Movement checks to reduce spoofing','Attendance records stored in MySQL','Finalist, GitLab Hackathon, IIT Bombay (2025)'],live:null,gh:'https://github.com/kellyyadav'}
+};
+function openM(k){
+  const p=projs[k];
+  document.getElementById('m-tag').textContent=p.tag;
+  document.getElementById('m-title').textContent=p.title;
+  document.getElementById('m-desc').textContent=p.desc;
+  const te=document.getElementById('m-tags'); te.innerHTML='';
+  p.tags.forEach(t=>{const s=document.createElement('span');s.className='ptag';s.style.cssText='font-size:11px;padding:4px 10px';s.textContent=t;te.appendChild(s);});
+  const fe=document.getElementById('m-feats'); fe.innerHTML='';
+  p.feats.forEach(f=>{const li=document.createElement('li');li.textContent=f;fe.appendChild(li);});
+  const ac=document.getElementById('m-actions'); ac.innerHTML='';
+  if(p.live){const a=document.createElement('a');a.className='mb mb-w';a.href=p.live;a.target='_blank';a.textContent='View Live ↗';ac.appendChild(a);}
+  const gh=document.createElement('a');gh.className='mb mb-g';gh.href=p.gh;gh.target='_blank';gh.textContent='GitHub →';ac.appendChild(gh);
+  document.getElementById('m-ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeM(){document.getElementById('m-ov').classList.remove('open');document.body.style.overflow='';}
+function closeMBg(e){if(e.target.id==='m-ov')closeM();}
+addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 </script>
 </body>
 </html>
